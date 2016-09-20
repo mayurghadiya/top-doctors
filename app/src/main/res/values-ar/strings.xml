@@ -1,0 +1,114 @@
+<resources>
+    <string name="app_name">أفضل طبيب</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="email">البريد الإلكتروني</string>
+    <string name="password">كلمه السر</string>
+    <string name="forgot_password">هل نسيت كلمة المرور؟</string>
+    <string name="register_account">تسجيل حساب</string>
+    <string name="enter_as_a_guest">أدخل كضيف</string>
+    <string name="login_with_facebook">تسجيل الدخول باستخدام الفيسبوك</string>
+    <string name="register">تسجيل</string>
+    <string name="first_name">الاسم الاول</string>
+    <string name="last_name">الكنية</string>
+    <string name="mobile_number">رقم الهاتف المحمول</string>
+    <string name="confirm_password">تأكيد كلمة المرور</string>
+    <string name="country">بلد</string>
+    <string name="address">عنوان</string>
+    <string name="newsletter">النشرة الإخبارية</string>
+    <string name="terms_and_conditions">الأحكام والشروط</string>
+    <string name="register_note">ملاحظة: جميع الحقول بعلامة * يجب ان يكون شغلها</string>
+    <string name="email_error">مطلوب البريد الإلكتروني</string>
+    <string name="password_error">كلمة المرور مطلوبة</string>
+    <string name="first_name_error">مطلوب الاسم الأول</string>
+    <string name="last_name_error">مطلوب اسم العائلة</string>
+    <string name="confirm_password_error">مطلوب تأكيد كلمة المرور</string>
+    <string name="password_mismatched_error">كلمة السر هي متطابقة</string>
+    <string name="mobile_error">مطلوب رقم تليفون</string>
+    <string name="guest_login">دخول النزيل</string>
+    <string name="coming_soon">قريبا...</string>
+    <string name="close">قريب</string>
+    <string name="please_accept_terms">يرجى قبول شروط والشروط</string>
+    <string name="spinner_country">حدد الدولة</string>
+    <string name="authenticating">مصادقة ...</string>
+    <string name="forgot_password_label">هل نسيت كلمة المرور</string>
+    <string name="submit">عرض</string>
+    <string name="back_to_login">العودة لتسجيل الدخول</string>
+    <string name="please_wait">أرجو الإنتظار...</string>
+    <string name="search_ex">بحث (مثلا: أحمد، القلب والأوعية الدموية)</string>
+    <string name="search_doctor_label">الأطباء</string>
+    <string name="search_hospital_label">المستشفيات</string>
+    <string name="hospital">مستشفى</string>
+    <string name="search_clinics_label">عيادات</string>
+    <string name="search_labs_label">مختبرات</string>
+    <string name="edit_profile">تعديل الملف الشخصي</string>
+    <string name="claim_profile">الملف الشخصي مطالبة</string>
+    <string name="add_a_doctor">إضافة الطبيب</string>
+    <string name="add_a_hospital">إضافة المستشفى</string>
+    <string name="add_a_clinic">إضافة العيادة</string>
+    <string name="clinics">عيادات</string>
+    <string name="country_name">بلد</string>
+    <string name="add_a_lab">إضافة مختبر</string>
+    <string name="write_a_review">أكتب مراجعة</string>
+    <string name="share">شارك</string>
+    <string name="bookmarks">إرسال</string>
+    <string name="recenty_viewed">شوهدت مؤخرا</string>
+    <string name="nearby">قريب</string>
+    <string name="search">بحث</string>
+    <string name="top_10_doctors">العشرة الأوائل الأطباء</string>
+    <string name="logout">خروج</string>
+    <string name="most_visited">أكثر زيارة</string>
+    <string name="location">موقع</string>
+    <string name="speciality">تخصص</string>
+    <string name="gender">جنس</string>
+    <string name="total_reviews">30 التعليقات</string>
+    <string name="enter_valid_password">إدخال كلمة السر الصحيحة</string>
+    <string-array name="countries_list">
+        <item>أفغانستان</item>
+        <item>ألبانيا</item>
+        <item>أستراليا</item>
+        <item>بنغلاديش</item>
+        <item>بوتان</item>
+        <item>إنكلترا</item>
+        <item>فنلندا</item>
+        <item>الهند</item>
+        <item>المملكة العربية السعودية</item>
+        <item>نيبال</item>
+    </string-array>
+
+    <string-array name="specialities">
+        <item>ﺔﻳﻮﻣﺪﻟﺍ ﺔﻴﻋﻭﻻﺍﻭ ﺐﻠﻘﻟﺍ</item>
+        <item>ﺔﻴﺳﺎﺴﺤﻟاو رﺪﺼﻟا</item>
+        <item>نﺎﻨﺳأ</item>
+        <item>ﺔﻴﻠﺳﺎﻨﺘﻟاو ﺔﻳﺪﻠﺠﻟا</item>
+        <item>ةﺮﺠﻨﺣو نذاو ﻒﻧا</item>
+        <item>ﺪﺒﻜﻟاو ﻲﻤﻀﻬﻟا زﺎﻬﺠﻟا</item>
+        <item>ﺔﻣﺎﻋ ﺔﺣاﺮﺟ</item>
+        <item>ﺔﻨﻃﺎﺒﻟا</item>
+        <item>ﺏﺎﺼﻋﻷﺍﻭ ﺦﻤﻟﺍ ﺽﺍﺮﻣﺍ</item>
+        <item>ﺔﻓﺎﺤﻨﻟاو ﺔﻨﻤﺴﻟا</item>
+        <item>ﺪﻴﻟﻮﺘﻟاو ءﺎﺴﻨﻟا</item>
+        <item>مﺎﻈﻌﻟا ﺔﺣاﺮﺟ</item>
+        <item>لﺎﻔﻃأ</item>
+        <item>ﻲﺴﻔﻨﻟا ﺐﻄﻟا</item>
+        <item>مﺰﻴﺗﺎﻣوﺮﻟا</item>
+        <item>ﺔﻴﻟﻮﺒﻟا ﻚﻟﺎﺴﻤﻟا</item>
+        <item>مﺎﻋ سرﺎﻤﻣ</item>
+        <item>نﻮﻴﻌﻟا</item>
+        <item>دﺪﻐﻟا</item>
+        <item>ﻡﺍﺭﻭﻷﺍ</item>
+        <item>ﺔﻨﻣﺰﻣ ضاﺮﻣأ</item>
+        <item>ﻞﻴﻤﺠﺗ ﺔﺣاﺮﺟ</item>
+        <item>ﻲﻌﻴﺒﻃ جﻼﻋ</item>
+        <item>ﺔﻋﺎﻨﻣ ضاﺮﻣأ</item>
+        <item>ﺮﻳﺪﺨﺗ</item>
+        <item>ﺔﻌﺷﻷﺍ ﺮﺒﺘﺨﻣ</item>
+        <item>ﻲﺒﻃ ﺮﺒﺘﺨﻣ</item>
+        <item>ﻰﻔﺸﺘﺴﻣ</item>
+        <item>ﺰﻛﺮﻣ</item>
+    </string-array>
+    <string-array name="gender">
+        <item>جنس</item>
+        <item>ذكر</item>
+        <item>أنثى</item>
+    </string-array>
+</resources>

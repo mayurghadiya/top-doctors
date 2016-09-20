@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/home_page_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:layoutDirection="inherit"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:background="#103C61">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="20dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="10dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@mipmap/close"/>
+
+                <TextView
+                    android:id="@+id/add_doctor_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add doctor"
+                    android:textColor="#ffffff"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:layout_marginTop="15dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="25dp"
+                android:paddingEnd="25dp"
+                android:paddingTop="20dp">
+
+                <EditText
+                    android:id="@+id/add_doctor_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Name"
+                    android:backgroundTint="#ffffff"
+                    android:drawableEnd="@mipmap/star"/>
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#D3D3D3"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="-10dp"/>
+
+                <EditText
+                    android:id="@+id/add_doctor_clinic_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Clinic Name"
+                    android:backgroundTint="#ffffff"
+                    android:drawableEnd="@mipmap/star"/>
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#D3D3D3"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="-10dp"/>
+
+                <EditText
+                    android:id="@+id/add_doctor_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#ffffff"
+                    android:hint="E-mail"
+                    android:drawableEnd="@mipmap/star"/>
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#D3D3D3"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="-10dp"/>
+
+                <EditText
+                    android:id="@+id/add_doctor_mobile_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Mobile Number"
+                    android:backgroundTint="#ffffff"
+                    android:drawableEnd="@mipmap/star"/>
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#D3D3D3"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="-10dp"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <Spinner
+                        android:id="@+id/add_doctor_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:spinnerMode="dialog"
+                        android:prompt="@string/country">
+                    </Spinner>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/dropdown_arrow"
+                        android:paddingRight="2dp"
+                        android:layout_marginTop="@dimen/country_dropdown_arrow_margin_top"/>
+                </RelativeLayout>
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#D3D3D3"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"/>
+
+                <EditText
+                    android:id="@+id/add_doctor_clinic_address"
+                    android:layout_width="match_parent"
+                    android:backgroundTint="#ffffff"
+                    android:layout_height="wrap_content"
+                    android:hint="Clinic Address"/>
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#D3D3D3"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="-10dp"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <Spinner
+                        android:id="@+id/add_doctor_speciality"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:spinnerMode="dialog"
+                        android:prompt="@string/country">
+                    </Spinner>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toStartOf="@+id/add_doctor_speciality_arrow"
+                        android:src="@mipmap/star"
+                        android:paddingRight="3dp"
+                        android:layout_marginTop="@dimen/country_dropdown_arrow_margin_top"
+                        android:paddingEnd="3dp"/>
+                    <ImageView
+                        android:id="@+id/add_doctor_speciality_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/dropdown_arrow"
+                        android:paddingRight="2dp"
+                        android:layout_marginTop="@dimen/country_dropdown_arrow_margin_top"/>
+                </RelativeLayout>
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#D3D3D3"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <Spinner
+                        android:id="@+id/add_doctor_gender"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:spinnerMode="dialog"
+                        android:prompt="@string/gender">
+                    </Spinner>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/dropdown_arrow"
+                        android:paddingRight="2dp"
+                        android:layout_marginTop="@dimen/country_dropdown_arrow_margin_top"/>
+                </RelativeLayout>
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#D3D3D3"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="#103C61"
+                    android:layout_marginTop="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:src="@mipmap/camera"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Upload photo the syndicate ID *"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:textColor="#ffffff"
+                        android:textSize="16dp"/>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="17dp">
+                        <TextView
+                            android:id="@+id/add_doctor_terms_note"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Note: "
+                            android:textColor="#008f9e"
+                            android:textSize="@dimen/term_and_condition_text_size"/>
+                        <TextView
+                            android:id="@+id/add_doctor_terms_start"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="All fields with"
+                            android:layout_alignEnd="@+id/add_doctor_terms_note"
+                            android:textSize="@dimen/term_and_condition_text_size"/>
+                        <ImageView
+                            android:id="@+id/add_doctor_terms_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/terms_image_height"
+                            android:layout_alignEnd="@+id/add_doctor_terms_start"
+                            android:src="@drawable/terms"/>
+                        <TextView
+                            android:id="@+id/terms_end"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="must be filled."
+                            android:layout_alignEnd="@+id/add_doctor_terms_icon"
+                            android:textSize="@dimen/term_and_condition_text_size"/>
+                    </LinearLayout>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#103C61"
+                        android:text="Submit"
+                        android:textColor="#ffffff"
+                        android:layout_alignParentEnd="true"/>
+
+                </RelativeLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/menu_edit_profile"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/edit_profile"
+            android:icon="@mipmap/edit_profile"
+            android:title="@string/edit_profile"/>
+    </group>
+
+    <group
+        android:id="@+id/menu_profile_and_add"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/claim_profile"
+            android:icon="@mipmap/claim_profile"
+            android:title="@string/claim_profile" />
+        <item
+            android:id="@+id/add_a_doctor"
+            android:icon="@mipmap/add_a_doctor"
+            android:title="@string/add_a_doctor" />
+        <item
+            android:id="@+id/add_a_hospital"
+            android:icon="@mipmap/add_a_hospital"
+            android:title="@string/add_a_hospital" />
+        <item
+            android:id="@+id/add_a_clinic"
+            android:icon="@mipmap/add_a_clinic"
+            android:title="@string/add_a_clinic" />
+        <item
+            android:id="@+id/add_a_lab"
+            android:icon="@mipmap/add_a_lab"
+            android:title="@string/add_a_lab" />
+    </group>
+
+    <group
+        android:id="@+id/menu_write_a_review"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/write_a_review"
+            android:icon="@mipmap/write_a_review"
+            android:title="@string/write_a_review" />
+        <item
+            android:id="@+id/share"
+            android:icon="@mipmap/share"
+            android:title="@string/share" />
+        <item
+            android:id="@+id/bookmarks"
+            android:icon="@mipmap/bookmarks"
+            android:title="@string/bookmarks" />
+    </group>
+
+    <group
+        android:id="@+id/menu_recenty_viewed"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/recently_viewed"
+            android:icon="@mipmap/recently_viewed"
+            android:title="@string/recenty_viewed" />
+        <item
+            android:id="@+id/nearby"
+            android:icon="@mipmap/nearby"
+            android:title="@string/nearby" />
+        <item
+            android:id="@+id/search"
+            android:icon="@mipmap/search_2"
+            android:title="@string/search" />
+        <item
+            android:id="@+id/top_ten_doctors"
+            android:icon="@mipmap/top_10_doctors"
+            android:title="@string/top_10_doctors" />
+    </group>
+
+    <group
+        android:id="@+id/menu_logout"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/logout_btn"
+            android:icon="@mipmap/logout"
+            android:title="@string/logout" />
+    </group>
+
+</menu>

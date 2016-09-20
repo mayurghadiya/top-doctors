@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nearby_template"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="@dimen/main_margin_top"
+    android:layout_marginBottom="@dimen/main_margin_bottom"
+    android:layoutDirection="locale">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/layout_conten_margin_start_end"
+        android:layout_marginEnd="@dimen/layout_conten_margin_start_end">
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="#c5c6c8"
+            android:layout_marginBottom="@dimen/border_separator_margin_top"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/search_box_margin_top">
+
+            <LinearLayout
+                android:layout_width="@dimen/image_back_ground_width"
+                android:layout_height="@dimen/image_back_ground_height"
+                android:background="#BCBDC1"
+                android:gravity="center">
+                <ImageView
+                    android:id="@+id/most_visited_"
+                    android:layout_width="@dimen/image_width_height"
+                    android:layout_height="@dimen/image_width_height"
+                    android:src="@mipmap/most_visited_doctor"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/search_box_margin_top"
+                android:layout_marginTop="@dimen/details_margin_top">
+
+                <TextView
+                    android:id="@+id/title_work_place"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="viewStart"
+                    android:text="ABADI MOHAMMED ADEL EL QADI"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/result_text_size"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="@dimen/rating_margin_start"
+                    android:paddingStart="2.2dp">
+
+                    <!--rating-->
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/review_1"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/review_1"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/review_1"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/review_1"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/review_2"/>
+
+                    <!--review-->
+                    <TextView
+                        android:id="@+id/total_reviews"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="30 Reviews"
+                        android:textSize="@dimen/result_text_size"
+                        android:layout_marginTop="@dimen/review_margin_top"
+                        android:layout_marginStart="@dimen/review_margin_start"/>
+
+                </LinearLayout>
+
+                <!--address-->
+                <TextView
+                    android:id="@+id/work_place_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="viewStart"
+                    android:textSize="@dimen/result_text_size"
+                    android:text="6 El Obour Building., Salah Salem Road - Helipolis"/>
+
+                <TextView
+                    android:id="@+id/work_place_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="viewStart"
+                    android:textSize="@dimen/result_text_size"
+                    android:text="02 2408888"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginEnd="@dimen/contact_margin_end">
+
+                    <!--speciality-->
+                    <ImageView
+                        android:id="@+id/speciality"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/teath"/>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:layout_marginBottom="@dimen/contact_icon_margin_end">
+
+                        <ImageView
+                            android:id="@+id/phone_dialer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/call"
+                            android:layout_marginEnd="@dimen/contact_icon_margin_bottom"/>
+                        <ImageView
+                            android:id="@+id/add_to_contact"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/add_to_contact"
+                            android:layout_marginEnd="@dimen/contact_icon_margin_bottom"/>
+                        <ImageView
+                            android:id="@+id/share_details"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/more"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

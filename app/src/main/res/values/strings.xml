@@ -1,0 +1,124 @@
+<resources>
+    <string name="app_name">Top Doctors</string>
+    <string name="login">Login</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="register_account">Register \nan account</string>
+    <string name="enter_as_a_guest">Enter as a \nguest</string>
+    <string name="login_with_facebook">Login with Facebook</string>
+    <string name="register">Register</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="country">Country</string>
+    <string name="address">Address</string>
+    <string name="newsletter">Newsletter</string>
+    <string name="terms_and_conditions">Terms and conditions</string>
+    <string name="register_note">Note: All fields with * must be filled</string>
+    <string name="facebook_app_id">188229328256133</string>
+    <string name="email_error">Email is required</string>
+    <string name="password_error">Password is required</string>
+    <string name="first_name_error">First name is required</string>
+    <string name="last_name_error">Last name is required</string>
+    <string name="confirm_password_error">Confirm password is required</string>
+    <string name="password_mismatched_error">Password is mimatched</string>
+    <string name="mobile_error">Mobile number is required</string>
+    <string name="guest_login">Guest login</string>
+    <string name="coming_soon">Coming soon...</string>
+    <string name="close">Close</string>
+    <string name="please_accept_terms">Please accept our terms and conditions</string>
+    <string name="spinner_country">Select Country</string>
+    <string name="authenticating">Authenticating...</string>
+    <string name="forgot_password_label">Forgot Password</string>
+    <string name="submit">Submit</string>
+    <string name="back_to_login">Back to login</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="search_ex">Search(ex. Ahmed, Cardiovascular)</string>
+    <string name="search_doctor_label">Doctors</string>
+    <string name="search_hospital_label">Hospitals</string>
+    <string name="hospital">Hospital</string>
+    <string name="search_clinics_label">Clinics</string>
+    <string name="clinics">Clinics</string>
+    <string name="country_name">Country</string>
+    <string name="search_labs_label">Labs</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="claim_profile">Claim Profile</string>
+    <string name="add_a_doctor">Add a doctor</string>
+    <string name="add_a_hospital">Add a Hospital</string>
+    <string name="add_a_clinic">Add a Clinic</string>
+    <string name="write_a_review">Write a Review</string>
+    <string name="add_a_lab">Add a Lab</string>
+    <string name="share">Share</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="recenty_viewed">Recenty Viewed</string>
+    <string name="nearby">Nearby</string>
+    <string name="search">Search</string>
+    <string name="top_10_doctors">Top 10 Doctors</string>
+    <string name="logout">Logout</string>
+    <string name="most_visited">Most Visited</string>
+    <string name="location">Location</string>
+    <string name="speciality">Speciality</string>
+    <string name="gender">Gender</string>
+    <string name="total_reviews">30 Reviews</string>
+    <string name="enter_valid_password">Enter valid password</string>
+    <string-array name="countries_list">
+        <item>Afghanistan</item>
+        <item>Albania</item>
+        <item>Australia</item>
+        <item>Bangladesh</item>
+        <item>Bhutan</item>
+        <item>England</item>
+        <item>Finland</item>
+        <item>India</item>
+        <item>Saudi Arabia</item>
+        <item>Nepal</item>
+    </string-array>
+
+    <string-array name="gender">
+        <item>Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="specialities">
+        <item>Cardiovascular</item>
+        <item>Chest and Allergy</item>
+        <item>Dentistry</item>
+        <item>Dermatology and Andrology</item>
+        <item>ENT</item>
+        <item>Gastrointestinal Tract</item>
+        <item>General Surgery</item>
+        <item>Internal Medicine</item>
+        <item>Neurosurgery</item>
+        <item>Obesity &amp; Thinness</item>
+        <item>Obstetrics &amp; Gynaecology</item>
+        <item>Orthopedics</item>
+        <item>Orthopedics</item>
+        <item>Psychiatry</item>
+        <item>Rhumatology</item>
+        <item>Urology</item>
+        <item>G.P.</item>
+        <item>Opthemology</item>
+        <item>Endocrinology</item>
+        <item>Oncology</item>
+        <item>Chronic Diseases</item>
+        <item>Plastic Surgery</item>
+        <item>Physiotherapy</item>
+        <item>Autoimmune Diseases</item>
+        <item>Anaesthesia</item>
+        <item>Radiology Lab</item>
+        <item>Medical Lab</item>
+        <item>Hospital</item>
+        <item>Center</item>
+    </string-array>
+    <string name="title_activity_tabbed">TabbedActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_template">TemplateActivity</string>
+</resources>
