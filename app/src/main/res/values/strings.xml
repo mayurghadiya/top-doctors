@@ -63,6 +63,17 @@
     <string name="gender">Gender</string>
     <string name="total_reviews">30 Reviews</string>
     <string name="enter_valid_password">Enter valid password</string>
+    <string name="add_doctor">Add doctor</string>
+    <string name="name">Name</string>
+    <string name="clinic_name">Clinic Name</string>
+    <string name="clinic_address">Clinic Address</string>
+    <string name="upload_photo">Upload photo of the syndicate ID *</string>
+    <string name="note">Note: </string>
+    <string name="all_field_with">All fields with</string>
+    <string name="must_be_filled">must be filled.</string>
+    <string name="filters">Filters</string>
+    <string name="nearby_first">Nearby first</string>
+    <string name="no_data_found">No data found</string>
     <string-array name="countries_list">
         <item>Afghanistan</item>
         <item>Albania</item>
@@ -121,4 +132,5 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_template">TemplateActivity</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

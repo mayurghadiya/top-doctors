@@ -1,21 +1,27 @@
 package searchnative.com.topdoctors;
 
 import android.annotation.TargetApi;
+import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -35,6 +41,7 @@ public class BaseActivity extends AppCompatActivity {
     NavigationView mNavigationView;
     FragmentManager mFragmentManager;
     FragmentTransaction mFragmentTransaction;
+    TabFragment tabFragment = new TabFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +74,7 @@ public class BaseActivity extends AppCompatActivity {
         //inflate the first fragment
         mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
-        mFragmentTransaction.replace(R.id.containerView, new TabFragment()).commit();
+        mFragmentTransaction.replace(R.id.containerView, tabFragment).commit();
 
         //setup click event on navigation view
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -85,8 +92,14 @@ public class BaseActivity extends AppCompatActivity {
                 }
 
                 if(menuItem.getItemId() == R.id.add_a_doctor) {
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new AddDoctor()).commit();
+                    startActivity(new Intent(BaseActivity.this, AddDoctorActivity.class));
+                    mNavigationView.getMenu().findItem(menuItem.getItemId()).setChecked(false);
+                    //FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+                    //fragmentTransaction.replace(R.id.containerView, new AddDoctor()).addToBackStack(null).commit();
+                }
+
+                if(menuItem.getItemId() == R.id.search) {
+                    tabFragment.tabLayout.getTabAt(1).select();
                 }
 
                 return false;

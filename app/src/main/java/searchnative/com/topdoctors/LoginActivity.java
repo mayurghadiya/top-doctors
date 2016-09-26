@@ -263,7 +263,7 @@ public class LoginActivity extends AppCompatActivity {
             protected void onPreExecute() {
                 super.onPreExecute();
                 mProgressDialog = new ProgressDialog(LoginActivity.this);
-                mProgressDialog.setMessage("Please wait...");
+                mProgressDialog.setMessage(getResources().getString(R.string.please_wait));
                 mProgressDialog.setCancelable(false);
                 mProgressDialog.show();
             }

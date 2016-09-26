@@ -103,4 +103,41 @@
     <dimen name="contact_icon_margin_bottom">10dp</dimen>
     <dimen name="contact_icon_margin_end">10dp</dimen>
     <dimen name="details_margin_top">-3dp</dimen>
+
+    <!--Add doctor-->
+    <dimen name="add_doctor_padding_top">10dp</dimen>
+    <dimen name="add_doctor_close_button_paddingBottom">20dp</dimen>
+    <dimen name="add_doctor_close_button_paddingStart">20dp</dimen>
+    <dimen name="add_doctor_close_button_paddingEnd">10dp</dimen>
+    <dimen name="add_doctor_close_button_marginTop">10dp</dimen>
+    <dimen name="add_doctor_title">18dp</dimen>
+    <dimen name="add_doctor_title_marginTop">16dp</dimen>
+    <dimen name="add_doctor_main_content_paddingStartEnd">25dp</dimen>
+    <dimen name="add_doctor_main_content_paddingTop">20dp</dimen>
+    <dimen name="add_doctor_border_line_marginBottom">10dp</dimen>
+    <dimen name="add_doctor_border_line_marginStart">5dp</dimen>
+    <dimen name="add_doctor_border_line_marginTop">-10dp</dimen>
+    <dimen name="add_doctor_spinner_layout_marginStart">-3dp</dimen>
+    <dimen name="add_doctor_spinner_image_paddingRight">2dp</dimen>
+    <dimen name="add_doctor_spinner_image_marginTop">15dp</dimen>
+    <dimen name="add_doctor_border_paddingStart">3dp</dimen>
+    <dimen name="add_doctor_border_paddingEnd">3dp</dimen>
+    <dimen name="add_doctor_upload_layout">10dp</dimen>
+    <dimen name="add_doctor_upload_photo_marginStart">30dp</dimen>
+    <dimen name="add_doctor_photo_text_marginStart">10dp</dimen>
+    <dimen name="add_doctor_photo_text_size">14dp</dimen>
+    <dimen name="add_doctor_terms_layout_marginTop">20dp</dimen>
+    <dimen name="add_doctor_terms_text_layout_marginTop">17dp</dimen>
+    <dimen name="add_doctor_terms_text_size">13dp</dimen>
+    <dimen name="add_doctor_submit_text_size">18dp</dimen>
+    <dimen name="add_doctor_main_paddingBottom">15dp</dimen>
+    <dimen name="add_dotcor_text_size">16dp</dimen>
+
+    <!--search filter layout-->
+    <dimen name="search_box_width">260dp</dimen>
+    <dimen name="add_doctor_maplocation_paddingTop">26dp</dimen>
+
+    <!--Filter popup-->
+    <dimen name="filters_textSize">18dp</dimen>
+    <dimen name="filters_borgin_marginBottomStart">3dp</dimen>
 </resources>

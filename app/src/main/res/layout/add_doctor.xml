@@ -21,7 +21,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:background="#103C61">
+                android:background="#103C61"
+                android:paddingTop="10dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -29,7 +30,7 @@
                     android:paddingBottom="20dp"
                     android:paddingStart="20dp"
                     android:paddingEnd="10dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="10dp"
                     android:src="@mipmap/close"/>
 
                 <TextView
@@ -38,9 +39,9 @@
                     android:layout_height="wrap_content"
                     android:text="Add doctor"
                     android:textColor="#ffffff"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     android:gravity="center"
-                    android:layout_marginTop="15dp"/>
+                    android:layout_marginTop="16dp"/>
 
             </LinearLayout>
 
@@ -88,7 +89,8 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="#ffffff"
                     android:hint="E-mail"
-                    android:drawableEnd="@mipmap/star"/>
+                    android:drawableEnd="@mipmap/star"
+                    android:inputType="textEmailAddress"/>
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
@@ -103,7 +105,9 @@
                     android:layout_height="wrap_content"
                     android:hint="Mobile Number"
                     android:backgroundTint="#ffffff"
-                    android:drawableEnd="@mipmap/star"/>
+                    android:drawableEnd="@mipmap/star"
+                    android:inputType="number"
+                    android:maxLength="15"/>
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
@@ -114,14 +118,15 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="-3dp">
                     <Spinner
                         android:id="@+id/add_doctor_location"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:spinnerMode="dialog"
-                        android:prompt="@string/country">
+                        android:prompt="@string/location">
                     </Spinner>
                     <ImageView
                         android:layout_width="wrap_content"
@@ -129,7 +134,7 @@
                         android:layout_alignParentEnd="true"
                         android:src="@drawable/dropdown_arrow"
                         android:paddingRight="2dp"
-                        android:layout_marginTop="@dimen/country_dropdown_arrow_margin_top"/>
+                        android:layout_marginTop="15dp"/>
                 </RelativeLayout>
                 <View
                     android:layout_width="fill_parent"
@@ -137,7 +142,7 @@
                     android:background="#D3D3D3"
                     android:layout_marginBottom="10dp"
                     android:layout_marginStart="5dp"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="-10dp"/>
 
                 <EditText
                     android:id="@+id/add_doctor_clinic_address"
@@ -155,14 +160,15 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="-3dp">
                     <Spinner
                         android:id="@+id/add_doctor_speciality"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:spinnerMode="dialog"
-                        android:prompt="@string/country">
+                        android:prompt="@string/speciality">
                     </Spinner>
                     <ImageView
                         android:layout_width="wrap_content"
@@ -170,7 +176,7 @@
                         android:layout_toStartOf="@+id/add_doctor_speciality_arrow"
                         android:src="@mipmap/star"
                         android:paddingRight="3dp"
-                        android:layout_marginTop="@dimen/country_dropdown_arrow_margin_top"
+                        android:layout_marginTop="15dp"
                         android:paddingEnd="3dp"/>
                     <ImageView
                         android:id="@+id/add_doctor_speciality_arrow"
@@ -179,7 +185,7 @@
                         android:layout_alignParentEnd="true"
                         android:src="@drawable/dropdown_arrow"
                         android:paddingRight="2dp"
-                        android:layout_marginTop="@dimen/country_dropdown_arrow_margin_top"/>
+                        android:layout_marginTop="15dp"/>
                 </RelativeLayout>
                 <View
                     android:layout_width="fill_parent"
@@ -187,10 +193,11 @@
                     android:background="#D3D3D3"
                     android:layout_marginBottom="10dp"
                     android:layout_marginStart="5dp"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="-10dp"/>
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="-3dp">
                     <Spinner
                         android:id="@+id/add_doctor_gender"
                         android:layout_width="match_parent"
@@ -205,7 +212,7 @@
                         android:layout_alignParentEnd="true"
                         android:src="@drawable/dropdown_arrow"
                         android:paddingRight="2dp"
-                        android:layout_marginTop="@dimen/country_dropdown_arrow_margin_top"/>
+                        android:layout_marginTop="15dp"/>
                 </RelativeLayout>
                 <View
                     android:layout_width="fill_parent"
@@ -213,9 +220,10 @@
                     android:background="#D3D3D3"
                     android:layout_marginBottom="10dp"
                     android:layout_marginStart="5dp"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="-10dp"/>
 
                 <LinearLayout
+                    android:id="@+id/upload_photo_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -230,6 +238,7 @@
                         android:layout_marginStart="30dp"
                         android:src="@mipmap/camera"/>
                     <TextView
+                        android:id="@+id/add_doctor_upload_note"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Upload photo the syndicate ID *"
@@ -254,14 +263,14 @@
                             android:layout_height="wrap_content"
                             android:text="Note: "
                             android:textColor="#008f9e"
-                            android:textSize="@dimen/term_and_condition_text_size"/>
+                            android:textSize="15dp"/>
                         <TextView
                             android:id="@+id/add_doctor_terms_start"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="All fields with"
                             android:layout_alignEnd="@+id/add_doctor_terms_note"
-                            android:textSize="@dimen/term_and_condition_text_size"/>
+                            android:textSize="15dp"/>
                         <ImageView
                             android:id="@+id/add_doctor_terms_icon"
                             android:layout_width="wrap_content"
@@ -269,21 +278,32 @@
                             android:layout_alignEnd="@+id/add_doctor_terms_start"
                             android:src="@drawable/terms"/>
                         <TextView
-                            android:id="@+id/terms_end"
+                            android:id="@+id/add_doctor_terms_end"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="must be filled."
                             android:layout_alignEnd="@+id/add_doctor_terms_icon"
-                            android:textSize="@dimen/term_and_condition_text_size"/>
+                            android:textSize="15dp"/>
                     </LinearLayout>
 
                     <Button
+                        android:id="@+id/add_doctor_submit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="#103C61"
                         android:text="Submit"
                         android:textColor="#ffffff"
-                        android:layout_alignParentEnd="true"/>
+                        android:layout_alignParentEnd="true"
+                        android:textAllCaps="false"
+                        android:capitalize="words"
+                        android:textSize="18dp"/>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/imageView"
+                        android:visibility="gone"/>
 
                 </RelativeLayout>
             </LinearLayout>

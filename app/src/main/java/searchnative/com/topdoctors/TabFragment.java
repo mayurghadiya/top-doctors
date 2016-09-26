@@ -18,6 +18,7 @@ public class TabFragment extends Fragment {
     public static TabLayout tabLayout;
     public static ViewPager viewPager;
     public static int int_items = 3 ;
+    int tabPosition = 0;
 
     @Nullable
     @Override
@@ -44,7 +45,7 @@ public class TabFragment extends Fragment {
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                int tabPosition = tab.getPosition();
+                tabPosition = tab.getPosition();
 
                 switch (tabPosition) {
                     case 0 :
@@ -61,6 +62,11 @@ public class TabFragment extends Fragment {
                         tabLayout.getTabAt(0).setIcon(R.mipmap.near_by_activated);
                         tabLayout.getTabAt(1).setIcon(R.mipmap.search);
                         tabLayout.getTabAt(2).setIcon(R.mipmap.top_10_doctor_bottom);
+                        break;
+                    case 3:
+                        tabLayout.getTabAt(0).setIcon(R.mipmap.near_by_activated);
+                        tabLayout.getTabAt(1).setIcon(R.mipmap.search);
+                        tabLayout.getTabAt(2).setIcon(R.mipmap.top_10_doctor_bottom_1);
                 }
             }
 
@@ -112,7 +118,6 @@ public class TabFragment extends Fragment {
                 case 0 : return new PrimaryFragment();
                 case 1 : return new SearchFragment();
                 case 2 : return new UpdatesFragment();
-                case 3 : return new ProfileFragment();
             }
             return null;
         }

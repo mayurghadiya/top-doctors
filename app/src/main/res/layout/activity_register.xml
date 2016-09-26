@@ -313,14 +313,14 @@
                     android:id="@+id/terms_note"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Note: "
+                    android:text="@string/note"
                     android:textColor="#008f9e"
                     android:textSize="@dimen/term_and_condition_text_size"/>
                 <TextView
                     android:id="@+id/terms_start"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="All fields with"
+                    android:text="@string/all_field_with"
                     android:textSize="@dimen/term_and_condition_text_size"/>
                 <ImageView
                     android:layout_width="wrap_content"
@@ -330,7 +330,7 @@
                     android:id="@+id/terms_end"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="must be filled."
+                    android:text="@string/must_be_filled"
                     android:textSize="@dimen/term_and_condition_text_size"/>
 
             </LinearLayout>

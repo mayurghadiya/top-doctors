@@ -294,14 +294,21 @@ public class PrimaryFragment extends Fragment {
         final int listSize = countryDataList.size() - 1;
         spinnerLocation.setAdapter(spinnerArrayAdapter);
 
+        Preference.setValue(getContext(), "DOCTOR_SEARCH_CUSTOM", "");
+
         //location/country wise doctor search
         spinnerLocation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i > 0) {
-                    //search doctors based on location/country
                     getDoctorSearchLocation = spinnerLocation.getSelectedItem().toString();
-                    searchDoctors(getDoctorSearchGender, getDoctorSearchSpeciality, getDoctorSearchLocation);
+                    //Toast.makeText(getContext(), "density: " + getDoctorSearchLocation, Toast.LENGTH_LONG).show();
+                    Preference.setValue(getContext(), "DOCTOR_SEARCH_CUSTOM", "true");
+                    Preference.setValue(getContext(), "DOCTOR_LOCATION_SEARCH", getDoctorSearchLocation);
+                    customSearch();
+                    //search doctors based on location/country
+                    //getDoctorSearchLocation = spinnerLocation.getSelectedItem().toString();
+                    //searchDoctors(getDoctorSearchGender, getDoctorSearchSpeciality, getDoctorSearchLocation);
                 }
             }
 
@@ -366,7 +373,10 @@ public class PrimaryFragment extends Fragment {
                 if(i > 0) {
                     //search doctors based on speciality
                     getDoctorSearchSpeciality = spinnerSpeciality.getSelectedItem().toString();
-                    searchDoctors(getDoctorSearchGender, getDoctorSearchSpeciality, getDoctorSearchLocation);
+                    Preference.setValue(getContext(), "DOCTOR_SEARCH_CUSTOM", "true");
+                    Preference.setValue(getContext(), "DOCTOR_SPECIALITY_SEARCH", getDoctorSearchSpeciality);
+                    customSearch();
+                    //searchDoctors(getDoctorSearchGender, getDoctorSearchSpeciality, getDoctorSearchLocation);
                 }
             }
 
@@ -376,6 +386,8 @@ public class PrimaryFragment extends Fragment {
             }
         });
 
+        Preference.setValue(getContext(), "LAB_SEARCH_CUSTOM", "");
+
         //speciality wise lab search
         labSpecialitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -383,7 +395,10 @@ public class PrimaryFragment extends Fragment {
                 if(i > 0) {
                     //search lab based on speciality
                     getLabSearchSpeciality = labSpecialitySpinner.getSelectedItem().toString();
-                    searchLab(getLabSearchGender, getLabSearchSpeciality);
+                    Preference.setValue(getContext(), "LAB_SEARCH_CUSTOM", "true");
+                    Preference.setValue(getContext(), "LAB_SEARCH_SPECIALITY", getLabSearchSpeciality);
+                    customSearch();
+                    //searchLab(getLabSearchGender, getLabSearchSpeciality);
                 }
             }
 
@@ -452,7 +467,10 @@ public class PrimaryFragment extends Fragment {
                 if(i > 0) {
                     //search doctors based on gender
                     getDoctorSearchGender = spinner1.getSelectedItem().toString();
-                    searchDoctors(getDoctorSearchGender, getDoctorSearchSpeciality, getDoctorSearchLocation);
+                    Preference.setValue(getContext(), "DOCTOR_SEARCH_CUSTOM", "true");
+                    Preference.setValue(getContext(), "DOCTOR_GENDER_SEARCH", getDoctorSearchGender);
+                    customSearch();
+                    //searchDoctors(getDoctorSearchGender, getDoctorSearchSpeciality, getDoctorSearchLocation);
                 }
             }
 
@@ -469,7 +487,10 @@ public class PrimaryFragment extends Fragment {
                 //search lab based on gender
                 if(i > 0) {
                     getLabSearchGender = labGenderSpinner.getSelectedItem().toString();
-                    searchLab(getLabSearchGender, getLabSearchSpeciality);
+                    Preference.setValue(getContext(), "LAB_SEARCH_CUSTOM", "true");
+                    Preference.setValue(getContext(), "LAB_SEARCH_GENDER", getLabSearchGender);
+                    customSearch();
+                    //searchLab(getLabSearchGender, getLabSearchSpeciality);
                 }
             }
 
@@ -483,19 +504,24 @@ public class PrimaryFragment extends Fragment {
         //String nearby = new GetNearBy().execute();
         new GetNearBy().execute();
 
+        Preference.setValue(getContext(), "HOSPITAL_SEARCH", "");
         //hospitals
         etHospitalSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new GetHospitalList().execute();
+                Preference.setValue(getContext(), "HOSPITAL_SEARCH", "true");
+                customSearch();
             }
         });
 
         //clinics
+        Preference.setValue(getContext(), "CLINIC_SEARCH", "");
         etClinicSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new GetClinic().execute();
+                Preference.setValue(getContext(), "CLINIC_SEARCH", "true");
+                customSearch();
+                //new GetClinic().execute();
             }
         });
 
@@ -1123,7 +1149,7 @@ public class PrimaryFragment extends Fragment {
         protected void onPreExecute() {
             super.onPreExecute();
             mProgressDialog = new ProgressDialog(getContext());
-            mProgressDialog.setMessage("Please wait...");
+            mProgressDialog.setMessage(getResources().getString(R.string.please_wait));
             mProgressDialog.setCancelable(false);
             mProgressDialog.show();
         }
@@ -1166,7 +1192,7 @@ public class PrimaryFragment extends Fragment {
         protected void onPreExecute() {
             super.onPreExecute();
             mProgressDialog = new ProgressDialog(getContext());
-            mProgressDialog.setMessage("Please wait...");
+            mProgressDialog.setMessage(getResources().getString(R.string.please_wait));
             mProgressDialog.setCancelable(false);
             mProgressDialog.show();
         }
@@ -1207,7 +1233,7 @@ public class PrimaryFragment extends Fragment {
         protected void onPreExecute() {
             super.onPreExecute();
             mProgressDialog = new ProgressDialog(getContext());
-            mProgressDialog.setMessage("Please wait...");
+            mProgressDialog.setMessage(getResources().getString(R.string.please_wait));
             mProgressDialog.setCancelable(false);
             mProgressDialog.show();
         }
@@ -1260,7 +1286,7 @@ public class PrimaryFragment extends Fragment {
             protected void onPreExecute() {
                 super.onPreExecute();
                 mProgressDialog = new ProgressDialog(getContext());
-                mProgressDialog.setMessage("Please wait...");
+                mProgressDialog.setMessage(getResources().getString(R.string.please_wait));
                 mProgressDialog.setCancelable(false);
                 mProgressDialog.show();
             }
@@ -1421,7 +1447,7 @@ public class PrimaryFragment extends Fragment {
             protected void onPreExecute() {
                 super.onPreExecute();
                 mProgressDialog = new ProgressDialog(getContext());
-                mProgressDialog.setMessage("Please wait...");
+                mProgressDialog.setMessage(getResources().getString(R.string.please_wait));
                 mProgressDialog.setCancelable(false);
                 mProgressDialog.show();
             }
@@ -1521,5 +1547,10 @@ public class PrimaryFragment extends Fragment {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void customSearch() {
+        BaseActivity baseActivity = new BaseActivity();
+        baseActivity.tabFragment.tabLayout.getTabAt(1).select();
     }
 }

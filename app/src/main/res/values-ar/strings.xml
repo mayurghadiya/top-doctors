@@ -62,6 +62,17 @@
     <string name="gender">جنس</string>
     <string name="total_reviews">30 التعليقات</string>
     <string name="enter_valid_password">إدخال كلمة السر الصحيحة</string>
+    <string name="add_doctor">طبيب جديد</string>
+    <string name="name">اسم</string>
+    <string name="clinic_name">اسم العيادة</string>
+    <string name="clinic_address">عنوان العيادة</string>
+    <string name="upload_photo">تحميل صورة للهوية نقابة *</string>
+    <string name="note">ملاحظة:</string>
+    <string name="all_field_with">جميع المجالات مع</string>
+    <string name="must_be_filled">يجب أن يكون شغلها.</string>
+    <string name="filters">مرشحات</string>
+    <string name="nearby_first">قريب لأول مرة</string>
+    <string name="no_data_found">لاتوجد بيانات</string>
     <string-array name="countries_list">
         <item>أفغانستان</item>
         <item>ألبانيا</item>

@@ -348,7 +348,7 @@ public class RegisterActivity extends AppCompatActivity {
             protected void onPreExecute() {
                 super.onPreExecute();
                 mProgressDialog = new ProgressDialog(RegisterActivity.this);
-                mProgressDialog.setMessage("Please wait...");
+                mProgressDialog.setMessage(getResources().getString(R.string.please_wait));
                 mProgressDialog.setCancelable(false);
                 mProgressDialog.show();
             }
