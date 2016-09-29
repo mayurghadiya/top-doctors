@@ -1,5 +1,6 @@
 package searchnative.com.topdoctors;
 
+import android.support.v4.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -63,7 +64,7 @@ public class TabFragment extends Fragment {
                         tabLayout.getTabAt(1).setIcon(R.mipmap.search);
                         tabLayout.getTabAt(2).setIcon(R.mipmap.top_10_doctor_bottom);
                         break;
-                    case 3:
+                    default:
                         tabLayout.getTabAt(0).setIcon(R.mipmap.near_by_activated);
                         tabLayout.getTabAt(1).setIcon(R.mipmap.search);
                         tabLayout.getTabAt(2).setIcon(R.mipmap.top_10_doctor_bottom_1);

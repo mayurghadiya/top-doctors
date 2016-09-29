@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/search_layout"
+    android:textAlignment="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#E7EBEE">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/main_container_padding_start_end"
+            android:paddingEnd="@dimen/main_container_padding_start_end"
+            android:paddingBottom="@dimen/main_container_padding_bottom"
+            android:background="@color/headerColor">
+
+            <LinearLayout
+                android:id="@+id/top_bar_main"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/top_bar_main_layout_height"
+                android:orientation="horizontal"
+                android:layoutDirection="ltr">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/lab_profile_swipe_menu"
+                        android:clickable="true"
+                        android:layout_width="@dimen/swipe_menu_width"
+                        android:layout_height="@dimen/swipe_menu_height"
+                        android:src="@mipmap/menu"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:paddingTop="@dimen/swipe_menu_padding_top"
+                        android:gravity="left"
+                        android:paddingBottom="@dimen/swipe_menu_padding_bottom"
+                        android:layout_marginStart="@dimen/swipe_menu_margin_start"/>
+
+                    <TextView
+                        android:id="@+id/profile_detail_name"
+                        android:layout_width="@dimen/search_box_width"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:padding="@dimen/hope_page_main_search_padding"
+                        android:drawablePadding="@dimen/hope_page_main_search_drawable_padding"
+                        android:text=""
+                        android:textSize="16dp"
+                        android:layout_marginTop="27dp"
+                        android:layout_marginStart="8dp"/>
+
+                    <ImageView
+                        android:id="@+id/search_map_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/share"
+                        android:layout_alignParentEnd="true"
+                        android:paddingTop="28dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/home_page_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:layoutDirection="inherit"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="23dp"
+                    android:paddingEnd="@dimen/main_container_padding_start_end"
+                    android:paddingBottom="@dimen/main_container_padding_bottom"
+                    android:paddingTop="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="90dp"
+                                android:layout_height="95dp"
+                                android:background="@drawable/customborder"
+                                android:gravity="center">
+                                <LinearLayout
+                                    android:layout_width="90dp"
+                                    android:layout_height="95dp"
+                                    android:background="#BCBDC1"
+                                    android:gravity="center">
+                                    <ImageView
+                                        android:id="@+id/most_visited_"
+                                        android:layout_width="70dp"
+                                        android:layout_height="70dp"
+                                        android:src="@mipmap/most_visited_doctor"/>
+                                </LinearLayout>
+                            </LinearLayout>
+
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_marginStart="@dimen/search_box_margin_top"
+                                android:layout_marginTop="@dimen/details_margin_top">
+
+                                <TextView
+                                    android:id="@+id/profile_detail_title"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textAlignment="viewStart"
+                                    android:text=""
+                                    android:textAllCaps="true"
+                                    android:textSize="@dimen/result_text_size"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginStart="@dimen/rating_margin_start"
+                                    android:paddingStart="2.2dp">
+
+                                    <!--rating-->
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:src="@mipmap/review_1"/>
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:src="@mipmap/review_1"/>
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:src="@mipmap/review_1"/>
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:src="@mipmap/review_1"/>
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:src="@mipmap/review_2"/>
+
+                                    <!--review-->
+                                    <TextView
+                                        android:id="@+id/total_reviews"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="30 Reviews"
+                                        android:textSize="@dimen/result_text_size"
+                                        android:layout_marginTop="@dimen/review_margin_top"
+                                        android:layout_marginStart="@dimen/review_margin_start"
+                                        android:textColor="@color/black"/>
+
+                                </LinearLayout>
+
+                                <!--address-->
+                                <!-- <TextView
+                                     android:id="@+id/work_place_address"
+                                     android:layout_width="match_parent"
+                                     android:layout_height="wrap_content"
+                                     android:textAlignment="viewStart"
+                                     android:textSize="@dimen/result_text_size"
+                                     android:text="6 El Obour Building., Salah Salem Road - Helipolis"/>-->
+
+                                <!-- <TextView
+                                     android:id="@+id/work_place_phone"
+                                     android:layout_width="match_parent"
+                                     android:layout_height="wrap_content"
+                                     android:textAlignment="viewStart"
+                                     android:textSize="@dimen/result_text_size"
+                                     android:text="02 2408888"/>-->
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginEnd="@dimen/contact_margin_end">
+
+                                    <!--speciality-->
+                                    <ImageView
+                                        android:id="@+id/speciality"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:src="@mipmap/teath"
+                                        android:paddingStart="-5dp"/>
+                                    <!--
+
+
+                                                                <LinearLayout
+                                                                    android:layout_width="match_parent"
+                                                                    android:layout_height="wrap_content"
+                                                                    android:gravity="end"
+                                                                    android:layout_marginBottom="@dimen/contact_icon_margin_end">
+
+                                                                    <ImageView
+                                                                        android:id="@+id/phone_dialer"
+                                                                        android:layout_width="wrap_content"
+                                                                        android:layout_height="wrap_content"
+                                                                        android:src="@mipmap/call"
+                                                                        android:layout_marginEnd="@dimen/contact_icon_margin_bottom"/>
+                                                                    <ImageView
+                                                                        android:id="@+id/add_to_contact"
+                                                                        android:layout_width="wrap_content"
+                                                                        android:layout_height="wrap_content"
+                                                                        android:src="@mipmap/add_to_contact"
+                                                                        android:layout_marginEnd="@dimen/contact_icon_margin_bottom"/>
+                                                                    <ImageView
+                                                                        android:id="@+id/share_details"
+                                                                        android:layout_width="wrap_content"
+                                                                        android:layout_height="wrap_content"
+                                                                        android:src="@mipmap/more"/>
+
+                                                                </LinearLayout>
+                                    -->
+
+                                </LinearLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentBottom="true"
+                                        android:text="Work Hours: 7:00 PM - 10:00PM"
+                                        android:textColor="@color/black"/>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentEnd="true"
+                                        android:text="D: 30 K"
+                                        android:textSize="20dp"
+                                        android:textColor="@color/black"/>
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:background="@drawable/border"
+                        android:weightSum="1.0"
+                        android:paddingStart="10dp"
+                        android:layout_marginTop="10dp">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/review_1"
+                            android:paddingTop="3dp"
+                            android:paddingStart="8dp"/>
+                        <TextView
+                            android:id="@+id/write_a_review_button"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="10dp"
+                            android:text="Write a Review"
+                            android:textColor="@color/black"
+                            android:layout_weight=".7"
+                            android:paddingStart="10dp"
+                            android:layout_marginTop="5dp"/>
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="fill_parent"
+                            android:background="#101010"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/claim_profile"
+                            android:layout_marginStart="20dp"
+                            android:paddingBottom="2dp"/>
+                        <TextView
+                            android:id="@+id/claim_profile_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="10dp"
+                            android:text="Claim Profile"
+                            android:textColor="@color/black"
+                            android:layout_marginTop="5dp"
+                            android:textSize="15dp"/>
+
+                    </LinearLayout>
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:weightSum="1.0"
+                        android:gravity="center">
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:layout_width="0sp"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/imageView2"
+                                android:src="@mipmap/add_a_hospital"
+                                android:paddingStart="-13dp"/>
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="fill_parent"
+                                android:background="#D3D3D3"/>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/imageView3"
+                                android:src="@mipmap/share"
+                                android:paddingStart="-5dp"/>
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="fill_parent"
+                                android:background="#D3D3D3"/>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/imageView4"
+                                android:src="@mipmap/bookmarks"
+                                android:paddingStart="20dp"/>
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Photo or Video"
+                                android:textColor="@color/black"
+                                android:id="@+id/textView3"
+                                android:paddingEnd="30dp"
+                                android:textSize="15dp"
+                                android:paddingStart="10dp"/>
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="fill_parent"
+                                android:background="#D3D3D3"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Share"
+                                android:textColor="@color/black"
+                                android:id="@+id/textView4"
+                                android:layout_marginEnd="40dp"
+                                android:paddingStart="40dp"/>
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="fill_parent"
+                                android:background="#D3D3D3"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Bookmark"
+                                android:textColor="@color/black"
+                                android:id="@+id/textView5"
+                                android:paddingStart="30dp"/>
+                        </TableRow>
+
+                    </TableLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dp"
+                    android:background="#D3D3D3"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="23dp"
+                    android:paddingEnd="@dimen/main_container_padding_start_end"
+                    android:paddingBottom="@dimen/main_container_padding_bottom"
+                    android:paddingTop="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@drawable/border"
+                        android:gravity="center">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="#D3D3D3"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="150dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="6 El Obour Building, Salah Salem Road, - Helipolis"
+                            android:textColor="@color/black"
+                            android:id="@+id/textView6"
+                            android:gravity="center"
+                            android:textSize="15dp"
+                            android:paddingBottom="10dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@drawable/border"
+                        android:layout_marginTop="20dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/imageView5"
+                                android:src="@mipmap/near_by_activated" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="Get Direction"
+                                android:id="@+id/textView7"
+                                android:layout_toEndOf="@id/imageView5"
+                                android:paddingStart="15dp"
+                                android:paddingTop="8dp"
+                                android:textColor="#101010" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/imageView6"
+                                android:src="@mipmap/top_arrow"
+                                android:layout_alignParentStart="false"
+                                android:layout_alignParentEnd="true" />
+                        </RelativeLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="#D3D3D3"
+                            android:layout_marginBottom="15dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginTop="10dp"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:paddingBottom="10dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/imageView7"
+                                android:src="@mipmap/call" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="Call (02 24048888)"
+                                android:id="@+id/textView8"
+                                android:layout_toEndOf="@id/imageView7"
+                                android:textColor="#101010"
+                                android:paddingTop="8dp"
+                                android:paddingStart="15dp" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/imageView8"
+                                android:src="@mipmap/top_arrow"
+                                android:layout_alignParentEnd="true" />
+                        </RelativeLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="#D3D3D3"
+                            android:layout_marginBottom="15dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginTop="10dp"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</RelativeLayout>

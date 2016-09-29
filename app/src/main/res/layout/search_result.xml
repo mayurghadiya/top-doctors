@@ -36,7 +36,6 @@
                     android:src="@mipmap/most_visited_doctor"/>
             </LinearLayout>
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,72 +43,91 @@
                 android:layout_marginStart="@dimen/search_box_margin_top"
                 android:layout_marginTop="@dimen/details_margin_top">
 
-                <TextView
-                    android:id="@+id/search_title_work_place"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="viewStart"
-                    android:text="ABADI MOHAMMED ADEL EL QADI"
-                    android:textAllCaps="true"
-                    android:textSize="@dimen/result_text_size"/>
-
                 <LinearLayout
+                    android:id="@+id/show_details"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginStart="@dimen/rating_margin_start"
-                    android:paddingStart="2.2dp">
-
-                    <!--rating-->
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/review_1"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/review_1"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/review_1"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/review_1"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/review_2"/>
-
-                    <!--review-->
+                    android:orientation="vertical">
                     <TextView
-                        android:id="@+id/search_total_reviews"
+                        android:id="@+id/search_result_doctor_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="30 Reviews"
+                        android:visibility="gone"/>
+
+                    <TextView
+                        android:id="@+id/hospital_profile_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"/>
+
+                    <TextView
+                        android:id="@+id/search_title_work_place"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="viewStart"
+                        android:text="ABADI MOHAMMED ADEL EL QADI"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/result_text_size"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginStart="@dimen/rating_margin_start"
+                        android:paddingStart="2.2dp">
+
+                        <!--rating-->
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/review_1"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/review_1"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/review_1"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/review_1"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/review_2"/>
+
+                        <!--review-->
+                        <TextView
+                            android:id="@+id/search_total_reviews"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="30 Reviews"
+                            android:textSize="@dimen/result_text_size"
+                            android:layout_marginTop="@dimen/review_margin_top"
+                            android:layout_marginStart="@dimen/review_margin_start"/>
+
+                    </LinearLayout>
+
+                    <!--address-->
+                    <TextView
+                        android:id="@+id/search_work_place_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="viewStart"
                         android:textSize="@dimen/result_text_size"
-                        android:layout_marginTop="@dimen/review_margin_top"
-                        android:layout_marginStart="@dimen/review_margin_start"/>
+                        android:text="6 El Obour Building., Salah Salem Road - Helipolis"/>
+
+                    <TextView
+                        android:id="@+id/search_work_place_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="viewStart"
+                        android:textSize="@dimen/result_text_size"
+                        android:text="02 2408888"/>
 
                 </LinearLayout>
-
-                <!--address-->
-                <TextView
-                    android:id="@+id/search_work_place_address"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="viewStart"
-                    android:textSize="@dimen/result_text_size"
-                    android:text="6 El Obour Building., Salah Salem Road - Helipolis"/>
-
-                <TextView
-                    android:id="@+id/search_work_place_phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="viewStart"
-                    android:textSize="@dimen/result_text_size"
-                    android:text="02 2408888"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"

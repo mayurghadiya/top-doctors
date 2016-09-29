@@ -2,6 +2,7 @@ package searchnative.com.topdoctors;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.support.v4.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
@@ -38,6 +40,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.vision.text.Line;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
@@ -49,6 +53,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -310,7 +315,7 @@ public class SearchFragment extends Fragment {
                     JSONArray searchResult = jsonObject.getJSONArray("data");
                     Log.v("Result: ", searchResult.toString());
                     for(int i = 0; i < searchResult.length(); i++) {
-                        JSONObject filterData = searchResult.getJSONObject(i);
+                        final JSONObject filterData = searchResult.getJSONObject(i);
                         View view;
                         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                         view = inflater.inflate(R.layout.search_result, null);
@@ -339,7 +344,103 @@ public class SearchFragment extends Fragment {
                         textView4.setTypeface(typeface);
                         textView4.setTextColor(Color.parseColor("#010101"));
 
+                        linearLayout.addView(view);
 
+                        final String callDialer = filterData.getString("Phone");
+
+                        //phone dialer
+                        ImageView imageView = (ImageView) view.findViewById(R.id.search_phone_dialer);
+                        imageView.setId(imageView.getId() + i);
+                        imageView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                openPhoneDialer(callDialer);
+                            }
+                        });
+
+                        //doctor details
+                        final String detailsId =  filterData.getString("DoctorId");
+
+                        LinearLayout showDetails = (LinearLayout) view.findViewById(R.id.show_details);
+                        showDetails.setId(getId() + i);
+                        showDetails.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Bundle args = new Bundle();
+                                args.putString("id", detailsId);
+
+                                FragmentManager mFragmentManager;
+                                mFragmentManager = getActivity().getSupportFragmentManager();
+                                FragmentTransaction mFragmentTransaction;
+                                mFragmentTransaction = mFragmentManager.beginTransaction();
+
+                                DoctorProfileFragment doctorprofile = new DoctorProfileFragment();
+                                doctorprofile.setArguments(args);
+
+                                mFragmentTransaction.addToBackStack("profile");
+                                mFragmentTransaction.replace(R.id.containerView, doctorprofile).commit();
+                            }
+                        });
+
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    public class RenderHospitelSearchResult {
+        RenderHospitelSearchResult(String result) {
+            linearLayout.removeAllViews();
+            linearLayout.setGravity(Gravity.START);
+            LinearLayout.LayoutParams textLayoutParam = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                if(jsonObject.getString("status").equals("false")) {
+                    TextView textView = new TextView(getContext());
+                    textView.setText(getResources().getString(R.string.no_data_found));
+                    textView.setGravity(Gravity.CENTER | Gravity.BOTTOM);
+                    textView.setTextColor(Color.parseColor("#010101"));
+                    textView.setTextSize(20);
+                    textView.setLayoutParams(textLayoutParam);
+
+                    linearLayout.addView(textView);
+                } else {
+                    JSONArray searchResult = jsonObject.getJSONArray("data");
+                    Log.v("Result: ", searchResult.toString());
+                    for(int i = 0; i < searchResult.length(); i++) {
+                        final JSONObject filterData = searchResult.getJSONObject(i);
+                        View view;
+                        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                        view = inflater.inflate(R.layout.search_result, null);
+
+                        //clinic name
+                        TextView textView1 = (TextView) view.findViewById(R.id.search_title_work_place);
+                        textView1.setText(filterData.getString("Name"));
+                        textView1.setTypeface(typeface, typeface.BOLD);
+                        textView1.setTextColor(Color.parseColor("#010101"));
+
+                        //clinic address
+                        TextView textView2 = (TextView) view.findViewById(R.id.search_work_place_address);
+                        textView2.setText(filterData.getString("Address"));
+                        textView2.setTypeface(typeface);
+                        textView2.setTextColor(Color.parseColor("#010101"));
+
+                        //mobile
+                        TextView textView3 = (TextView) view.findViewById(R.id.search_work_place_phone);
+                        textView3.setText(filterData.getString("Phone"));
+                        textView3.setTypeface(typeface);
+                        textView3.setTextColor(Color.parseColor("#010101"));
+
+                        //total reviews
+                        TextView textView4 = (TextView) view.findViewById(R.id.search_total_reviews);
+                        textView4.setText(getResources().getString(R.string.total_reviews));
+                        textView4.setTypeface(typeface);
+                        textView4.setTextColor(Color.parseColor("#010101"));
 
                         linearLayout.addView(view);
 
@@ -354,13 +455,234 @@ public class SearchFragment extends Fragment {
                                 openPhoneDialer(callDialer);
                             }
                         });
+
+                        //doctor details
+                        final String detailsId =  filterData.getString("HospitalId");
+
+                        LinearLayout showDetails = (LinearLayout) view.findViewById(R.id.show_details);
+                        showDetails.setId(getId() + i);
+                        showDetails.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Bundle args = new Bundle();
+                                args.putString("id", detailsId);
+
+                                FragmentManager mFragmentManager;
+                                mFragmentManager = getActivity().getSupportFragmentManager();
+                                FragmentTransaction mFragmentTransaction;
+                                mFragmentTransaction = mFragmentManager.beginTransaction();
+
+                                HospitalProfileFragment hospitalProfileFragment = new HospitalProfileFragment();
+                                hospitalProfileFragment.setArguments(args);
+
+                                mFragmentTransaction.addToBackStack("profile");
+                                mFragmentTransaction.replace(R.id.containerView, hospitalProfileFragment).commit();
+                            }
+                        });
+
                     }
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
+    }
 
+    /**
+     * Render clinic search results
+     */
+    public class RenderClinicSearchResult {
+        RenderClinicSearchResult(String result) {
+            linearLayout.removeAllViews();
+            linearLayout.setGravity(Gravity.START);
+            LinearLayout.LayoutParams textLayoutParam = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                if(jsonObject.getString("status").equals("false")) {
+                    TextView textView = new TextView(getContext());
+                    textView.setText(getResources().getString(R.string.no_data_found));
+                    textView.setGravity(Gravity.CENTER | Gravity.BOTTOM);
+                    textView.setTextColor(Color.parseColor("#010101"));
+                    textView.setTextSize(20);
+                    textView.setLayoutParams(textLayoutParam);
+
+                    linearLayout.addView(textView);
+                } else {
+                    JSONArray searchResult = jsonObject.getJSONArray("data");
+                    Log.v("Result: ", searchResult.toString());
+                    for(int i = 0; i < searchResult.length(); i++) {
+                        final JSONObject filterData = searchResult.getJSONObject(i);
+                        View view;
+                        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                        view = inflater.inflate(R.layout.search_result, null);
+
+                        //clinic name
+                        TextView textView1 = (TextView) view.findViewById(R.id.search_title_work_place);
+                        textView1.setText(filterData.getString("Name"));
+                        textView1.setTypeface(typeface, typeface.BOLD);
+                        textView1.setTextColor(Color.parseColor("#010101"));
+
+                        //clinic address
+                        TextView textView2 = (TextView) view.findViewById(R.id.search_work_place_address);
+                        textView2.setText(filterData.getString("Address"));
+                        textView2.setTypeface(typeface);
+                        textView2.setTextColor(Color.parseColor("#010101"));
+
+                        //mobile
+                        TextView textView3 = (TextView) view.findViewById(R.id.search_work_place_phone);
+                        textView3.setText(filterData.getString("Phone"));
+                        textView3.setTypeface(typeface);
+                        textView3.setTextColor(Color.parseColor("#010101"));
+
+                        //total reviews
+                        TextView textView4 = (TextView) view.findViewById(R.id.search_total_reviews);
+                        textView4.setText(getResources().getString(R.string.total_reviews));
+                        textView4.setTypeface(typeface);
+                        textView4.setTextColor(Color.parseColor("#010101"));
+
+                        linearLayout.addView(view);
+
+                        final String callDialer = filterData.getString("Phone");
+
+                        //phone dialer
+                        ImageView imageView = (ImageView) view.findViewById(R.id.search_phone_dialer);
+                        imageView.setId(imageView.getId() + i);
+                        imageView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                openPhoneDialer(callDialer);
+                            }
+                        });
+
+                        //doctor details
+                        final String clinicId =  filterData.getString("ClinicId");
+
+                        LinearLayout showDetails = (LinearLayout) view.findViewById(R.id.show_details);
+                        showDetails.setId(getId() + i);
+                        showDetails.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Bundle args = new Bundle();
+                                args.putString("id", clinicId);
+
+                                FragmentManager mFragmentManager;
+                                mFragmentManager = getActivity().getSupportFragmentManager();
+                                FragmentTransaction mFragmentTransaction;
+                                mFragmentTransaction = mFragmentManager.beginTransaction();
+
+                                ClinicProfileFragment clinicProfileFragment = new ClinicProfileFragment();
+                                clinicProfileFragment.setArguments(args);
+
+                                mFragmentTransaction.addToBackStack("profile");
+                                mFragmentTransaction.replace(R.id.containerView, clinicProfileFragment).commit();
+                            }
+                        });
+
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public class RenderLabSearchResult {
+        RenderLabSearchResult(String result) {
+            linearLayout.removeAllViews();
+            linearLayout.setGravity(Gravity.START);
+            LinearLayout.LayoutParams textLayoutParam = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                if(jsonObject.getString("status").equals("false")) {
+                    TextView textView = new TextView(getContext());
+                    textView.setText(getResources().getString(R.string.no_data_found));
+                    textView.setGravity(Gravity.CENTER | Gravity.BOTTOM);
+                    textView.setTextColor(Color.parseColor("#010101"));
+                    textView.setTextSize(20);
+                    textView.setLayoutParams(textLayoutParam);
+
+                    linearLayout.addView(textView);
+                } else {
+                    JSONArray searchResult = jsonObject.getJSONArray("data");
+                    Log.v("Result: ", searchResult.toString());
+                    for(int i = 0; i < searchResult.length(); i++) {
+                        final JSONObject filterData = searchResult.getJSONObject(i);
+                        View view;
+                        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                        view = inflater.inflate(R.layout.search_result, null);
+
+                        //clinic name
+                        TextView textView1 = (TextView) view.findViewById(R.id.search_title_work_place);
+                        textView1.setText(filterData.getString("Name"));
+                        textView1.setTypeface(typeface, typeface.BOLD);
+                        textView1.setTextColor(Color.parseColor("#010101"));
+
+                        //clinic address
+                        TextView textView2 = (TextView) view.findViewById(R.id.search_work_place_address);
+                        textView2.setText(filterData.getString("Address"));
+                        textView2.setTypeface(typeface);
+                        textView2.setTextColor(Color.parseColor("#010101"));
+
+                        //mobile
+                        TextView textView3 = (TextView) view.findViewById(R.id.search_work_place_phone);
+                        textView3.setText(filterData.getString("Phone"));
+                        textView3.setTypeface(typeface);
+                        textView3.setTextColor(Color.parseColor("#010101"));
+
+                        //total reviews
+                        TextView textView4 = (TextView) view.findViewById(R.id.search_total_reviews);
+                        textView4.setText(getResources().getString(R.string.total_reviews));
+                        textView4.setTypeface(typeface);
+                        textView4.setTextColor(Color.parseColor("#010101"));
+
+                        linearLayout.addView(view);
+
+                        final String callDialer = filterData.getString("Phone");
+
+                        //phone dialer
+                        ImageView imageView = (ImageView) view.findViewById(R.id.search_phone_dialer);
+                        imageView.setId(imageView.getId() + i);
+                        imageView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                openPhoneDialer(callDialer);
+                            }
+                        });
+
+                        //lab details
+                        final String detailsId =  filterData.getString("LabId");
+
+                        LinearLayout showDetails = (LinearLayout) view.findViewById(R.id.show_details);
+                        showDetails.setId(getId() + i);
+                        showDetails.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Bundle args = new Bundle();
+                                args.putString("id", detailsId);
+
+                                FragmentManager mFragmentManager;
+                                mFragmentManager = getActivity().getSupportFragmentManager();
+                                FragmentTransaction mFragmentTransaction;
+                                mFragmentTransaction = mFragmentManager.beginTransaction();
+
+                                LabProfileFragment labProfileFragment = new LabProfileFragment();
+                                labProfileFragment.setArguments(args);
+
+                                mFragmentTransaction.addToBackStack("profile");
+                                mFragmentTransaction.replace(R.id.containerView, labProfileFragment).commit();
+                            }
+                        });
+
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -438,6 +760,9 @@ public class SearchFragment extends Fragment {
         }
     }
 
+    /**
+     * Doctor search
+     */
     public void doctorSearch() {
         final String location = Preference.getValue(getContext(), "DOCTOR_LOCATION_SEARCH", "");
         final String speciality = Preference.getValue(getContext(), "DOCTOR_SPECIALITY_SEARCH", "");
@@ -473,6 +798,7 @@ public class SearchFragment extends Fragment {
 
             @Override
             protected void onPostExecute(String result) {
+                Log.v("Doctor: ", result);
                 new RenderSearchResult(result);
                 if (mProgressDialog != null && mProgressDialog.isShowing()) {
                     mProgressDialog.dismiss();
@@ -501,6 +827,9 @@ public class SearchFragment extends Fragment {
         Preference.setValue(getContext(), "DOCTOR_GENDER_SEARCH", "");
     }
 
+    /**
+     * Hospital search
+     */
     public void hospitalSearchCustom() {
         class HospitalSearch extends AsyncTask<Void, Void, String> {
             String URL = webServiceUrl + "search/hospitalSearch";
@@ -523,7 +852,7 @@ public class SearchFragment extends Fragment {
 
             @Override
             protected void onPostExecute(String result) {
-                new RenderSearchResult(result);
+                new RenderHospitelSearchResult(result);
                 if (mProgressDialog != null && mProgressDialog.isShowing()) {
                     mProgressDialog.dismiss();
                     mProgressDialog = null;
@@ -566,7 +895,7 @@ public class SearchFragment extends Fragment {
 
             @Override
             protected void onPostExecute(String result) {
-                new RenderSearchResult(result);
+                new RenderClinicSearchResult(result);
                 if (mProgressDialog != null && mProgressDialog.isShowing()) {
                     mProgressDialog.dismiss();
                     mProgressDialog = null;
@@ -619,7 +948,7 @@ public class SearchFragment extends Fragment {
 
             @Override
             protected void onPostExecute(String result) {
-                new RenderSearchResult(result);
+                new RenderLabSearchResult(result);
                 if (mProgressDialog != null && mProgressDialog.isShowing()) {
                     mProgressDialog.dismiss();
                     mProgressDialog = null;
@@ -650,6 +979,7 @@ public class SearchFragment extends Fragment {
 //        Log.v("search", Preference.getValue(getContext(), "HOSPITAL_SEARCH", ""));
         if (visible) {
             if(Preference.getValue(getContext(), "HOSPITAL_SEARCH", "").equals("true")) {
+                //Toast.makeText(getContext(), Preference.getValue(getContext(), "HOSPITAL_SEARCH", ""), Toast.LENGTH_SHORT).show();
                 hospitalSearchCustom();
                 Preference.setValue(getContext(), "HOSPITAL_SEARCH", "");
             } else if(Preference.getValue(getContext(), "CLINIC_SEARCH", "").equals("true")) {
