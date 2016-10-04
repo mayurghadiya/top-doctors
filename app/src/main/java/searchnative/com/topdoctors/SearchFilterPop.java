@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -49,10 +50,18 @@ public class SearchFilterPop extends AppCompatActivity {
     Button searchButton;
     TextView titleText;
     String getLocation, getSpeciality, getGender, getName;
+    String prevLocation, prevSpeciality, prevGender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Toast.makeText(SearchFilterPop.this, Preference.getValue(SearchFilterPop.this, "GLOBAL_FILTER_TYPE", ""), Toast.LENGTH_LONG).show();
+
+        prevLocation = Preference.getValue(SearchFilterPop.this, "DOCTOR_LOCATION_SEARCH", "");
+        prevSpeciality = Preference.getValue(SearchFilterPop.this, "DOCTOR_SPECIALITY_SEARCH", "");
+        prevGender = Preference.getValue(SearchFilterPop.this, "DOCTOR_GENDER_SEARCH", "");
+        //globalFilterType = Preference.getValue(SearchFilterPop.this, "GLOBAL_FILTER_TYPE", "");
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.search_filter);
@@ -254,7 +263,7 @@ public class SearchFilterPop extends AppCompatActivity {
                         locationArrayAdapter.add(country.getString("country_name"));
                     }
 
-                    String prevLocation = Preference.getValue(SearchFilterPop.this, "FILTER_LOCATION", "");;
+                    //prevLocation = Preference.getValue(SearchFilterPop.this, "FILTER_LOCATION", "");
 
                     for(int i = 0; i < locationArrayAdapter.getCount(); i++) {
                         if(prevLocation.trim().equals(locationArrayAdapter.getItem(i).toString())) {
@@ -303,8 +312,6 @@ public class SearchFilterPop extends AppCompatActivity {
                         JSONObject spec = jsonArray.getJSONObject(i);
                         specialityArrayAdapter.add(spec.getString("SPEC"));
                     }
-
-                    String prevSpeciality = Preference.getValue(SearchFilterPop.this, "FILTER_SPECIALITY", "");;
 
                     for(int i = 0; i < specialityArrayAdapter.getCount(); i++) {
                         if(prevSpeciality.trim().equals(specialityArrayAdapter.getItem(i).toString())) {
@@ -368,7 +375,7 @@ public class SearchFilterPop extends AppCompatActivity {
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGender.setAdapter(arrayAdapter);
 
-        String prevGender = Preference.getValue(SearchFilterPop.this, "FILTER_GENDER", "");;
+        //String prevGender = Preference.getValue(SearchFilterPop.this, "FILTER_GENDER", "");;
 
         for(int i = 0; i < arrayAdapter.getCount(); i++) {
             if(prevGender.trim().equals(arrayAdapter.getItem(i).toString())) {
@@ -383,7 +390,9 @@ public class SearchFilterPop extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i > 0) {
                     getLocation = locationSpinner.getSelectedItem().toString();
+                    prevLocation = getLocation;
                     Preference.setValue(SearchFilterPop.this, "FILTER_LOCATION", getLocation);
+                    Preference.setValue(SearchFilterPop.this, "DOCTOR_LOCATION_SEARCH", getLocation);
                 }
 
             }
@@ -401,7 +410,9 @@ public class SearchFilterPop extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i > 0) {
                     getSpeciality = specialitySpinner.getSelectedItem().toString();
+                    prevSpeciality = getSpeciality;
                     Preference.setValue(SearchFilterPop.this, "FILTER_SPECIALITY", getSpeciality);
+                    Preference.setValue(SearchFilterPop.this, "FILTER_SPECIALITY", prevSpeciality);
                 }
             }
 
@@ -418,7 +429,9 @@ public class SearchFilterPop extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i > 0) {
                     getGender = spinnerGender.getSelectedItem().toString();
+                    prevGender = getGender;
                     Preference.setValue(SearchFilterPop.this, "FILTER_GENDER", getGender);
+                    Preference.setValue(SearchFilterPop.this, "DOCTOR_GENDER_SEARCH", prevGender);
                 }
             }
 

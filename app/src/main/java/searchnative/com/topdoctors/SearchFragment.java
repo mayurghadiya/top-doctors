@@ -85,11 +85,9 @@ public class SearchFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         clearPreferences();
-
-        //hospitalSearchCustom();
         new GetAllWorkMaster().execute();
-
         relativeLayout = (RelativeLayout) getView().findViewById(R.id.search_layout);
         relativeLayout.setBackgroundColor(Color.WHITE);
 
@@ -110,9 +108,7 @@ public class SearchFragment extends Fragment {
         linearLayout = (LinearLayout) getView().findViewById(R.id.search_result_layout);
 
         //new GetAllWorkMaster().execute();
-
         final EditText editText = (EditText) getView().findViewById(R.id.hope_page_main_search_custom);
-
         editText.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
@@ -155,6 +151,8 @@ public class SearchFragment extends Fragment {
                 return false;
             }
         });
+
+
     }
 
     public void globalSearch(final String search) {
@@ -211,6 +209,8 @@ public class SearchFragment extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
+        Log.v("OnResume: ", "resume");
+        String globalSearchType = Preference.getValue(getContext(), "GLOBAL_FILTER_TYPE", "");
         setMenuVisibility(true);
         relativeLayout.setBackgroundColor(Color.WHITE);
         String search = Preference.getValue(getContext(), "IS_SEARCH", "");
@@ -221,13 +221,14 @@ public class SearchFragment extends Fragment {
             String name = Preference.getValue(getContext(), "FILTER_NAME", "");
             String searchData = Preference.getValue(getContext(), "SEARCH_KEYWORD", "");
 
-            searchFilterRequest(location, speciality, gender, name, searchData);
+            searchFilterRequest(location, speciality, gender, name, searchData, globalSearchType);
         }
 
 
     }
 
-    public void searchFilterRequest(final String location, final String speciality, final String gender, final String name, final String search) {
+    public void searchFilterRequest(final String location, final String speciality, final String gender, final String name, final String search,
+                                    final String searchType) {
 
         class SearchFilter extends AsyncTask<String, Void, String> {
             String URL = webServiceUrl + "search/filterSearch";
@@ -237,6 +238,7 @@ public class SearchFragment extends Fragment {
             String quickGender = gender;
             String quickName = name;
             String quickSearch = search;
+            String quickSearchType = searchType;
 
 
             @Override
@@ -247,6 +249,7 @@ public class SearchFragment extends Fragment {
                 nameValuePairs.add(new BasicNameValuePair("gender", quickGender));
                 nameValuePairs.add(new BasicNameValuePair("name", quickName));
                 nameValuePairs.add(new BasicNameValuePair("searchdata", quickSearch));
+                nameValuePairs.add(new BasicNameValuePair("searchType", quickSearchType));
 
                 try {
                     HttpPost httpPost = new HttpPost(URL);
@@ -263,7 +266,11 @@ public class SearchFragment extends Fragment {
 
             @Override
             protected void onPostExecute(String result) {
-                new RenderSearchResult(result);
+                if(Preference.getValue(getContext(), "GLOBAL_FILTER_TYPE", "").equals("doctor")) {
+                  new RenderDoctorSearchResult(result);
+                } else {
+                    new RenderSearchResult(result);
+                }
                 if (mProgressDialog != null && mProgressDialog.isShowing()) {
                     mProgressDialog.dismiss();
                     mProgressDialog = null;
@@ -359,29 +366,74 @@ public class SearchFragment extends Fragment {
                         });
 
                         //doctor details
-                        final String detailsId =  filterData.getString("DoctorId");
+                        final String detailsId =  filterData.getString("WorkId");
 
-                        LinearLayout showDetails = (LinearLayout) view.findViewById(R.id.show_details);
-                        showDetails.setId(getId() + i);
-                        showDetails.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Bundle args = new Bundle();
-                                args.putString("id", detailsId);
+                        final String workType = filterData.getString("WorkType");
 
-                                FragmentManager mFragmentManager;
-                                mFragmentManager = getActivity().getSupportFragmentManager();
-                                FragmentTransaction mFragmentTransaction;
-                                mFragmentTransaction = mFragmentManager.beginTransaction();
+                        if(workType.equals("Lab")) {
+                            LinearLayout showDetails = (LinearLayout) view.findViewById(R.id.show_details);
+                            showDetails.setId(getId() + i);
+                            showDetails.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Bundle args = new Bundle();
+                                    args.putString("id", detailsId);
 
-                                DoctorProfileFragment doctorprofile = new DoctorProfileFragment();
-                                doctorprofile.setArguments(args);
+                                    FragmentManager mFragmentManager;
+                                    mFragmentManager = getActivity().getSupportFragmentManager();
+                                    FragmentTransaction mFragmentTransaction;
+                                    mFragmentTransaction = mFragmentManager.beginTransaction();
 
-                                mFragmentTransaction.addToBackStack("profile");
-                                mFragmentTransaction.replace(R.id.containerView, doctorprofile).commit();
-                            }
-                        });
+                                    LabProfileFragment doctorprofile = new LabProfileFragment();
+                                    doctorprofile.setArguments(args);
 
+                                    mFragmentTransaction.addToBackStack("labProfile");
+                                    mFragmentTransaction.replace(R.id.search_layout, doctorprofile).commit();
+                                }
+                            });
+                        } else if(workType.equals("Clinic")) {
+                            LinearLayout showDetails = (LinearLayout) view.findViewById(R.id.show_details);
+                            showDetails.setId(getId() + i);
+                            showDetails.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Bundle args = new Bundle();
+                                    args.putString("id", detailsId);
+
+                                    FragmentManager mFragmentManager;
+                                    mFragmentManager = getActivity().getSupportFragmentManager();
+                                    FragmentTransaction mFragmentTransaction;
+                                    mFragmentTransaction = mFragmentManager.beginTransaction();
+
+                                    ClinicProfileFragment doctorprofile = new ClinicProfileFragment();
+                                    doctorprofile.setArguments(args);
+
+                                    mFragmentTransaction.addToBackStack("clinicProfile");
+                                    mFragmentTransaction.replace(R.id.search_layout, doctorprofile).commit();
+                                }
+                            });
+                        } else if(workType.equals("Hospital")) {
+                            LinearLayout showDetails = (LinearLayout) view.findViewById(R.id.show_details);
+                            showDetails.setId(getId() + i);
+                            showDetails.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Bundle args = new Bundle();
+                                    args.putString("id", detailsId);
+
+                                    FragmentManager mFragmentManager;
+                                    mFragmentManager = getActivity().getSupportFragmentManager();
+                                    FragmentTransaction mFragmentTransaction;
+                                    mFragmentTransaction = mFragmentManager.beginTransaction();
+
+                                    HospitalProfileFragment doctorprofile = new HospitalProfileFragment();
+                                    doctorprofile.setArguments(args);
+
+                                    mFragmentTransaction.addToBackStack("hospitalProfile");
+                                    mFragmentTransaction.replace(R.id.search_layout, doctorprofile).commit();
+                                }
+                            });
+                        }
                     }
                 }
             } catch (JSONException e) {
@@ -391,8 +443,9 @@ public class SearchFragment extends Fragment {
 
     }
 
-    public class RenderHospitelSearchResult {
+        public class RenderHospitelSearchResult {
         RenderHospitelSearchResult(String result) {
+            hideFilterIcon();
             linearLayout.removeAllViews();
             linearLayout.setGravity(Gravity.START);
             LinearLayout.LayoutParams textLayoutParam = new LinearLayout.LayoutParams(
@@ -411,7 +464,6 @@ public class SearchFragment extends Fragment {
                     linearLayout.addView(textView);
                 } else {
                     JSONArray searchResult = jsonObject.getJSONArray("data");
-                    Log.v("Result: ", searchResult.toString());
                     for(int i = 0; i < searchResult.length(); i++) {
                         final JSONObject filterData = searchResult.getJSONObject(i);
                         View view;
@@ -475,8 +527,8 @@ public class SearchFragment extends Fragment {
                                 HospitalProfileFragment hospitalProfileFragment = new HospitalProfileFragment();
                                 hospitalProfileFragment.setArguments(args);
 
-                                mFragmentTransaction.addToBackStack("profile");
-                                mFragmentTransaction.replace(R.id.containerView, hospitalProfileFragment).commit();
+                                mFragmentTransaction.addToBackStack("hospitalProfile");
+                                mFragmentTransaction.replace(R.id.search_layout, hospitalProfileFragment).commit();
                             }
                         });
 
@@ -575,8 +627,106 @@ public class SearchFragment extends Fragment {
                                 ClinicProfileFragment clinicProfileFragment = new ClinicProfileFragment();
                                 clinicProfileFragment.setArguments(args);
 
-                                mFragmentTransaction.addToBackStack("profile");
-                                mFragmentTransaction.replace(R.id.containerView, clinicProfileFragment).commit();
+                                mFragmentTransaction.addToBackStack("clinicProfile");
+                                mFragmentTransaction.replace(R.id.search_layout, clinicProfileFragment).commit();
+                            }
+                        });
+
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public class RenderDoctorSearchResult {
+        RenderDoctorSearchResult(String result) {
+            hideFilterIcon();
+            linearLayout.removeAllViews();
+            linearLayout.setGravity(Gravity.START);
+            LinearLayout.LayoutParams textLayoutParam = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                if(jsonObject.getString("status").equals("false")) {
+                    TextView textView = new TextView(getContext());
+                    textView.setText(getResources().getString(R.string.no_data_found));
+                    textView.setGravity(Gravity.CENTER | Gravity.BOTTOM);
+                    textView.setTextColor(Color.parseColor("#010101"));
+                    textView.setTextSize(20);
+                    textView.setLayoutParams(textLayoutParam);
+
+                    linearLayout.addView(textView);
+                } else {
+                    JSONArray searchResult = jsonObject.getJSONArray("data");
+                    Log.v("Result: ", searchResult.toString());
+                    for(int i = 0; i < searchResult.length(); i++) {
+                        final JSONObject filterData = searchResult.getJSONObject(i);
+                        View view;
+                        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                        view = inflater.inflate(R.layout.search_result, null);
+
+                        //clinic name
+                        TextView textView1 = (TextView) view.findViewById(R.id.search_title_work_place);
+                        textView1.setText(filterData.getString("Name"));
+                        textView1.setTypeface(typeface, typeface.BOLD);
+                        textView1.setTextColor(Color.parseColor("#010101"));
+
+                        //clinic address
+                        TextView textView2 = (TextView) view.findViewById(R.id.search_work_place_address);
+                        textView2.setText(filterData.getString("Address"));
+                        textView2.setTypeface(typeface);
+                        textView2.setTextColor(Color.parseColor("#010101"));
+
+                        //mobile
+                        TextView textView3 = (TextView) view.findViewById(R.id.search_work_place_phone);
+                        textView3.setText(filterData.getString("Phone"));
+                        textView3.setTypeface(typeface);
+                        textView3.setTextColor(Color.parseColor("#010101"));
+
+                        //total reviews
+                        TextView textView4 = (TextView) view.findViewById(R.id.search_total_reviews);
+                        textView4.setText(getResources().getString(R.string.total_reviews));
+                        textView4.setTypeface(typeface);
+                        textView4.setTextColor(Color.parseColor("#010101"));
+
+                        linearLayout.addView(view);
+
+                        final String callDialer = filterData.getString("Phone");
+
+                        //phone dialer
+                        ImageView imageView = (ImageView) view.findViewById(R.id.search_phone_dialer);
+                        imageView.setId(imageView.getId() + i);
+                        imageView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                openPhoneDialer(callDialer);
+                            }
+                        });
+
+                        //doctor details
+                        final String clinicId =  filterData.getString("DoctorId");
+
+                        LinearLayout showDetails = (LinearLayout) view.findViewById(R.id.show_details);
+                        showDetails.setId(getId() + i);
+                        showDetails.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Bundle args = new Bundle();
+                                args.putString("id", clinicId);
+
+                                FragmentManager mFragmentManager;
+                                mFragmentManager = getActivity().getSupportFragmentManager();
+                                FragmentTransaction mFragmentTransaction;
+                                mFragmentTransaction = mFragmentManager.beginTransaction();
+
+                                DoctorProfileFragment clinicProfileFragment = new DoctorProfileFragment();
+                                clinicProfileFragment.setArguments(args);
+
+                                mFragmentTransaction.addToBackStack("doctorProfile");
+                                mFragmentTransaction.add(R.id.search_layout, clinicProfileFragment).commit();
                             }
                         });
 
@@ -590,6 +740,7 @@ public class SearchFragment extends Fragment {
 
     public class RenderLabSearchResult {
         RenderLabSearchResult(String result) {
+            hideFilterIcon();
             linearLayout.removeAllViews();
             linearLayout.setGravity(Gravity.START);
             LinearLayout.LayoutParams textLayoutParam = new LinearLayout.LayoutParams(
@@ -672,8 +823,8 @@ public class SearchFragment extends Fragment {
                                 LabProfileFragment labProfileFragment = new LabProfileFragment();
                                 labProfileFragment.setArguments(args);
 
-                                mFragmentTransaction.addToBackStack("profile");
-                                mFragmentTransaction.replace(R.id.containerView, labProfileFragment).commit();
+                                mFragmentTransaction.addToBackStack("labProfile");
+                                mFragmentTransaction.replace(R.id.search_layout, labProfileFragment).commit();
                             }
                         });
 
@@ -764,7 +915,9 @@ public class SearchFragment extends Fragment {
      * Doctor search
      */
     public void doctorSearch() {
+        Preference.setValue(getContext(), "GLOBAL_FILTER_TYPE", "doctor");
         final String location = Preference.getValue(getContext(), "DOCTOR_LOCATION_SEARCH", "");
+        Preference.getValue(getContext(), "FILTER_LOCATION", location);
         final String speciality = Preference.getValue(getContext(), "DOCTOR_SPECIALITY_SEARCH", "");
         final String gender = Preference.getValue(getContext(), "DOCTOR_GENDER_SEARCH", "");
 
@@ -799,7 +952,7 @@ public class SearchFragment extends Fragment {
             @Override
             protected void onPostExecute(String result) {
                 Log.v("Doctor: ", result);
-                new RenderSearchResult(result);
+                new RenderDoctorSearchResult(result);
                 if (mProgressDialog != null && mProgressDialog.isShowing()) {
                     mProgressDialog.dismiss();
                     mProgressDialog = null;
@@ -822,9 +975,9 @@ public class SearchFragment extends Fragment {
         Log.v("location", location);
         Log.v("speciality", speciality);
         Log.v("gender", gender);
-        Preference.setValue(getContext(), "DOCTOR_LOCATION_SEARCH", "");
-        Preference.setValue(getContext(), "DOCTOR_SPECIALITY_SEARCH", "");
-        Preference.setValue(getContext(), "DOCTOR_GENDER_SEARCH", "");
+        //Preference.setValue(getContext(), "DOCTOR_LOCATION_SEARCH", "");
+        //Preference.setValue(getContext(), "DOCTOR_SPECIALITY_SEARCH", "");
+        //Preference.setValue(getContext(), "DOCTOR_GENDER_SEARCH", "");
     }
 
     /**
@@ -975,8 +1128,6 @@ public class SearchFragment extends Fragment {
     @Override
     public void setMenuVisibility(final boolean visible) {
         super.setMenuVisibility(visible);
-        //String hospital = Preference.getValue(getContext(), "HOSPITAL_SEARCH", "");
-//        Log.v("search", Preference.getValue(getContext(), "HOSPITAL_SEARCH", ""));
         if (visible) {
             if(Preference.getValue(getContext(), "HOSPITAL_SEARCH", "").equals("true")) {
                 //Toast.makeText(getContext(), Preference.getValue(getContext(), "HOSPITAL_SEARCH", ""), Toast.LENGTH_SHORT).show();
@@ -993,6 +1144,12 @@ public class SearchFragment extends Fragment {
                 Preference.setValue(getContext(), "LAB_SEARCH_CUSTOM", "");
             }
         }
+    }
+
+    public void hideFilterIcon() {
+        //searchKeyword.setCompoundDrawables(null, null, null, null);
+        //searchKeyword.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
+        //searchKeyword.setFocusable(false);
     }
 
 }

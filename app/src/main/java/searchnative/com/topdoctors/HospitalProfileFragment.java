@@ -1,6 +1,7 @@
 package searchnative.com.topdoctors;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -17,9 +18,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.vision.text.Line;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ResponseHandler;
@@ -34,6 +49,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by mayur on 28/9/16.
@@ -47,10 +63,18 @@ public class HospitalProfileFragment extends Fragment {
     final String WEB_SERVICE_URL = AppConfig.getWebServiceUrl();
     private ProgressDialog mProgressDialog;
     private Typeface typeface;
+    private double latitude, longitude;
+    private LatLng hospitalMap;
+    private GoogleMap googleMap;
+    private SupportMapFragment supportMapFragment;
+    private LinearLayout linearLayout;
+    //Bundle savedState;
+    //MapView mapView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.hospital_profile, container, false);
+        //supportMapFragment = (SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.google_map_fragment);
 
         return view;
     }
@@ -158,7 +182,7 @@ public class HospitalProfileFragment extends Fragment {
 
                     //phone
                     TextView doctorPhone = (TextView) getView().findViewById(R.id.textView8);
-                    doctorPhone.setText("Call (" + profile.getString("Phone") + ")");
+                    doctorPhone.setText(getResources().getString(R.string.call) +" (" + profile.getString("Phone") + ")");
                     doctorPhone.setTypeface(typeface);
 
                     //get direction
@@ -171,7 +195,7 @@ public class HospitalProfileFragment extends Fragment {
 
                     //total doctors
                     TextView totalDoctors = (TextView) getView().findViewById(R.id.total_doctor_button);
-                    totalDoctors.setText(jsonObject.getString("totalDcotors") + " Doctors");
+                    totalDoctors.setText(jsonObject.getString("totalDcotors") + " " + getResources().getString(R.string.search_doctor_label));
                     totalDoctors.setTypeface(typeface);
 
                     final String callDialer = profile.getString("Phone");
@@ -187,6 +211,7 @@ public class HospitalProfileFragment extends Fragment {
 
                     final String hospitalId = profile.getString("HospitalId");
                     final String hospitalName = profile.getString("Name");
+                    final String hospitalAddress = profile.getString("Address");
 
                     totalDoctors.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -204,14 +229,91 @@ public class HospitalProfileFragment extends Fragment {
                             hospitalDoctorListFragment.setArguments(args);
 
                             mFragmentTransaction.addToBackStack("hospitalDoctors");
-                            mFragmentTransaction.replace(R.id.containerView, hospitalDoctorListFragment).commit();
+                            mFragmentTransaction.replace(R.id.search_layout, hospitalDoctorListFragment).commit();
                         }
                     });
+
+                    latitude = profile.getDouble("Latitude");
+                    longitude = profile.getDouble("Longitude");
+
+                    //set latitude and longitude
+                    hospitalMap = new LatLng(latitude, longitude);
+                    //google map
+                    try {
+                        FragmentManager fragmentManager = getChildFragmentManager();
+                        supportMapFragment = (SupportMapFragment) fragmentManager.findFragmentById(R.id.hospital_google_map_layout);
+                        if(supportMapFragment == null) {
+                            supportMapFragment = SupportMapFragment.newInstance();
+                            supportMapFragment.getMapAsync(new OnMapReadyCallback() {
+                                @Override
+                                public void onMapReady(final GoogleMap map) {
+                                    map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(hospitalMap, 16));
+                                    map.addMarker(new MarkerOptions().position(hospitalMap).title(hospitalAddress));
+                                    map.setTrafficEnabled(true);
+                                    map.setIndoorEnabled(true);
+                                    map.setBuildingsEnabled(true);
+                                    map.getUiSettings().setZoomControlsEnabled(true);
+                                }
+                            });
+                            fragmentManager.beginTransaction().replace(R.id.hospital_google_map_layout, supportMapFragment).commit();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    //get direction
+                    RelativeLayout relativeLayout = (RelativeLayout) getView().findViewById(R.id.get_direction_layout);
+                    relativeLayout.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if(String.valueOf(latitude).isEmpty() || String.valueOf(longitude).isEmpty()) {
+                                Toast.makeText(getContext(), "Location is not available", Toast.LENGTH_LONG).show();
+                            } else {
+                                final Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse("http://maps.google.com/maps?" + "saddr=my location" +"&daddr=" + latitude + "," + longitude));
+                                intent.setClassName("com.google.android.apps.maps","com.google.android.maps.MapsActivity");
+                                startActivity(intent);
+                            }
+                        }
+                    });
+
                 }
             } catch(Exception e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
+
+    public void initilizeMap() {
+        supportMapFragment.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap map) {
+                map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                map.addMarker(new MarkerOptions().position(hospitalMap).title("Ahmedabad"));
+                map.animateCamera(CameraUpdateFactory.zoomTo(5.0f));
+                map.setTrafficEnabled(true);
+                map.setIndoorEnabled(true);
+                map.setBuildingsEnabled(true);
+                map.getUiSettings().setZoomControlsEnabled(true);
+            }
+        });
     }
 
 }

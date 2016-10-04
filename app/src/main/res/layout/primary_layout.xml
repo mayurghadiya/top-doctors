@@ -317,6 +317,31 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/home_page_lab_search"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:textColor="#010101"
+                            android:backgroundTint="#ffffff"
+                            android:drawablePadding="@dimen/search_content_drawable_padding"
+                            android:maxLines="1"
+                            android:textColorHint="#010101"
+                            android:textAlignment="viewStart"
+                            android:drawableStart="@mipmap/labs"
+                            android:inputType="text"
+                            android:textSize="@dimen/search_text_size"
+                            android:gravity="center"
+                            android:hint="@string/search_labs_label"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

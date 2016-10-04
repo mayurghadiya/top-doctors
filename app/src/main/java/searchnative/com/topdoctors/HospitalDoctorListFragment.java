@@ -65,7 +65,7 @@ public class HospitalDoctorListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         hospitalId = getArguments().getString("id");
         hospitalName = getArguments().getString("hospitalName");
-        //Toast.makeText(getContext(), hospitalId, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), Preference.getValue(getContext(), "HOSPITAL_SEARCH", ""), Toast.LENGTH_SHORT).show();
 
         typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/ExoMedium.otf");
 
@@ -149,6 +149,10 @@ public class HospitalDoctorListFragment extends Fragment {
                     textView.setTextColor(Color.parseColor("#010101"));
                     textView.setTextSize(20);
                     textView.setLayoutParams(textLayoutParam);
+                    //title name
+                    TextView profile_detail_name = (TextView) getView().findViewById(R.id.profile_detail_name);
+                    profile_detail_name.setTypeface(typeface, typeface.BOLD);
+                    profile_detail_name.setText(hospitalName);
 
                     linearLayout.addView(textView);
                 } else {
@@ -225,7 +229,7 @@ public class HospitalDoctorListFragment extends Fragment {
                                 doctorprofile.setArguments(args);
 
                                 mFragmentTransaction.addToBackStack("profile");
-                                mFragmentTransaction.replace(R.id.containerView, doctorprofile).commit();
+                                mFragmentTransaction.replace(R.id.search_layout, doctorprofile).commit();
                             }
                         });
 

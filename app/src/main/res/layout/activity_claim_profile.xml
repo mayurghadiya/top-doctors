@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_claim_profile"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="searchnative.com.topdoctors.ClaimProfileActivity">
+
+    <LinearLayout
+        android:id="@+id/claim_profile_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/top_bar_close_and_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#053B61"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp">
+
+            <ImageView
+                android:id="@+id/close_claim_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/close"
+                android:paddingEnd="10dp"/>
+
+            <TextView
+                android:id="@+id/claim_profile_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/claim_profile"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:paddingTop="5dp"/>
+
+        </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/login_form"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            android:layoutDirection="inherit">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/claim_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:paddingTop="18dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp">
+
+                    <TextView
+                        android:id="@+id/profile_name_claim_message"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text=""
+                        android:textSize="20dp"
+                        android:textColor="#103C61"
+                        android:maxLines="2"/>
+
+                    <TextView
+                        android:id="@+id/fill_form_message"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:text=""
+                        android:textSize="20dp"
+                        android:paddingTop="20dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/claim_profile_form"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp"
+                    android:paddingTop="18dp">
+
+                    <EditText
+                        android:id="@+id/claim_profile_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#bcbbc0"
+                        android:backgroundTint="#ffffff"
+                        android:hint="@string/email"
+                        android:drawablePadding="8dp"
+                        android:inputType="textEmailAddress"
+                        android:singleLine="true"
+                        android:drawableEnd="@mipmap/star"
+                        android:textColorHint="#bcbbc0"
+                        android:focusableInTouchMode="true"
+                        android:textAlignment="viewStart"/>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="2dp"
+                        android:background="#D3D3D3"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="-10dp"/>
+
+                    <EditText
+                        android:id="@+id/claim_profile_mobile_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#bcbbc0"
+                        android:backgroundTint="#ffffff"
+                        android:text="@string/mobile_number"
+                        android:textAlignment="viewStart"
+                        android:drawableEnd="@mipmap/star"
+                        android:paddingTop="15dp"
+                        android:inputType="number"/>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="2dp"
+                        android:background="#D3D3D3"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="-10dp"/>
+
+                    <EditText
+                        android:id="@+id/claim_profile_clinic_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/clinic_number"
+                        android:textColor="#bcbbc0"
+                        android:backgroundTint="#ffffff"
+                        android:drawableEnd="@mipmap/star"
+                        android:paddingTop="15dp"
+                        android:textAlignment="viewStart"/>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="2dp"
+                        android:background="#D3D3D3"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="-10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/upload_photo_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:background="#103C61"
+                        android:layout_marginTop="15dp"
+                        android:paddingTop="@dimen/add_doctor_upload_layout"
+                        android:paddingBottom="@dimen/add_doctor_upload_layout">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/add_doctor_upload_photo_marginStart"
+                            android:src="@mipmap/camera"/>
+                        <TextView
+                            android:id="@+id/claim_profile_upload_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/upload_photo"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/add_doctor_photo_text_marginStart"
+                            android:textColor="#ffffff"
+                            android:textSize="@dimen/add_doctor_photo_text_size"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/add_doctor_terms_layout_marginTop"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/add_doctor_terms_text_layout_marginTop">
+                        <TextView
+                            android:id="@+id/claim_profile_terms_note"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/note"
+                            android:textColor="#008f9e"
+                            android:textSize="@dimen/add_doctor_terms_text_size"/>
+                        <TextView
+                            android:id="@+id/claim_profile_terms_start"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/all_field_with"
+                            android:layout_alignEnd="@+id/add_doctor_terms_note"
+                            android:textSize="@dimen/add_doctor_terms_text_size"/>
+                        <ImageView
+                            android:id="@+id/claim_profile_terms_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/terms_image_height"
+                            android:layout_alignEnd="@+id/add_doctor_terms_start"
+                            android:src="@drawable/terms"/>
+                        <TextView
+                            android:id="@+id/claim_profile_terms_end"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/must_be_filled"
+                            android:layout_alignEnd="@+id/add_doctor_terms_icon"
+                            android:textSize="@dimen/add_doctor_terms_text_size"/>
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/claim_profile_submit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#103C61"
+                        android:text="@string/submit"
+                        android:textColor="#ffffff"
+                        android:layout_alignParentEnd="true"
+                        android:textAllCaps="false"
+                        android:capitalize="words"
+                        android:textSize="@dimen/add_doctor_submit_text_size"/>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/imageView"
+                        android:visibility="gone"/>
+
+                </RelativeLayout>
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</RelativeLayout>

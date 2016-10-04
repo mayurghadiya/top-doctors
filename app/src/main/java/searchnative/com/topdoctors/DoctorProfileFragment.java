@@ -21,6 +21,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -46,6 +53,9 @@ public class DoctorProfileFragment extends Fragment {
     final String WEB_SERVICE_URL = AppConfig.getWebServiceUrl();
     private ProgressDialog mProgressDialog;
     private Typeface typeface;
+    private SupportMapFragment supportMapFragment;
+    private double latitude, longitude;
+    private LatLng doctorProfileLatlong;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -153,7 +163,7 @@ public class DoctorProfileFragment extends Fragment {
 
                     //phone
                     TextView doctorPhone = (TextView) getView().findViewById(R.id.textView8);
-                    doctorPhone.setText("Call (" + profile.getString("Phone") + ")");
+                    doctorPhone.setText(getResources().getString(R.string.call) + " (" + profile.getString("Phone") + ")");
                     doctorPhone.setTypeface(typeface);
 
                     //get direction
@@ -167,6 +177,17 @@ public class DoctorProfileFragment extends Fragment {
                     //claim profile
                     TextView claimProfile = (TextView) getView().findViewById(R.id.claim_profile_button);
                     claimProfile.setTypeface(typeface);
+                    final String profileName = profile.getString("Name");
+                    claimProfile.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(getContext(), ClaimProfileActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("name", profileName);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
+                    });
 
                     final String callDialer = profile.getString("Phone");
                     RelativeLayout hospitalCall = (RelativeLayout) getView().findViewById(R.id.doctor_call);
@@ -176,6 +197,52 @@ public class DoctorProfileFragment extends Fragment {
                             Intent intent = new Intent(Intent.ACTION_DIAL);
                             intent.setData(Uri.parse("tel:" + callDialer));
                             startActivity(intent);
+                        }
+                    });
+
+                    latitude = profile.getDouble("Latitude");
+                    longitude = profile.getDouble("Longitude");
+
+                    //set latitude and longitude
+                    doctorProfileLatlong = new LatLng(latitude, longitude);
+                    final String doctorAddress = profile.getString("Address");
+                    //google map
+                    try {
+                        FragmentManager fragmentManager = getChildFragmentManager();
+                        supportMapFragment = (SupportMapFragment) fragmentManager.findFragmentById(R.id.doctor_profile_map_layout);
+                        if(supportMapFragment == null) {
+                            supportMapFragment = SupportMapFragment.newInstance();
+                            supportMapFragment.getMapAsync(new OnMapReadyCallback() {
+                                @Override
+                                public void onMapReady(final GoogleMap map) {
+                                    map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(doctorProfileLatlong, 16));
+                                    map.addMarker(new MarkerOptions().position(doctorProfileLatlong).title(doctorAddress));
+                                    map.setTrafficEnabled(true);
+                                    map.setIndoorEnabled(true);
+                                    map.setBuildingsEnabled(true);
+                                    map.getUiSettings().setZoomControlsEnabled(true);
+                                }
+                            });
+                            fragmentManager.beginTransaction().replace(R.id.doctor_profile_map_layout, supportMapFragment).commit();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    //get direction
+                    RelativeLayout relativeLayout = (RelativeLayout) getView().findViewById(R.id.doctor_get_direction_layout);
+                    relativeLayout.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if(String.valueOf(latitude).isEmpty() || String.valueOf(longitude).isEmpty()) {
+                                Toast.makeText(getContext(), "Location is not available", Toast.LENGTH_LONG).show();
+                            } else {
+                                final Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse("http://maps.google.com/maps?" + "saddr=my location" +"&daddr=" + latitude + "," + longitude));
+                                intent.setClassName("com.google.android.apps.maps","com.google.android.maps.MapsActivity");
+                                startActivity(intent);
+                            }
+
                         }
                     });
 

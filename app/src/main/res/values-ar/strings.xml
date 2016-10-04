@@ -50,6 +50,7 @@
     <string name="add_a_lab">إضافة مختبر</string>
     <string name="write_a_review">أكتب مراجعة</string>
     <string name="share">شارك</string>
+    <string name="bookmark">المرجعية</string>
     <string name="bookmarks">إرسال</string>
     <string name="recenty_viewed">شوهدت مؤخرا</string>
     <string name="nearby">قريب</string>
@@ -73,6 +74,13 @@
     <string name="filters">مرشحات</string>
     <string name="nearby_first">قريب لأول مرة</string>
     <string name="no_data_found">لاتوجد بيانات</string>
+    <string name="clinic_number">عدد العيادة</string>
+    <string name="are_you">أنت</string>
+    <string name="claim_profile_contact_message">يرجى ملء النموذج التالي لتكون قادرة على الاتصال بك</string>
+    <string name="map_under_construction">خريطة تحت الإنشاء</string>
+    <string name="photo_or_video">صورة أو فيديو</string>
+    <string name="get_direction">احصل على اتجاه</string>
+    <string name="call">مكالمة</string>
     <string-array name="countries_list">
         <item>أفغانستان</item>
         <item>ألبانيا</item>

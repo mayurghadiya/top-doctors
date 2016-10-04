@@ -57,9 +57,9 @@
                         android:padding="@dimen/hope_page_main_search_padding"
                         android:drawablePadding="@dimen/hope_page_main_search_drawable_padding"
                         android:text=""
-                        android:textSize="16dp"
-                        android:layout_marginTop="27dp"
-                        android:layout_marginStart="8dp"/>
+                        android:textSize="@dimen/add_doctor_photo_text_size"
+                        android:layout_marginTop="@dimen/detail_name_layout_top"
+                        android:layout_marginStart="@dimen/details_name_margin_start"/>
 
                     <ImageView
                         android:id="@+id/search_map_location"
@@ -67,7 +67,7 @@
                         android:layout_height="wrap_content"
                         android:src="@mipmap/share"
                         android:layout_alignParentEnd="true"
-                        android:paddingTop="28dp"/>
+                        android:paddingTop="@dimen/social_share_icon_padding_top"/>
 
                 </LinearLayout>
 
@@ -92,10 +92,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginStart="23dp"
+                    android:layout_marginStart="@dimen/profile_layout_margin_start"
                     android:paddingEnd="@dimen/main_container_padding_start_end"
                     android:paddingBottom="@dimen/main_container_padding_bottom"
-                    android:paddingTop="10dp">
+                    android:paddingTop="@dimen/profile_layout_padding_top">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -107,19 +107,19 @@
                             android:orientation="horizontal">
 
                             <LinearLayout
-                                android:layout_width="90dp"
-                                android:layout_height="95dp"
+                                android:layout_width="@dimen/profile_pic_layout_width"
+                                android:layout_height="@dimen/profile_pic_layout_height"
                                 android:background="@drawable/customborder"
                                 android:gravity="center">
                                 <LinearLayout
-                                    android:layout_width="90dp"
-                                    android:layout_height="95dp"
+                                    android:layout_width="@dimen/profile_pic_layout_width"
+                                    android:layout_height="@dimen/profile_pic_layout_height"
                                     android:background="#BCBDC1"
                                     android:gravity="center">
                                     <ImageView
                                         android:id="@+id/most_visited_"
-                                        android:layout_width="70dp"
-                                        android:layout_height="70dp"
+                                        android:layout_width="@dimen/profile_pic_width_height"
+                                        android:layout_height="@dimen/profile_pic_width_height"
                                         android:src="@mipmap/most_visited_doctor"/>
                                 </LinearLayout>
                             </LinearLayout>
@@ -147,7 +147,7 @@
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal"
                                     android:layout_marginStart="@dimen/rating_margin_start"
-                                    android:paddingStart="2.2dp">
+                                    android:paddingStart="@dimen/rating_layout_padding">
 
                                     <!--rating-->
                                     <ImageView
@@ -184,23 +184,6 @@
 
                                 </LinearLayout>
 
-                                <!--address-->
-                                <!-- <TextView
-                                     android:id="@+id/work_place_address"
-                                     android:layout_width="match_parent"
-                                     android:layout_height="wrap_content"
-                                     android:textAlignment="viewStart"
-                                     android:textSize="@dimen/result_text_size"
-                                     android:text="6 El Obour Building., Salah Salem Road - Helipolis"/>-->
-
-                                <!-- <TextView
-                                     android:id="@+id/work_place_phone"
-                                     android:layout_width="match_parent"
-                                     android:layout_height="wrap_content"
-                                     android:textAlignment="viewStart"
-                                     android:textSize="@dimen/result_text_size"
-                                     android:text="02 2408888"/>-->
-
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -213,37 +196,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:src="@mipmap/teath"
-                                        android:paddingStart="-5dp"/>
-                                    <!--
-
-
-                                                                <LinearLayout
-                                                                    android:layout_width="match_parent"
-                                                                    android:layout_height="wrap_content"
-                                                                    android:gravity="end"
-                                                                    android:layout_marginBottom="@dimen/contact_icon_margin_end">
-
-                                                                    <ImageView
-                                                                        android:id="@+id/phone_dialer"
-                                                                        android:layout_width="wrap_content"
-                                                                        android:layout_height="wrap_content"
-                                                                        android:src="@mipmap/call"
-                                                                        android:layout_marginEnd="@dimen/contact_icon_margin_bottom"/>
-                                                                    <ImageView
-                                                                        android:id="@+id/add_to_contact"
-                                                                        android:layout_width="wrap_content"
-                                                                        android:layout_height="wrap_content"
-                                                                        android:src="@mipmap/add_to_contact"
-                                                                        android:layout_marginEnd="@dimen/contact_icon_margin_bottom"/>
-                                                                    <ImageView
-                                                                        android:id="@+id/share_details"
-                                                                        android:layout_width="wrap_content"
-                                                                        android:layout_height="wrap_content"
-                                                                        android:src="@mipmap/more"/>
-
-                                                                </LinearLayout>
-                                    -->
-
+                                        android:paddingStart="@dimen/speciality_margin"/>
                                 </LinearLayout>
 
                                 <RelativeLayout
@@ -254,13 +207,15 @@
                                         android:layout_height="wrap_content"
                                         android:layout_alignParentBottom="true"
                                         android:text="Work Hours: 7:00 PM - 10:00PM"
-                                        android:textColor="@color/black"/>
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/work_hour_textsize"
+                                        android:textAlignment="viewStart"/>
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_alignParentEnd="true"
                                         android:text="D: 30 K"
-                                        android:textSize="20dp"
+                                        android:textSize="@dimen/after_working_hour_textsize"
                                         android:textColor="@color/black"/>
                                 </RelativeLayout>
 
@@ -275,24 +230,25 @@
                         android:orientation="horizontal"
                         android:background="@drawable/border"
                         android:weightSum="1.0"
-                        android:paddingStart="10dp"
-                        android:layout_marginTop="10dp">
+                        android:paddingStart="@dimen/layout_profile_button_padding"
+                        android:layout_marginTop="@dimen/layout_profile_button_padding">
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@mipmap/review_1"
-                            android:paddingTop="3dp"
-                            android:paddingStart="8dp"/>
+                            android:paddingTop="@dimen/review_icon_paddingtop"
+                            android:paddingStart="@dimen/review_icon_paddingtop"/>
                         <TextView
                             android:id="@+id/write_a_review_button"
                             android:layout_width="0dip"
                             android:layout_height="wrap_content"
-                            android:drawablePadding="10dp"
-                            android:text="Write a Review"
+                            android:drawablePadding="@dimen/drawable_padding"
+                            android:text="@string/write_a_review"
                             android:textColor="@color/black"
                             android:layout_weight=".7"
-                            android:paddingStart="10dp"
-                            android:layout_marginTop="5dp"/>
+                            android:paddingStart="@dimen/drawable_padding"
+                            android:layout_marginTop="@dimen/write_reviewlayout_margin_top"
+                            android:textSize="@dimen/photo_or_video_textsize"/>
                         <View
                             android:layout_width="1dp"
                             android:layout_height="fill_parent"
@@ -301,24 +257,24 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@mipmap/claim_profile"
-                            android:layout_marginStart="20dp"
-                            android:paddingBottom="2dp"/>
+                            android:layout_marginStart="@dimen/total_doctors_margin_start"
+                            android:paddingBottom="@dimen/total_doctors_padding_bottom"/>
                         <TextView
                             android:id="@+id/claim_profile_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:drawablePadding="10dp"
-                            android:text="Claim Profile"
+                            android:drawablePadding="@dimen/total_doctors_drawable_padding"
+                            android:text="@string/claim_profile"
                             android:textColor="@color/black"
-                            android:layout_marginTop="5dp"
-                            android:textSize="15dp"/>
+                            android:layout_marginTop="@dimen/total_doctors_margin_top"
+                            android:textSize="@dimen/total_doctors_text_size"/>
 
                     </LinearLayout>
 
                     <TableLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingTop="10dp"
+                        android:paddingTop="@dimen/tablayout_padding"
                         android:weightSum="1.0"
                         android:gravity="center">
 
@@ -331,7 +287,7 @@
                                 android:layout_height="wrap_content"
                                 android:id="@+id/imageView2"
                                 android:src="@mipmap/add_a_hospital"
-                                android:paddingStart="-13dp"/>
+                                android:paddingStart="@dimen/add_hospital_padding_start"/>
 
                             <View
                                 android:layout_width="2dp"
@@ -343,10 +299,10 @@
                                 android:layout_height="wrap_content"
                                 android:id="@+id/imageView3"
                                 android:src="@mipmap/share"
-                                android:paddingStart="-5dp"/>
+                                android:paddingStart="@dimen/share_padding"/>
 
                             <View
-                                android:layout_width="2dp"
+                                android:layout_width="@dimen/border_width"
                                 android:layout_height="fill_parent"
                                 android:background="#D3D3D3"/>
 
@@ -355,7 +311,7 @@
                                 android:layout_height="wrap_content"
                                 android:id="@+id/imageView4"
                                 android:src="@mipmap/bookmarks"
-                                android:paddingStart="20dp"/>
+                                android:paddingStart="@dimen/bookmarks_padding_start"/>
                         </TableRow>
 
                         <TableRow
@@ -365,39 +321,41 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Photo or Video"
+                                android:text="@string/photo_or_video"
                                 android:textColor="@color/black"
                                 android:id="@+id/textView3"
-                                android:paddingEnd="30dp"
-                                android:textSize="15dp"
-                                android:paddingStart="10dp"/>
+                                android:paddingEnd="@dimen/photo_or_video_paddingend"
+                                android:textSize="@dimen/photo_or_video_textsize"
+                                android:paddingStart="@dimen/photo_or_video_paddingstart"/>
 
                             <View
-                                android:layout_width="2dp"
+                                android:layout_width="@dimen/border_width"
                                 android:layout_height="fill_parent"
                                 android:background="#D3D3D3"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Share"
+                                android:text="@string/share"
                                 android:textColor="@color/black"
                                 android:id="@+id/textView4"
-                                android:layout_marginEnd="40dp"
-                                android:paddingStart="40dp"/>
+                                android:layout_marginEnd="@dimen/layout_share_marginend"
+                                android:paddingStart="@dimen/layout_share_marginend"
+                                android:textSize="@dimen/photo_or_video_textsize"/>
 
                             <View
-                                android:layout_width="2dp"
+                                android:layout_width="@dimen/border_width"
                                 android:layout_height="fill_parent"
                                 android:background="#D3D3D3"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Bookmark"
+                                android:text="@string/bookmark"
                                 android:textColor="@color/black"
                                 android:id="@+id/textView5"
-                                android:paddingStart="30dp"/>
+                                android:paddingStart="@dimen/bookmarks_padding_start_table"
+                                android:textSize="@dimen/photo_or_video_textsize"/>
                         </TableRow>
 
                     </TableLayout>
@@ -406,43 +364,49 @@
 
                 <View
                     android:layout_width="fill_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="@dimen/border_width"
                     android:background="#D3D3D3"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginBottom="@dimen/border_separator_margin_bottom_profile"
+                    android:layout_marginStart="@dimen/border_separator_margin_start_profile"
+                    android:layout_marginTop="@dimen/border_separator_margin_top_profile"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginStart="23dp"
+                    android:layout_marginStart="@dimen/map_layout_margin_start"
                     android:paddingEnd="@dimen/main_container_padding_start_end"
                     android:paddingBottom="@dimen/main_container_padding_bottom"
-                    android:paddingTop="10dp">
+                    android:paddingTop="@dimen/map_layout_padding_top">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:background="@drawable/border"
                         android:gravity="center">
+                        <LinearLayout
+                            android:id="@+id/doctor_profile_map_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/map_height"
+                            android:orientation="vertical"
+                            android:gravity="center">
+                        </LinearLayout>
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="2dp"
+                            android:layout_height="@dimen/border_width"
                             android:background="#D3D3D3"
-                            android:layout_marginBottom="10dp"
-                            android:layout_marginTop="150dp"/>
+                            android:layout_marginBottom="@dimen/expandable_last_border_margin"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="6 El Obour Building, Salah Salem Road, - Helipolis"
+                            android:text=""
                             android:textColor="@color/black"
                             android:id="@+id/textView6"
                             android:gravity="center"
-                            android:textSize="15dp"
-                            android:paddingBottom="10dp" />
+                            android:textSize="@dimen/hope_page_main_search_textsize"
+                            android:paddingBottom="@dimen/swipe_menu_padding_bottom" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -450,31 +414,33 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:background="@drawable/border"
-                        android:layout_marginTop="20dp">
+                        android:layout_marginTop="@dimen/add_doctor_terms_layout_marginTop">
 
                         <RelativeLayout
+                            android:id="@+id/doctor_get_direction_layout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingTop="10dp"
-                            android:paddingStart="10dp"
-                            android:paddingEnd="10dp">
+                            android:paddingTop="@dimen/profile_layout_padding_top"
+                            android:paddingStart="@dimen/profile_layout_padding_top"
+                            android:paddingEnd="@dimen/profile_layout_padding_top">
 
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/imageView5"
-                                android:src="@mipmap/near_by_activated" />
+                                android:src="@mipmap/get_direction" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
-                                android:text="Get Direction"
+                                android:text="@string/get_direction"
                                 android:id="@+id/textView7"
                                 android:layout_toEndOf="@id/imageView5"
-                                android:paddingStart="15dp"
-                                android:paddingTop="8dp"
-                                android:textColor="#101010" />
+                                android:paddingStart="@dimen/main_container_padding_start_end"
+                                android:paddingTop="@dimen/search_content_drawable_padding"
+                                android:textColor="#101010"
+                                android:textSize="@dimen/get_direction_call_text_size"/>
 
                             <ImageView
                                 android:layout_width="wrap_content"
@@ -487,26 +453,26 @@
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="2dp"
+                            android:layout_height="@dimen/border_width"
                             android:background="#D3D3D3"
-                            android:layout_marginBottom="15dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginTop="10dp"/>
+                            android:layout_marginBottom="@dimen/main_margin_top"
+                            android:layout_marginStart="@dimen/contact_icon_margin_end"
+                            android:layout_marginEnd="@dimen/contact_icon_margin_end"
+                            android:layout_marginTop="@dimen/contact_icon_margin_end"/>
 
                         <RelativeLayout
                             android:id="@+id/doctor_call"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:paddingStart="10dp"
-                            android:paddingEnd="10dp"
-                            android:paddingBottom="10dp">
+                            android:paddingStart="@dimen/contact_icon_margin_end"
+                            android:paddingEnd="@dimen/contact_icon_margin_end"
+                            android:paddingBottom="@dimen/contact_icon_margin_end">
 
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/imageView7"
-                                android:src="@mipmap/call" />
+                                android:src="@mipmap/profile_call" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -516,25 +482,18 @@
                                 android:id="@+id/textView8"
                                 android:layout_toEndOf="@id/imageView7"
                                 android:textColor="#101010"
-                                android:paddingTop="8dp"
-                                android:paddingStart="15dp" />
+                                android:paddingTop="@dimen/details_name_margin_start"
+                                android:paddingStart="@dimen/main_container_padding_start_end"
+                                android:textSize="@dimen/get_direction_call_text_size"/>
 
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/imageView8"
                                 android:src="@mipmap/top_arrow"
-                                android:layout_alignParentEnd="true" />
+                                android:layout_alignParentEnd="true"/>
                         </RelativeLayout>
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="2dp"
-                            android:background="#D3D3D3"
-                            android:layout_marginBottom="15dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginTop="10dp"/>
 
                     </LinearLayout>
 

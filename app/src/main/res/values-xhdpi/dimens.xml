@@ -140,4 +140,48 @@
     <!--Filter popup-->
     <dimen name="filters_textSize">18dp</dimen>
     <dimen name="filters_borgin_marginBottomStart">3dp</dimen>
+
+    <!--profile-->
+    <dimen name="profile_details_name">16dp</dimen>
+    <dimen name="detail_name_layout_top">30dp</dimen>
+    <dimen name="details_name_margin_start">8dp</dimen>
+    <dimen name="social_share_icon_padding_top">33dp</dimen>
+    <dimen name="profile_layout_margin_start">23dp</dimen>
+    <dimen name="profile_layout_padding_top">10dp</dimen>
+    <dimen name="profile_pic_layout_width">90dp</dimen>
+    <dimen name="profile_pic_layout_height">95dp</dimen>
+    <dimen name="profile_pic_width_height">70dp</dimen>
+    <dimen name="rating_layout_padding">2.2dp</dimen>
+    <dimen name="speciality_margin">-5dp</dimen>
+    <dimen name="after_working_hour_textsize">18dp</dimen>
+    <dimen name="layout_profile_button_padding">10dp</dimen>
+    <dimen name="review_icon_paddingtop">3dp</dimen>
+    <dimen name="review_padding_start">8dp</dimen>
+    <dimen name="drawable_padding">10dp</dimen>
+    <dimen name="write_a_review_padding_start">10dp</dimen>
+    <dimen name="write_reviewlayout_margin_top">5dp</dimen>
+    <dimen name="total_doctors_margin_start">20dp</dimen>
+    <dimen name="total_doctors_padding_bottom">2dp</dimen>
+    <dimen name="total_doctors_drawable_padding">10dp</dimen>
+    <dimen name="total_doctors_margin_top">5dp</dimen>
+    <dimen name="total_doctors_text_size">15dp</dimen>
+    <dimen name="tablayout_padding">10dp</dimen>
+    <dimen name="add_hospital_padding_start">-13dp</dimen>
+    <dimen name="border_width">2dp</dimen>
+    <dimen name="share_padding">-5dp</dimen>
+    <dimen name="bookmarks_padding_start">20dp</dimen>
+    <dimen name="photo_or_video_paddingend">25dp</dimen>
+    <dimen name="photo_or_video_textsize">13dp</dimen>
+    <dimen name="photo_or_video_paddingstart">10dp</dimen>
+    <dimen name="layout_share_marginend">40dp</dimen>
+    <dimen name="layout_padding_start">40dp</dimen>
+    <dimen name="bookmarks_padding_start_table">25dp</dimen>
+    <dimen name="border_separator_margin_bottom_profile">10dp</dimen>
+    <dimen name="border_separator_margin_start_profile">5dp</dimen>
+    <dimen name="border_separator_margin_top_profile">5dp</dimen>
+    <dimen name="map_layout_margin_start">23dp</dimen>
+    <dimen name="map_layout_padding_top">10dp</dimen>
+    <dimen name="map_height">230dp</dimen>
+    <dimen name="work_hour_textsize">13dp</dimen>
+    <dimen name="get_direction_call_text_size">15dp</dimen>
 </resources>

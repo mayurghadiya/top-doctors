@@ -9,6 +9,7 @@ import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.SparseLongArray;
 import android.view.Window;
 import android.view.WindowManager;
 import android.content.Intent;
@@ -36,6 +37,7 @@ public class SplashActivity extends AppCompatActivity {
         InputMethodSubtype ims = imm.getCurrentInputMethodSubtype();
         String locale = ims.getLocale();
         LocalInformation.setLocalLang(locale);
+
         if(!Preference.getValue(SplashActivity.this, "PREF_FNAME", "").equals("")) {
             Toast.makeText(this, "Welcome back, " + Preference.getValue(SplashActivity.this, "PREF_FNAME", ""),
                     Toast.LENGTH_SHORT).show();
@@ -62,7 +64,7 @@ public class SplashActivity extends AppCompatActivity {
         public void handleMessage(Message message) {
             super.handleMessage(message);
             //check for internet
-
+            clearPreference();
             String username = Preference.getValue(SplashActivity.this, "PREF_FNAME", "");
             if(username.equals("")) {
                 intent = new Intent(SplashActivity.this, LoginActivity.class);
@@ -76,5 +78,19 @@ public class SplashActivity extends AppCompatActivity {
             finish();
         }
     };
+
+    public void clearPreference() {
+        Preference.setValue(SplashActivity.this, "GLOBAL_FILTER_TYPE", "");
+        Preference.setValue(SplashActivity.this, "DOCTOR_LOCATION_SEARCH", "");
+        Preference.setValue(SplashActivity.this, "DOCTOR_SPECIALITY_SEARCH", "");
+        Preference.setValue(SplashActivity.this, "DOCTOR_GENDER_SEARCH", "");
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 
 }

@@ -14,6 +14,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Gravity;
@@ -64,6 +65,7 @@ public class PrimaryFragment extends Fragment {
     ArrayAdapter<String> spinnerArrayAdapter, specialityArrayAdapter;
     String webServiceUrl = AppConfig.getWebServiceUrl();
     private ProgressDialog mProgressDialog;
+    TextView home_page_lab_search;
 
     //doctor search param
     String getDoctorSearchGender = "", getDoctorSearchSpeciality = "", getDoctorSearchLocation = "";
@@ -304,7 +306,10 @@ public class PrimaryFragment extends Fragment {
                     getDoctorSearchLocation = spinnerLocation.getSelectedItem().toString();
                     //Toast.makeText(getContext(), "density: " + getDoctorSearchLocation, Toast.LENGTH_LONG).show();
                     Preference.setValue(getContext(), "DOCTOR_SEARCH_CUSTOM", "true");
+                    Preference.setValue(getContext(), "DOCTOR_LOCATION_SEARCH", "");
+                    Preference.setValue(getContext(), "DOCTOR_LOCATION", "");
                     Preference.setValue(getContext(), "DOCTOR_LOCATION_SEARCH", getDoctorSearchLocation);
+                    Preference.setValue(getContext(), "DOCTOR_LOCATION", getDoctorSearchLocation);
                     customSearch();
                     //search doctors based on location/country
                     //getDoctorSearchLocation = spinnerLocation.getSelectedItem().toString();
@@ -374,6 +379,7 @@ public class PrimaryFragment extends Fragment {
                     //search doctors based on speciality
                     getDoctorSearchSpeciality = spinnerSpeciality.getSelectedItem().toString();
                     Preference.setValue(getContext(), "DOCTOR_SEARCH_CUSTOM", "true");
+                    Preference.setValue(getContext(), "DOCTOR_SPECIALITY_SEARCH", "");
                     Preference.setValue(getContext(), "DOCTOR_SPECIALITY_SEARCH", getDoctorSearchSpeciality);
                     customSearch();
                     //searchDoctors(getDoctorSearchGender, getDoctorSearchSpeciality, getDoctorSearchLocation);
@@ -477,6 +483,16 @@ public class PrimaryFragment extends Fragment {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
+
+        home_page_lab_search = (TextView) getView().findViewById(R.id.home_page_lab_search);
+        home_page_lab_search.setTypeface(typeface);
+        home_page_lab_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Preference.setValue(getContext(), "LAB_SEARCH_CUSTOM", "true");
+                customSearch();
             }
         });
 
@@ -1381,6 +1397,8 @@ public class PrimaryFragment extends Fragment {
                                 openPhoneDialer(callDialer);
                             }
                         });
+
+
                     }
                 }
 
@@ -1551,6 +1569,9 @@ public class PrimaryFragment extends Fragment {
 
     public void customSearch() {
         BaseActivity baseActivity = new BaseActivity();
+        FragmentManager mFragmentManager;
+        mFragmentManager = getActivity().getSupportFragmentManager();
+        mFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         baseActivity.tabFragment.tabLayout.getTabAt(1).select();
     }
 }

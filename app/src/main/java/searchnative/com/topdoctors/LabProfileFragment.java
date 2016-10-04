@@ -1,9 +1,11 @@
 package searchnative.com.topdoctors;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -17,7 +19,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ResponseHandler;
@@ -45,6 +56,10 @@ public class LabProfileFragment extends Fragment {
     final String WEB_SERVICE_URL = AppConfig.getWebServiceUrl();
     private ProgressDialog mProgressDialog;
     private Typeface typeface;
+    TextView claimProfile;
+    private double latitude, longitude;
+    private LatLng labMap;
+    private SupportMapFragment supportMapFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -156,7 +171,7 @@ public class LabProfileFragment extends Fragment {
 
                     //phone
                     TextView doctorPhone = (TextView) getView().findViewById(R.id.textView8);
-                    doctorPhone.setText("Call (" + profile.getString("Phone") + ")");
+                    doctorPhone.setText(getResources().getString(R.string.call) + " (" + profile.getString("Phone") + ")");
                     doctorPhone.setTypeface(typeface);
 
                     //get direction
@@ -167,9 +182,68 @@ public class LabProfileFragment extends Fragment {
                     TextView writeReview = (TextView) getView().findViewById(R.id.write_a_review_button);
                     writeReview.setTypeface(typeface);
 
+                    claimProfile = (TextView) getView().findViewById(R.id.claim_profile_button);
+                    final String profileName = profile.getString("Name");
+                    claimProfile.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(getContext(), ClaimProfileActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("name", profileName);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
+                    });
+
                     //claim profile
                     TextView claimProfile = (TextView) getView().findViewById(R.id.claim_profile_button);
                     claimProfile.setTypeface(typeface);
+
+                    latitude = profile.getDouble("Latitude");
+                    longitude = profile.getDouble("Longitude");
+
+                    //set latitude and longitude
+                    labMap = new LatLng(latitude, longitude);
+                    final String labAddress = profile.getString("Address");
+                    //google map
+                    try {
+                        FragmentManager fragmentManager = getChildFragmentManager();
+                        supportMapFragment = (SupportMapFragment) fragmentManager.findFragmentById(R.id.lab_map_layout);
+                        if(supportMapFragment == null) {
+                            supportMapFragment = SupportMapFragment.newInstance();
+                            supportMapFragment.getMapAsync(new OnMapReadyCallback() {
+                                @Override
+                                public void onMapReady(final GoogleMap map) {
+                                    map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(labMap, 16));
+                                    map.addMarker(new MarkerOptions().position(labMap).title(labAddress));
+                                    map.setTrafficEnabled(true);
+                                    map.setIndoorEnabled(true);
+                                    map.setBuildingsEnabled(true);
+                                    map.getUiSettings().setZoomControlsEnabled(true);
+                                }
+                            });
+                            fragmentManager.beginTransaction().replace(R.id.lab_map_layout, supportMapFragment).commit();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    //get direction
+                    RelativeLayout relativeLayout = (RelativeLayout) getView().findViewById(R.id.lab_get_direction);
+                    relativeLayout.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if(String.valueOf(latitude).isEmpty() || String.valueOf(longitude).isEmpty()) {
+                                Toast.makeText(getContext(), "Location is not available", Toast.LENGTH_LONG).show();
+                            } else {
+                                final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?" + "saddr=my location" +"&daddr=" + latitude + "," + longitude));
+                                intent.setClassName("com.google.android.apps.maps","com.google.android.maps.MapsActivity");
+                                startActivity(intent);
+                            }
+
+                        }
+                    });
 
                 }
             } catch(Exception e) {

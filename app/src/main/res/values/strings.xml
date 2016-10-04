@@ -51,6 +51,7 @@
     <string name="write_a_review">Write a Review</string>
     <string name="add_a_lab">Add a Lab</string>
     <string name="share">Share</string>
+    <string name="bookmark">Bookmark</string>
     <string name="bookmarks">Bookmarks</string>
     <string name="recenty_viewed">Recenty Viewed</string>
     <string name="nearby">Nearby</string>
@@ -74,6 +75,13 @@
     <string name="filters">Filters</string>
     <string name="nearby_first">Nearby first</string>
     <string name="no_data_found">No data found</string>
+    <string name="clinic_number">Clinic Number</string>
+    <string name="are_you">ARE YOU</string>
+    <string name="claim_profile_contact_message">Please fill in the following form to be able to contact you</string>
+    <string name="map_under_construction">Map Under Construction</string>
+    <string name="photo_or_video">Photo or Video</string>
+    <string name="get_direction">Get Direction</string>
+    <string name="call">Call</string>
     <string-array name="countries_list">
         <item>Afghanistan</item>
         <item>Albania</item>
