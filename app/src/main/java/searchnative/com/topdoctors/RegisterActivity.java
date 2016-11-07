@@ -25,6 +25,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -42,6 +51,7 @@ import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -71,9 +81,17 @@ public class RegisterActivity extends AppCompatActivity {
     //String DataParseUrl = "http://192.168.1.28/top-doctors/api/user/register";
     private ProgressDialog mProgressDialog;
 
+    private TextView info;
+    private LoginButton loginButton;
+    private CallbackManager callbackManager;
+
+    //fb login
+    private String userId, token, email, name, location;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         getSupportActionBar().hide();
         setContentView(R.layout.activity_register);
 
@@ -94,6 +112,66 @@ public class RegisterActivity extends AppCompatActivity {
         termsStart = (TextView) findViewById(R.id.terms_start);
         termsEnd = (TextView) findViewById(R.id.terms_end);
 
+        callbackManager = CallbackManager.Factory.create();
+        info = (TextView)findViewById(R.id.info);
+        loginButton = (LoginButton)findViewById(R.id.login_button_register);
+
+        //set read permission
+        loginButton.setReadPermissions(Arrays.asList(
+                "public_profile", "email", "user_birthday", "user_friends", "user_location"));
+
+        callbackManager = CallbackManager.Factory.create();
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                // insert in db with isSocial flag and token
+                token = loginResult.getAccessToken().getToken();
+                userId = loginResult.getAccessToken().getUserId();
+
+                /*info.setText(
+                        "User ID: "
+                                + loginResult.getAccessToken().getUserId()
+                                + "\n" +
+                                "Auth Token: "
+                                + loginResult.getAccessToken().getToken()
+                );*/
+
+                //App code
+                GraphRequest request = GraphRequest.newMeRequest(
+                        loginResult.getAccessToken(),
+                        new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+                                try {
+                                    email = object.getString("email");
+                                    name = object.getString("name");
+                                    location = object.getJSONObject("location").toString();
+                                    //insert db
+                                    facebookLogin(userId, name, token, email, location);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                );
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id,name,email,gender,birthday,location");
+                request.setParameters(parameters);
+                request.executeAsync();
+            }
+
+            @Override
+            public void onCancel() {
+                info.setText("Login attempt canceled.");
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                info.setText("Login attempt failed.");
+            }
+        });
+
         Typeface face = Typeface.createFromAsset(getAssets(), "fonts/ExoBlack.otf");
         btnRegister.setTypeface(face);
         tvRegister.setTypeface(face);
@@ -113,6 +191,7 @@ public class RegisterActivity extends AppCompatActivity {
         termsNote.setTypeface(face1);
         termsStart.setTypeface(face1);
         termsEnd.setTypeface(face1);
+        loginButton.setTypeface(face1);
 
         //set tranform font
         btnLoginFacebook.setTransformationMethod(null);
@@ -165,7 +244,7 @@ public class RegisterActivity extends AppCompatActivity {
                     TextView textView = new TextView(getContext());
                     textView.setHeight(0);
                     textView.setVisibility(View.GONE);
-                    textView.setTextColor(Color.GRAY);
+                    textView.setTextColor(getResources().getColor(R.color.textHighlightColor));
                     v = textView;
                 } else {
                     v = super.getDropDownView(position, null, parent);
@@ -178,8 +257,12 @@ public class RegisterActivity extends AppCompatActivity {
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
                 ((TextView) view).setTypeface(face1);
-                ((TextView) view).setTextColor(Color.parseColor("#bcbbc0"));
-
+                ((TextView) view).setSingleLine(true);
+                if(position == 0) {
+                    ((TextView) view).setTextColor(getResources().getColor(R.color.textHighlightColor));
+                } else {
+                    ((TextView) view).setTextColor(getResources().getColor(R.color.black));
+                }
                 //float density = getResources().getDisplayMetrics().density;
                 int dp = (int) (getResources().getDimension(R.dimen.input_text_size) / getResources().getDisplayMetrics().density);
                 //Toast.makeText(RegisterActivity.this, "Response: " + dp, Toast.LENGTH_LONG).show();
@@ -203,6 +286,13 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode,
+                resultCode, data);
     }
 
     public void validateData() {
@@ -300,6 +390,7 @@ public class RegisterActivity extends AppCompatActivity {
                     JSONObject json = new JSONObject(responseBody);
                     resMessage = json.getString("message");
                     resStatus = json.getString("status");
+                    userId = json.getString("loginId");
                     //Toast.makeText(RegisterActivity.this, "Response: " + resResult, Toast.LENGTH_LONG).show();
                     //HttpResponse response = httpClient.execute(httpPost);
                     //HttpEntity entity = response.getEntity();
@@ -334,6 +425,7 @@ public class RegisterActivity extends AppCompatActivity {
                             Preference.setValue(RegisterActivity.this, "PREF_FNAME", getFirstName + " " + getLastName.substring(0,1));
                             Preference.setValue(RegisterActivity.this, "PREF_ADDRESS", getCountry);
                             Preference.setValue(RegisterActivity.this, "PREF_ISLOGIN", "true");
+                            Preference.setValue(RegisterActivity.this, "LOGIN_ID", userId);
                             //extras.putString("userName", getFirstName + " " + getLastName.substring(0,1));
                             //extras.putString("userAddress", getCountry);
                             //intent.putExtras(extras);
@@ -394,5 +486,90 @@ public class RegisterActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void facebookLogin(final String userId, final String name, final String token,
+                              final String email, final String location) {
+
+        class FacebookLogin extends AsyncTask<String, Void, String> {
+            final String URL = AppConfig.getWebServiceUrl() + "user/facebookLogin";
+            AndroidHttpClient mClient = AndroidHttpClient.newInstance("");
+
+            String quickUserId = userId;
+            String quickName = name;
+            String quickToken = token;
+            String quickEmail = email;
+            String quickLocation = location;
+
+            @Override
+            protected String doInBackground(String... params) {
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                nameValuePairs.add(new BasicNameValuePair("userId", quickUserId));
+                nameValuePairs.add(new BasicNameValuePair("name", quickName));
+                nameValuePairs.add(new BasicNameValuePair("token", quickToken));
+                nameValuePairs.add(new BasicNameValuePair("email", quickEmail));
+                nameValuePairs.add(new BasicNameValuePair("location", quickLocation));
+
+                try {
+                    HttpPost httpPost = new HttpPost(URL);
+                    httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                    ResponseHandler<String> responseHandler = new BasicResponseHandler();
+
+                    return mClient.execute(httpPost, responseHandler);
+                } catch(IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    mClient.close();
+                }
+
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                super.onPostExecute(result);
+                if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                    mProgressDialog.dismiss();
+                    mProgressDialog = null;
+                }
+                Toast.makeText(RegisterActivity.this, "You have successfully loggedin", Toast.LENGTH_LONG).show();
+
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    Log.v("Fb Login response", result);
+
+                    //store in sharedpreference
+                    Preference.setValue(RegisterActivity.this, "PREF_FNAME", jsonObject.getString("name"));
+                    Preference.setValue(RegisterActivity.this, "PREF_ADDRESS", "India");
+                    Preference.setValue(RegisterActivity.this, "LOGIN_ID", jsonObject.getString("loginId"));
+                    Preference.setValue(RegisterActivity.this, "PREF_ISLOGIN", "true");
+
+                    //start new activity
+                    Intent intent = new Intent(RegisterActivity.this, BaseActivity.class);
+                    Bundle extras = new Bundle();
+                    extras.putString("userName", jsonObject.getString("name"));
+                    extras.putString("userAddress", "India");
+                    intent.putExtras(extras);
+                    finish();
+                    startActivity(intent);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                mProgressDialog = new ProgressDialog(RegisterActivity.this);
+                mProgressDialog.setMessage(getResources().getString(R.string.please_wait));
+                mProgressDialog.setCancelable(false);
+                mProgressDialog.show();
+            }
+        }
+
+        FacebookLogin facebookLogin = new FacebookLogin();
+        facebookLogin.execute(userId, name, token, email, location);
     }
 }

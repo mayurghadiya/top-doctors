@@ -102,6 +102,10 @@ public class TabFragment extends Fragment {
 
     }
 
+    public void switchTab(int tab) {
+        tabPosition = tab;
+    }
+
     class MyAdapter extends FragmentPagerAdapter{
 
         public MyAdapter(FragmentManager fm) {
@@ -118,7 +122,7 @@ public class TabFragment extends Fragment {
             switch (position){
                 case 0 : return new PrimaryFragment();
                 case 1 : return new SearchFragment();
-                case 2 : return new UpdatesFragment();
+                case 2 : return new TopTenDcotorsFragment();
             }
             return null;
         }

@@ -10,6 +10,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class ClaimProfileActivity extends AppCompatActivity {
 
     ImageView closeButton;
@@ -71,5 +74,41 @@ public class ClaimProfileActivity extends AppCompatActivity {
 
         submitButton = (Button) findViewById(R.id.claim_profile_submit);
         submitButton.setTypeface(typeface);
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                validateData();
+            }
+        });
+    }
+
+    public boolean validateData() {
+        Boolean isValid = true;
+
+        if(email.getText().toString().trim().length() == 0) {
+            email.setError(getResources().getString(R.string.email_error));
+            isValid = false;
+        }
+
+        //check for valid email
+        Pattern pattern1 = Pattern.compile( "^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\\.([a-zA-Z])+([a-zA-Z])+");
+        Matcher matcher1 = pattern1.matcher(email.getText().toString());
+        if (!matcher1.matches()) {
+            email.setError(getResources().getString(R.string.valid_email_error));
+            isValid = false;
+        }
+
+        if(mobileNumber.getText().toString().trim().length() == 0) {
+            mobileNumber.setError(getResources().getString(R.string.mobile_error));
+            isValid = false;
+        }
+
+        if(clinicNumber.getText().toString().trim().length() == 0) {
+            clinicNumber.setError("Clinic number is required");
+            isValid = false;
+        }
+
+        return isValid;
     }
 }

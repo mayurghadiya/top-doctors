@@ -12,6 +12,8 @@ public class AppConfig {
 
     //private static String WEB_SERVICE_URL = "http://192.168.1.28/top-doctors/api/";
 
+    //private static String WEB_SERVICE_URL = "http://192.168.1.27/topdoctor/api/";
+
     /**
      * Get web service url
      * @return string

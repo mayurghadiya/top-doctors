@@ -91,8 +91,6 @@
                     <TableRow
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="10dp">
-
-
                     </TableRow>
 
                 </TableLayout>

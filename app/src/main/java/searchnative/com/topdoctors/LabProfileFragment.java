@@ -27,6 +27,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -60,6 +61,12 @@ public class LabProfileFragment extends Fragment {
     private double latitude, longitude;
     private LatLng labMap;
     private SupportMapFragment supportMapFragment;
+    private String labMipmap;
+    private ImageView socialShare, photosOrVideo;
+    private String labName, labAddress, labPhone, labRating, labSpeciality;
+    private String appLang = LocalInformation.getLocaleLang();
+    private ImageView labShare;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -72,6 +79,8 @@ public class LabProfileFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         String labId = getArguments().getString("id");
+        labMipmap = getArguments().getString("mipmap");
+        labSpeciality = getArguments().getString("speciality");
 
         typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/ExoMedium.otf");
 
@@ -83,6 +92,31 @@ public class LabProfileFragment extends Fragment {
             public void onClick(View view) {
                 DrawerLayout drawerLayout = (DrawerLayout) getActivity().findViewById(R.id.drawerLayout);
                 drawerLayout.openDrawer(Gravity.LEFT);
+            }
+        });
+
+        //social share
+        socialShare = (ImageView) getView().findViewById(R.id.lab_social_share);
+        labShare = (ImageView) getView().findViewById(R.id.labShare);
+        socialShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shareIt(labName, labPhone, labAddress, labSpeciality, "");
+            }
+        });
+        labShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shareIt(labName, labPhone, labAddress, labSpeciality, "");
+            }
+        });
+
+        //photo or video
+        photosOrVideo = (ImageView) getView().findViewById(R.id.photos_or_video);
+        photosOrVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), PhotoOrVideoActivity.class));
             }
         });
     }
@@ -103,6 +137,7 @@ public class LabProfileFragment extends Fragment {
             protected String doInBackground(String... params) {
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                 nameValuePairs.add(new BasicNameValuePair("labId", quickLabId));
+                nameValuePairs.add(new BasicNameValuePair("lang", appLang));
 
                 try {
                     HttpPost httpPost = new HttpPost(URL);
@@ -111,8 +146,9 @@ public class LabProfileFragment extends Fragment {
                     return mClient.execute(httpPost, responseHandler);
                 } catch(IOException e) {
                     e.printStackTrace();
+                } finally {
+                    mClient.close();
                 }
-                mClient.close();
 
                 return null;
             }
@@ -158,6 +194,14 @@ public class LabProfileFragment extends Fragment {
                     TextView name = (TextView) getView().findViewById(R.id.profile_detail_name);
                     name.setText(profile.getString("Name"));
                     name.setTypeface(typeface, typeface.BOLD);
+                    labName = profile.getString("Name");
+
+                    //specilality
+                    int specialityId = getContext().getResources().getIdentifier(profile.getString("Mipmap"),
+                            "mipmap",
+                            getContext().getPackageName());
+                    ImageView specialityImage = (ImageView) getView().findViewById(R.id.speciality);
+                    specialityImage.setImageResource(specialityId);
 
                     //title
                     TextView title = (TextView) getView().findViewById(R.id.profile_detail_title);
@@ -168,11 +212,13 @@ public class LabProfileFragment extends Fragment {
                     TextView address = (TextView) getView().findViewById(R.id.textView6);
                     address.setText(profile.getString("Address"));
                     address.setTypeface(typeface);
+                    labAddress = profile.getString("Address");
 
                     //phone
                     TextView doctorPhone = (TextView) getView().findViewById(R.id.textView8);
                     doctorPhone.setText(getResources().getString(R.string.call) + " (" + profile.getString("Phone") + ")");
                     doctorPhone.setTypeface(typeface);
+                    labPhone = profile.getString("Phone");
 
                     //get direction
                     TextView getDirection = (TextView) getView().findViewById(R.id.textView7);
@@ -216,7 +262,8 @@ public class LabProfileFragment extends Fragment {
                                 public void onMapReady(final GoogleMap map) {
                                     map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                                     map.animateCamera(CameraUpdateFactory.newLatLngZoom(labMap, 16));
-                                    map.addMarker(new MarkerOptions().position(labMap).title(labAddress));
+                                    map.addMarker(new MarkerOptions().position(labMap)
+                                            .title(labAddress).icon(BitmapDescriptorFactory.fromResource(R.mipmap.add_a_lab)));
                                     map.setTrafficEnabled(true);
                                     map.setIndoorEnabled(true);
                                     map.setBuildingsEnabled(true);
@@ -244,7 +291,6 @@ public class LabProfileFragment extends Fragment {
 
                         }
                     });
-
                 }
             } catch(Exception e) {
                 e.printStackTrace();
@@ -277,6 +323,15 @@ public class LabProfileFragment extends Fragment {
         protected void onPostExecute(Bitmap result) {
             imageView.setImageBitmap(result);
         }
+    }
+
+    public void shareIt(final String name, final String phone, final String address, final String speciality, final String rating) {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "Name: " + name + "\n" + "Phone: " + phone + "\n" + "Address: "
+                + address + "\n" + "Speciality: " + speciality + "\n" + "Rating: " + rating);
+        sendIntent.setType("text/plain");
+        startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.social_text)));
     }
 
 }

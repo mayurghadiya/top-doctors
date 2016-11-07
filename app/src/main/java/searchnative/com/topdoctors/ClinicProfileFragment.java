@@ -25,6 +25,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -56,6 +57,11 @@ public class ClinicProfileFragment extends Fragment {
     private double latitude, longitude;
     private LatLng clinicMap;
     private SupportMapFragment supportMapFragment;
+    private String clinicMipmap;
+    private String clinicName, clinicAddress, clinicPhone, clinicRating, clinicSpeciality;
+    private ImageView socialShare, photosOrVideo;
+    private String appLang = LocalInformation.getLocaleLang();
+    private ImageView clinicShare;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,6 +74,8 @@ public class ClinicProfileFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         String clinicId = getArguments().getString("id");
+        clinicMipmap = getArguments().getString("mipmap");
+        clinicSpeciality = getArguments().getString("speciality");
 
         typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/ExoMedium.otf");
 
@@ -79,6 +87,31 @@ public class ClinicProfileFragment extends Fragment {
             public void onClick(View view) {
                 DrawerLayout drawerLayout = (DrawerLayout) getActivity().findViewById(R.id.drawerLayout);
                 drawerLayout.openDrawer(Gravity.LEFT);
+            }
+        });
+
+        //social share
+        socialShare = (ImageView) getView().findViewById(R.id.clinic_social_share);
+        clinicShare = (ImageView) getView().findViewById(R.id.clinicShare);
+        socialShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shareIt(clinicName, clinicPhone, clinicAddress, clinicSpeciality, "");
+            }
+        });
+        clinicShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shareIt(clinicName, clinicPhone, clinicAddress, clinicSpeciality, "");
+            }
+        });
+
+        //photo or videos
+        photosOrVideo = (ImageView) getView().findViewById(R.id.photos_or_video);
+        photosOrVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), PhotoOrVideoActivity.class));
             }
         });
     }
@@ -100,6 +133,7 @@ public class ClinicProfileFragment extends Fragment {
             protected String doInBackground(String... params) {
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                 nameValuePairs.add(new BasicNameValuePair("clinicId", quickClinicid));
+                nameValuePairs.add(new BasicNameValuePair("lang", appLang));
 
                 try {
                     HttpPost httpPost = new HttpPost(URL);
@@ -108,8 +142,9 @@ public class ClinicProfileFragment extends Fragment {
                     return mClient.execute(httpPost, responseHandler);
                 } catch(IOException e) {
                     e.printStackTrace();
+                } finally {
+                    mClient.close();
                 }
-                mClient.close();
 
                 return null;
             }
@@ -154,6 +189,14 @@ public class ClinicProfileFragment extends Fragment {
                     TextView name = (TextView) getView().findViewById(R.id.profile_detail_name);
                     name.setText(profile.getString("Name"));
                     name.setTypeface(typeface, typeface.BOLD);
+                    clinicName = profile.getString("Name");
+
+                    //specilality
+                    int specialityId = getContext().getResources().getIdentifier(profile.getString("Mipmap"),
+                            "mipmap",
+                            getContext().getPackageName());
+                    ImageView specialityImage = (ImageView) getView().findViewById(R.id.speciality);
+                    specialityImage.setImageResource(specialityId);
 
                     //title
                     TextView title = (TextView) getView().findViewById(R.id.profile_detail_title);
@@ -164,11 +207,13 @@ public class ClinicProfileFragment extends Fragment {
                     TextView address = (TextView) getView().findViewById(R.id.textView6);
                     address.setText(profile.getString("Address"));
                     address.setTypeface(typeface);
+                    clinicAddress = profile.getString("Address");
 
                     //phone
                     TextView doctorPhone = (TextView) getView().findViewById(R.id.textView8);
                     doctorPhone.setText(getResources().getString(R.string.call) + " (" + profile.getString("Phone") + ")");
                     doctorPhone.setTypeface(typeface);
+                    clinicPhone = profile.getString("Phone");
 
                     //get direction
                     TextView getDirection = (TextView) getView().findViewById(R.id.textView7);
@@ -205,8 +250,13 @@ public class ClinicProfileFragment extends Fragment {
                         }
                     });
 
-                    latitude = profile.getDouble("Latitude");
-                    longitude = profile.getDouble("Longitude");
+                    if(!profile.getString("Latitude").equals("null") &&
+                            !profile.getString("Latitude").isEmpty() &&
+                            !profile.getString("Longitude").equals("null") &&
+                            !profile.getString("Longitude").isEmpty()) {
+                        latitude = profile.getDouble("Latitude");
+                        longitude = profile.getDouble("Longitude");
+                    }
 
                     //set latitude and longitude
                     clinicMap = new LatLng(latitude, longitude);
@@ -222,7 +272,7 @@ public class ClinicProfileFragment extends Fragment {
                                 public void onMapReady(final GoogleMap map) {
                                     map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                                     map.animateCamera(CameraUpdateFactory.newLatLngZoom(clinicMap, 16));
-                                    map.addMarker(new MarkerOptions().position(clinicMap).title(clinicAddress));
+                                    map.addMarker(new MarkerOptions().position(clinicMap).title(clinicAddress).icon(BitmapDescriptorFactory.fromResource(R.mipmap.add_a_clinic)));
                                     map.setTrafficEnabled(true);
                                     map.setIndoorEnabled(true);
                                     map.setBuildingsEnabled(true);
@@ -256,6 +306,15 @@ public class ClinicProfileFragment extends Fragment {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void shareIt(final String name, final String phone, final String address, final String speciality, final String rating) {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "Name: " + name + "\n" + "Phone: " + phone + "\n" + "Address: "
+                + address + "\n" + "Speciality: " + speciality + "\n" + "Rating: " + rating);
+        sendIntent.setType("text/plain");
+        startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.social_text)));
     }
 
 }

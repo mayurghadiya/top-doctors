@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/search_layout"
+    android:textAlignment="center"
+    android:background="#E6EBEF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"> <!--E6EBEF-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/headerColor"
+            android:paddingStart="@dimen/main_container_padding_start_end"
+            android:paddingEnd="@dimen/main_container_padding_start_end">
+
+            <ImageView
+                android:id="@+id/reviews_swipe_menu"
+                android:clickable="true"
+                android:layout_width="@dimen/swipe_menu_width"
+                android:layout_height="@dimen/swipe_menu_height"
+                android:src="@mipmap/menu"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:paddingTop="@dimen/swipe_menu_padding_top"
+                android:paddingBottom="@dimen/swipe_menu_padding_bottom"
+                android:layout_marginStart="@dimen/swipe_menu_margin_start"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/reviews_profile_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:padding="@dimen/hope_page_main_search_padding"
+                    android:drawablePadding="@dimen/hope_page_main_search_drawable_padding"
+                    android:text=""
+                    android:textSize="@dimen/profile_details_name"
+                    android:layout_marginTop="@dimen/detail_name_layout_top"/>
+
+                <ImageView
+                    android:id="@+id/search_map_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/doctor_hospital_clinic_profile_share_icon_height"
+                    android:src="@mipmap/share_1"
+                    android:layout_alignParentEnd="true"
+                    android:paddingTop="@dimen/social_share_icon_padding_top"
+                    android:paddingEnd="@dimen/review_paddingEnd"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/home_page_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:layoutDirection="inherit"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/main_container_padding_start_end"
+                android:paddingEnd="@dimen/main_container_padding_start_end"
+                android:layout_marginStart="@dimen/review_margin_start_end"
+                android:layout_marginEnd="@dimen/review_margin_start_end">
+
+                <TextView
+                    android:id="@+id/reviews_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reviews"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/review_title_text_size"
+                    android:layout_marginTop="@dimen/review_marginTop"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/review_marginTop">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/review_layout_height"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="@dimen/review_marginTop"
+                            android:layout_marginStart="@dimen/review_marginTop">
+
+                            <TextView
+                                android:id="@+id/write_review_reputation"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".51"
+                                android:text="@string/reputation"
+                                android:textSize="@dimen/review_review_text_size"
+                                android:textColor="@color/reviewTextColor"
+                                android:paddingTop="@dimen/review_review_text_paddingTop"/>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight=".49"
+                                android:paddingStart="@dimen/review_ratingbar_paddingstart">
+
+                                <RatingBar
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    style= "@style/CustomRatingBar"
+                                    android:id="@+id/reputation_rating"
+                                    android:numStars="5"
+                                    android:stepSize="0.01"
+                                    android:isIndicator="true"
+                                    android:paddingTop="@dimen/review_review_text_paddingTop"/>
+                                <TextView
+                                    android:id="@+id/total_reputation_review"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="30"
+                                    android:layout_marginStart="@dimen/review_review_count_text_layout_marginStart"
+                                    android:textSize="@dimen/review_review_count_textSize"
+                                    android:paddingTop="@dimen/review_review_count_text_padding_top"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/review_layout_height"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="@dimen/review_review_text_layout_marginTop"
+                            android:layout_marginStart="@dimen/review_review_count_text_layout_marginStart">
+
+                            <TextView
+                                android:id="@+id/write_review_clinic_accessibility"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".51"
+                                android:text="@string/clinic_accessibility"
+                                android:textSize="@dimen/review_review_text_size"
+                                android:textColor="@color/reviewTextColor"
+                                android:paddingTop="@dimen/review_review_text_paddingTop"/>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight=".49"
+                                android:paddingStart="@dimen/review_ratingbar_paddingstart">
+
+                                <RatingBar
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    style= "@style/CustomRatingBar"
+                                    android:id="@+id/clinic_ratingbar"
+                                    android:numStars="5"
+                                    android:stepSize="0.01"
+                                    android:isIndicator="true"
+                                    android:paddingTop="@dimen/review_review_text_paddingTop"/>
+                                <TextView
+                                    android:id="@+id/total_review_clinic_accessibility"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="100"
+                                    android:layout_marginStart="@dimen/review_review_count_text_layout_marginStart"
+                                    android:textSize="@dimen/review_review_count_textSize"
+                                    android:paddingTop="@dimen/review_review_count_text_padding_top"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/review_layout_height"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="@dimen/review_review_text_layout_marginTop"
+                            android:layout_marginStart="@dimen/review_review_count_text_layout_marginStart">
+
+                            <TextView
+                                android:id="@+id/write_review_availability_in_emergencies"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".51"
+                                android:text="@string/availability_in_emergencies"
+                                android:textSize="@dimen/review_review_text_size"
+                                android:textColor="@color/reviewTextColor"
+                                android:paddingTop="@dimen/review_review_text_paddingTop"/>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight=".49"
+                                android:paddingStart="@dimen/review_ratingbar_paddingstart">
+
+                                <RatingBar
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    style= "@style/CustomRatingBar"
+                                    android:id="@+id/availability_ratingbar"
+                                    android:numStars="5"
+                                    android:stepSize="0.01"
+                                    android:isIndicator="true"
+                                    android:paddingTop="@dimen/review_review_text_paddingTop"/>
+                                <TextView
+                                    android:id="@+id/total_availibility_in_emergencies"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="3"
+                                    android:layout_marginStart="@dimen/review_review_count_text_layout_marginStart"
+                                    android:textSize="@dimen/review_review_count_textSize"
+                                    android:paddingTop="@dimen/review_review_count_text_padding_top"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/review_layout_height"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="@dimen/review_review_text_layout_marginTop"
+                            android:layout_marginStart="@dimen/review_review_count_text_layout_marginStart">
+
+                            <TextView
+                                android:id="@+id/write_review_approachability"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".51"
+                                android:text="@string/approachability"
+                                android:textSize="@dimen/review_review_text_size"
+                                android:textColor="@color/reviewTextColor"
+                                android:paddingTop="@dimen/review_review_text_paddingTop"/>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight=".49"
+                                android:paddingStart="@dimen/review_ratingbar_paddingstart">
+
+                                <RatingBar
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    style= "@style/CustomRatingBar"
+                                    android:id="@+id/approachability_ratingbar"
+                                    android:numStars="5"
+                                    android:stepSize="0.01"
+                                    android:isIndicator="true"
+                                    android:paddingTop="@dimen/review_review_text_paddingTop"/>
+                                <TextView
+                                    android:id="@+id/total_review_approachability"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="5"
+                                    android:layout_marginStart="@dimen/review_review_count_text_layout_marginStart"
+                                    android:textSize="@dimen/review_review_count_textSize"
+                                    android:paddingTop="@dimen/review_review_count_text_padding_top"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/review_layout_height"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="@dimen/review_review_text_layout_marginTop"
+                            android:layout_marginStart="@dimen/review_review_count_text_layout_marginStart">
+
+                            <TextView
+                                android:id="@+id/write_review_technology_and_equipment"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".51"
+                                android:text="@string/technology_and_equipment"
+                                android:textSize="@dimen/review_review_text_size"
+                                android:textColor="@color/reviewTextColor"
+                                android:paddingTop="@dimen/review_review_text_paddingTop"/>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight=".49"
+                                android:paddingStart="@dimen/review_ratingbar_paddingstart">
+
+                                <RatingBar
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    style= "@style/CustomRatingBar"
+                                    android:id="@+id/technology_ratingbar"
+                                    android:numStars="5"
+                                    android:stepSize="0.01"
+                                    android:isIndicator="true"
+                                    android:paddingTop="@dimen/review_review_text_paddingTop"/>
+                                <TextView
+                                    android:id="@+id/total_review_technology_and_equipment"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="106"
+                                    android:layout_marginStart="@dimen/review_review_count_text_layout_marginStart"
+                                    android:textSize="@dimen/review_review_count_textSize"
+                                    android:paddingTop="@dimen/review_review_count_text_padding_top"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <!--<LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/review_layout_height"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="@dimen/review_review_count_text_layout_marginStart"
+                            android:layout_marginStart="@dimen/review_review_count_text_layout_marginStart">
+
+                          &lt;!&ndash; <LinearLayout
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:layout_weight="1"
+                               android:orientation="horizontal"
+                               android:gravity="start">
+
+                               <ImageView
+                                   android:layout_width="0dp"
+                                   android:layout_height="wrap_content"
+                                   android:layout_weight=".10"
+                                   android:src="@drawable/hospital_review_1"/>
+                               <ImageView
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:src="@drawable/hospital_review_2"/>
+                               <ImageView
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:src="@drawable/hospital_review_3"/>
+                               <ImageView
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:src="@drawable/hospital_review_4"/>
+
+                           </LinearLayout>&ndash;&gt;
+
+                            &lt;!&ndash;<LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight=".49"
+                                android:gravity="center"
+                                android:layout_marginTop="@dimen/review_review_text_size">
+                                <TextView
+                                    android:id="@+id/total_reviews"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:layout_marginStart="@dimen/review_review_count_text_layout_marginStart"
+                                    android:layout_marginEnd="@dimen/review_review_text_paddingTop"
+                                    android:textSize="@dimen/review_review_count_textSize"
+                                    android:layout_marginBottom="@dimen/review_review_count_text_layout_marginStart"
+                                    android:paddingTop="@dimen/review_review_text_paddingTop"/>
+
+                            </LinearLayout>&ndash;&gt;
+
+                        </LinearLayout>-->
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/write_your_review"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/border"
+                    android:layout_marginTop="@dimen/review_review_count_text_layout_marginStart">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/review_review_text_paddingTop"
+                        android:layout_marginStart="@dimen/review_review_count_text_layout_marginStart">
+
+                        <RatingBar
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style= "@style/CustomRatingBar"
+                            android:numStars="5"
+                            android:stepSize="0.01"
+                            android:isIndicator="true"
+                            android:paddingTop="@dimen/review_review_text_paddingTop"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/write_your_review_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/write_your_review"
+                        android:layout_marginTop="@dimen/review_review_count_text_layout_marginStart"
+                        android:textSize="@dimen/review_review_text_size"
+                        android:layout_marginStart="@dimen/review_review_count_text_layout_marginStart"
+                        android:paddingBottom="@dimen/review_review_text_paddingTop"
+                        android:paddingTop="@dimen/review_review_text_paddingTop"/>
+
+                </LinearLayout>
+                
+                <LinearLayout
+                    android:id="@+id/doctor_review_list_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/border"
+                    android:layout_marginTop="@dimen/review_review_count_text_layout_marginStart"
+                    android:layout_marginBottom="@dimen/review_review_count_text_layout_marginStart">
+                   <!-- <include
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        layout="@layout/doctor_review_list" />-->
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</RelativeLayout>

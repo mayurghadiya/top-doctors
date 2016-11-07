@@ -4,10 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+
     android:gravity="center"
     tools:context="searchnative.com.topdoctors.LoginActivity"
     android:layoutDirection="locale">
@@ -24,7 +23,6 @@
             android:layout_height="fill_parent"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:paddingBottom="20dp"
             android:paddingStart="@dimen/main_layout_padding_start"
             android:paddingEnd="@dimen/main_layout_padding_end"
             android:weightSum="10"
@@ -38,7 +36,7 @@
                 android:src="@mipmap/toplogo"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:paddingTop="25dp"/>
+                android:paddingTop="@dimen/login_padding_top"/>
 
             <TextView
                 android:id="@+id/textViewLogin"
@@ -60,8 +58,9 @@
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#bcbbc0"
+                    android:textColor="@color/black"
                     android:backgroundTint="#ffffff"
+                    android:textColorHighlight="@color/textHighlightColor"
                     android:hint="@string/email"
                     android:layout_alignTop="@+id/emaillogo"
                     android:layout_alignParentEnd="false"
@@ -95,7 +94,8 @@
                     android:layout_alignParentStart="false"
                     android:hint="@string/password"
                     android:inputType="textPassword"
-                    android:textColor="#bcbbc0"
+                    android:textColorHighlight="@color/textHighlightColor"
+                    android:textColor="@color/black"
                     android:backgroundTint="#ffffff"
                     android:drawableStart="@mipmap/password"
                     android:drawablePadding="8dp"
@@ -112,8 +112,6 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="-10dp"/>
             </LinearLayout>
-
-
 
             <TextView
                 android:layout_width="match_parent"
@@ -185,6 +183,30 @@
                 android:layout_marginTop="20dp"
                 android:padding="10dip"
                 android:textSize="@dimen/login_with_facebook_text"/>
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/login_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#42609c"
+                android:textColor="#ffffff"
+                android:drawableLeft="@mipmap/facebook"
+                android:drawablePadding="20dp"
+                android:layout_marginTop="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="@string/login_with_facebook"
+                android:textSize="@dimen/login_with_facebook_text"
+                android:gravity="center"
+                android:visibility="gone"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/info"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:textSize="18sp"/>
 
         </LinearLayout>
 

@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/primary_layout">
 
     <ScrollView
         android:id="@+id/home_page_form"
@@ -82,16 +83,18 @@
                     android:id="@+id/hope_page_main_search"
                     android:layout_width="fill_parent"
                     android:layout_height="@dimen/hope_page_main_search_height"
-                    android:textColor="#bcbbc0"
+                    android:textColor="@color/black"
                     android:drawableStart="@mipmap/search"
                     android:padding="@dimen/hope_page_main_search_padding"
                     android:drawablePadding="@dimen/hope_page_main_search_drawable_padding"
                     android:inputType="text"
                     android:maxLines="1"
                     android:textColorHint="#bcbbc0"
+                    android:textColorHighlight="@color/textHighlightColor"
                     android:background="#ffffff"
                     android:textSize="@dimen/hope_page_main_search_textsize"
-                    android:hint="@string/search_ex" />
+                    android:hint="@string/search_ex"
+                    android:imeOptions="actionSearch"/>
 
             </LinearLayout>
             <!--Search-->
@@ -170,10 +173,10 @@
                                         android:id="@+id/spinner_location"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:prompt="@string/country_name"
+                                        android:prompt="@string/location"
                                         android:background="@null"
                                         android:spinnerMode="dialog"
-                                        android:textColor="#bcbbc0"/>
+                                        android:textColor="@color/black"/>
                                     <ImageView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -332,16 +335,15 @@
                             android:inputType="text"
                             android:textSize="@dimen/search_text_size"
                             android:gravity="center"
-                            android:hint="@string/search_labs_label"/>
+                            android:hint="@string/search_labs_label"
+                            android:visibility="gone"/>
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal"
-                        android:visibility="gone">
+                        android:orientation="horizontal">
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -382,14 +384,37 @@
                                 android:layout_width="fill_parent"
                                 android:layout_height="@dimen/border_height"
                                 android:background="#D3D3D3"
-                                android:layout_marginBottom="@dimen/expandable_layout_border_separator_margin_bottom"
                                 android:layout_marginStart="@dimen/expandable_layout_border_separator_margin_start_top"
                                 android:layout_marginTop="@dimen/expandable_layout_border_separator_margin_start_top"/>
+
+                            <TextView
+                                android:id="@+id/radiologyLab"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/radiology_lab"
+                                android:drawableStart="@mipmap/radiology_lab"
+                                android:textSize="@dimen/primary_filter_lab_text_size"
+                                android:textColor="@color/black"
+                                android:drawablePadding="@dimen/drawable_padding"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginTop="7dp"/>
+                            <TextView
+                                android:id="@+id/medicalLab"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/medical_lab"
+                                android:drawableStart="@mipmap/medical_lab"
+                                android:textSize="@dimen/primary_filter_lab_text_size"
+                                android:textColor="@color/black"
+                                android:drawablePadding="@dimen/drawable_padding"
+                                android:layout_marginBottom="5dp"
+                                android:textAlignment="viewStart"/>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:visibility="gone">
                                 <RelativeLayout
                                     android:id="@+id/lab_speciality_layout"
                                     android:layout_width="match_parent"
@@ -417,12 +442,15 @@
                                 android:background="#D3D3D3"
                                 android:layout_marginBottom="@dimen/expandable_layout_border_separator_margin_bottom"
                                 android:layout_marginStart="@dimen/expandable_layout_border_separator_margin_start_top"
-                                android:layout_marginTop="@dimen/expandable_layout_border_separator_margin_start_top"/>
+                                android:layout_marginTop="@dimen/expandable_layout_border_separator_margin_start_top"
+                                android:visibility="gone"
+                                android:textAlignment="viewStart"/>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:visibility="gone">
                                 <RelativeLayout
                                     android:id="@+id/lab_gender_layout"
                                     android:layout_width="match_parent"
@@ -446,6 +474,7 @@
                                 android:layout_width="fill_parent"
                                 android:layout_height="@dimen/border_height"
                                 android:background="#D3D3D3"
+                                android:visibility="gone"
                                 android:layout_marginBottom="@dimen/expandable_last_border_margin"
                                 android:layout_marginStart="@dimen/expandable_layout_border_separator_margin_start_top"
                                 android:layout_marginTop="@dimen/expandable_layout_border_separator_margin_start_top"/>

@@ -156,7 +156,7 @@ public class AddDoctor extends Fragment {
                     TextView textView = new TextView(getContext());
                     textView.setHeight(0);
                     textView.setVisibility(View.GONE);
-                    textView.setTextColor(Color.GRAY);
+                    textView.setTextColor(getResources().getColor(R.color.textHighlightColor));
                     v = textView;
                 } else {
                     v = super.getDropDownView(position, null, parent);
@@ -220,7 +220,7 @@ public class AddDoctor extends Fragment {
                     TextView textView = new TextView(getContext());
                     textView.setHeight(0);
                     textView.setVisibility(View.GONE);
-                    textView.setTextColor(Color.GRAY);
+                    textView.setTextColor(getResources().getColor(R.color.textHighlightColor));
                     v = textView;
                 } else {
                     v = super.getDropDownView(position, null, parent);
@@ -460,7 +460,7 @@ public class AddDoctor extends Fragment {
                     TextView textView = new TextView(getContext());
                     textView.setHeight(0);
                     textView.setVisibility(View.GONE);
-                    textView.setTextColor(Color.GRAY);
+                    textView.setTextColor(getResources().getColor(R.color.textHighlightColor));
                     v = textView;
                 } else {
                     v = super.getDropDownView(position, null, parent);

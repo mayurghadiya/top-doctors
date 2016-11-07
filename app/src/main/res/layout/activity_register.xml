@@ -3,10 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="searchnative.com.topdoctors.RegisterActivity"
     android:layoutDirection="locale">
 
@@ -54,7 +50,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
                 android:hint="@string/first_name"
-                android:textColor="#bcbbc0"
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/textHighlightColor"
                 android:backgroundTint="#ffffff"
                 android:drawableStart="@mipmap/first_name"
                 android:drawableEnd="@mipmap/star"
@@ -77,7 +74,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
                 android:hint="@string/last_name"
-                android:textColor="#bcbbc0"
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/textHighlightColor"
                 android:backgroundTint="#ffffff"
                 android:drawableStart="@mipmap/last_name"
                 android:drawableEnd="@mipmap/star"
@@ -99,7 +97,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
                 android:hint="@string/email"
-                android:textColor="#bcbbc0"
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/textHighlightColor"
                 android:backgroundTint="#ffffff"
                 android:drawableStart="@mipmap/email"
                 android:drawableEnd="@mipmap/star"
@@ -121,7 +120,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
                 android:hint="@string/mobile_number"
-                android:textColor="#bcbbc0"
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/textHighlightColor"
                 android:backgroundTint="#ffffff"
                 android:drawableStart="@mipmap/mobile"
                 android:drawableEnd="@mipmap/star"
@@ -144,7 +144,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
                 android:hint="@string/password"
-                android:textColor="#bcbbc0"
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/textHighlightColor"
                 android:backgroundTint="#ffffff"
                 android:drawableStart="@mipmap/password"
                 android:drawableEnd="@mipmap/star"
@@ -167,7 +168,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
                 android:hint="@string/confirm_password"
-                android:textColor="#bcbbc0"
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/textHighlightColor"
                 android:backgroundTint="#ffffff"
                 android:drawableStart="@mipmap/password"
                 android:drawableEnd="@mipmap/star"
@@ -232,7 +234,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
                 android:hint="@string/address"
-                android:textColor="#bcbbc0"
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/textHighlightColor"
                 android:backgroundTint="#ffffff"
                 android:drawableStart="@mipmap/address"
                 android:drawablePadding="8dp"
@@ -300,14 +303,38 @@
                 android:gravity="center"
                 android:textSize="@dimen/forgot_password_with_facebook_text"
                 android:layout_marginTop="20dp"
-                android:layout_marginStart="@dimen/login_facebook_button_margin_start"/>
+                android:layout_marginStart="@dimen/login_facebook_button_margin_start"
+                android:visibility="gone"/>
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/login_button_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#42609c"
+                android:textColor="#ffffff"
+                android:drawableLeft="@mipmap/facebook"
+                android:drawablePadding="20dp"
+                android:layout_marginTop="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="@string/login_with_facebook"
+                android:textSize="@dimen/login_with_facebook_text"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/info"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:textSize="18sp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="13dp">
 
                 <TextView
                     android:id="@+id/terms_note"

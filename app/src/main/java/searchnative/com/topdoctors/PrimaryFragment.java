@@ -18,11 +18,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -61,11 +63,12 @@ public class PrimaryFragment extends Fragment {
     Spinner spinner1, spinnerSpeciality, spinnerLocation, labSpecialitySpinner, labGenderSpinner;
     Typeface typeface;
     String[] genderArray;
-    List<String> specialityListData, countryDataList;
+    List<String> specialityListData, countryDataList, specialityListIcon;
     ArrayAdapter<String> spinnerArrayAdapter, specialityArrayAdapter;
     String webServiceUrl = AppConfig.getWebServiceUrl();
     private ProgressDialog mProgressDialog;
     TextView home_page_lab_search;
+    private TextView radiologyLab, medicalLab;
 
     //doctor search param
     String getDoctorSearchGender = "", getDoctorSearchSpeciality = "", getDoctorSearchLocation = "";
@@ -106,6 +109,7 @@ public class PrimaryFragment extends Fragment {
 
         final TextView tv = (TextView) getView().findViewById(R.id.home_page_doctor_search_doctor);
         final TextView etLabsSearch = (TextView) getView().findViewById(R.id.home_page_search_lab_textview);
+
         mLinearLayout.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
@@ -238,10 +242,26 @@ public class PrimaryFragment extends Fragment {
         });
 
 
-        EditText etMainSearch = (EditText) getView().findViewById(R.id.hope_page_main_search);
+        final EditText etMainSearch = (EditText) getView().findViewById(R.id.hope_page_main_search);
         //EditText etDoctorSearchLocation = (EditText) getView().findViewById(R.id.home_doctor_search_location);
         TextView etHospitalSearch = (TextView) getView().findViewById(R.id.home_page_search_hospital_textview);
         TextView etClinicSearch = (TextView) getView().findViewById(R.id.home_page_search_clinics_textview);
+        Preference.setValue(getContext(), "PRIMARY_SEARCH", "");
+        //global search
+        etMainSearch.setOnEditorActionListener(new TextView.OnEditorActionListener(){
+
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_SEARCH) {
+                    String searchKey = etMainSearch.getText().toString();
+                    Log.v("Search Key", searchKey);
+                    Preference.setValue(getContext(), "PRIMARY_SEARCH", "true");
+                    Preference.setValue(getContext(), "PROMARY_SEARCH_KEY", searchKey);
+                    customSearch();
+                }
+                return false;
+            }
+        });
 
         //set font
         typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/ExoMedium.otf");
@@ -251,11 +271,39 @@ public class PrimaryFragment extends Fragment {
         etClinicSearch.setTypeface(typeface);
         etLabsSearch.setTypeface(typeface);
 
+        radiologyLab = (TextView) getView().findViewById(R.id.radiologyLab);
+        medicalLab = (TextView) getView().findViewById(R.id.medicalLab);
+        radiologyLab.setTypeface(typeface);
+        medicalLab.setTypeface(typeface);
+
+        radiologyLab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getLabSearchSpeciality = radiologyLab.getText().toString();
+                Log.v("Lab Search type", getLabSearchSpeciality);
+                Preference.setValue(getContext(), "LAB_SEARCH_CUSTOM", "true");
+                Preference.setValue(getContext(), "LAB_SEARCH_SPECIALITY", getLabSearchSpeciality);
+                customSearch();
+            }
+        });
+
+        medicalLab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getLabSearchSpeciality = medicalLab.getText().toString();
+                Preference.setValue(getContext(), "LAB_SEARCH_CUSTOM", "true");
+                Preference.setValue(getContext(), "LAB_SEARCH_SPECIALITY", getLabSearchSpeciality);
+                customSearch();
+            }
+        });
+
         //location spinner configuration
         spinnerLocation = (Spinner) getView().findViewById(R.id.spinner_location);
         countryDataList = new ArrayList<String>();
-        countryDataList.add(getResources().getString(R.string.country_name));
-        spinnerArrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, countryDataList) {
+        countryDataList.add(getResources().getString(R.string.location));
+        countryDataList.addAll(LocationData.getmInstance().locationList);
+        spinnerArrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item,
+                countryDataList) {
             @Override
             public boolean isEnabled(int position) {
                 if(position == 0) {
@@ -273,7 +321,7 @@ public class PrimaryFragment extends Fragment {
                     TextView textView = new TextView(getContext());
                     textView.setHeight(0);
                     textView.setVisibility(View.GONE);
-                    textView.setTextColor(Color.GRAY);
+                    textView.setTextColor(getResources().getColor(R.color.textHighlightColor));
                     v = textView;
                 } else {
                     v = super.getDropDownView(position, null, parent);
@@ -286,14 +334,21 @@ public class PrimaryFragment extends Fragment {
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
                 ((TextView) view).setTypeface(typeface);
-                ((TextView) view).setTextColor(Color.parseColor("#bcbbc0"));
+                if(position == 0) {
+                    ((TextView) view).setTextColor(getResources().getColor(R.color.textHighlightColor));
+                    ((TextView) view).setTextSize(16);
+                } else {
+                    ((TextView) view).setTextColor(getResources().getColor(R.color.black));
+                    ((TextView) view).setTextSize(16);
+                }
+
                 return view;
             }
         };
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        new GetJSONCountry().execute();
+        //new GetJSONCountry().execute();
         spinnerArrayAdapter.setNotifyOnChange(true);
-        final int listSize = countryDataList.size() - 1;
+        //final int listSize = countryDataList.size() - 1;
         spinnerLocation.setAdapter(spinnerArrayAdapter);
 
         Preference.setValue(getContext(), "DOCTOR_SEARCH_CUSTOM", "");
@@ -327,49 +382,12 @@ public class PrimaryFragment extends Fragment {
         spinnerSpeciality = (Spinner) getView().findViewById(R.id.spinner_speciality);
         labSpecialitySpinner = (Spinner) getView().findViewById(R.id.lab_spinner_speciality);
         specialityListData = new ArrayList<String>();
+        specialityListIcon = new ArrayList<>();
         specialityListData.add(getResources().getString(R.string.speciality));
-        specialityArrayAdapter = new ArrayAdapter<String>(getContext(),
-                android.R.layout.simple_spinner_dropdown_item, specialityListData) {
-            @Override
-            public boolean isEnabled(int position) {
-                if(position == 0) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-
-            @Override
-            public View getDropDownView(int position, View convertView, ViewGroup parent) {
-                View v = null;
-                //View view  = super.getDropDownView(position, convertView, parent);
-                if(position == 0) {
-                    TextView textView = new TextView(getContext());
-                    textView.setHeight(0);
-                    textView.setVisibility(View.GONE);
-                    textView.setTextColor(Color.GRAY);
-                    v = textView;
-                } else {
-                    v = super.getDropDownView(position, null, parent);
-                }
-
-                return v;
-            }
-
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View v = super.getView(position, convertView, parent);
-                ((TextView) v).setTypeface(typeface);
-                ((TextView) v).setTextColor(Color.parseColor("#bcbbc0"));
-
-                return v;
-            }
-        };
-        specialityArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        new GetJSONData().execute();
-        specialityArrayAdapter.setNotifyOnChange(true);
-        spinnerSpeciality.setAdapter(specialityArrayAdapter);
-        labSpecialitySpinner.setAdapter(specialityArrayAdapter);
+        specialityListIcon.addAll(SpecialityData.getmInstance().specialityListIcon);
+        specialityListData.addAll(SpecialityData.getmInstance().specialityList);
+        CustomAdapter customAdapter = new CustomAdapter(getContext(), specialityListIcon, specialityListData);
+        spinnerSpeciality.setAdapter(customAdapter);
 
         //speciality wise doctor search
         spinnerSpeciality.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -377,7 +395,7 @@ public class PrimaryFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i > 0) {
                     //search doctors based on speciality
-                    getDoctorSearchSpeciality = spinnerSpeciality.getSelectedItem().toString();
+                    getDoctorSearchSpeciality = SpecialityData.getmInstance().specialityList.get(i - 1).toString();
                     Preference.setValue(getContext(), "DOCTOR_SEARCH_CUSTOM", "true");
                     Preference.setValue(getContext(), "DOCTOR_SPECIALITY_SEARCH", "");
                     Preference.setValue(getContext(), "DOCTOR_SPECIALITY_SEARCH", getDoctorSearchSpeciality);
@@ -456,7 +474,11 @@ public class PrimaryFragment extends Fragment {
             public View getView(int position, View convertView, ViewGroup parent) {
                 View v = super.getView(position, convertView, parent);
                 ((TextView) v).setTypeface(typeface);
-                ((TextView) v).setTextColor(Color.parseColor("#bcbbc0"));
+                ((TextView) v).setTextColor(getResources().getColor(R.color.black));((TextView) v).setTextColor(getResources().getColor(R.color.black));
+                ((TextView) v).setTextSize(16);
+                if(position == 0) {
+                    ((TextView) v).setTextColor(getResources().getColor(R.color.textHighlightColor));
+                }
 
                 return v;
             }
@@ -472,9 +494,10 @@ public class PrimaryFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i > 0) {
                     //search doctors based on gender
-                    getDoctorSearchGender = spinner1.getSelectedItem().toString();
+                    getDoctorSearchGender = String.valueOf(i);
+                    //getDoctorSearchGender = spinner1.getSelectedItem().toString();
                     Preference.setValue(getContext(), "DOCTOR_SEARCH_CUSTOM", "true");
-                    Preference.setValue(getContext(), "DOCTOR_GENDER_SEARCH", getDoctorSearchGender);
+                    Preference.setValue(getContext(), "DOCTOR_GENDER_SEARCH", String.valueOf(i));
                     customSearch();
                     //searchDoctors(getDoctorSearchGender, getDoctorSearchSpeciality, getDoctorSearchLocation);
                 }
@@ -492,6 +515,7 @@ public class PrimaryFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Preference.setValue(getContext(), "LAB_SEARCH_CUSTOM", "true");
+                Preference.setValue(getContext(), "GLOBAL_FILTER_TYPE", "lab");
                 customSearch();
             }
         });
@@ -526,6 +550,7 @@ public class PrimaryFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Preference.setValue(getContext(), "HOSPITAL_SEARCH", "true");
+                Preference.setValue(getContext(), "GLOBAL_FILTER_TYPE", "hospital");
                 customSearch();
             }
         });
@@ -536,10 +561,14 @@ public class PrimaryFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Preference.setValue(getContext(), "CLINIC_SEARCH", "true");
+                Preference.setValue(getContext(), "GLOBAL_FILTER_TYPE", "clinic");
                 customSearch();
                 //new GetClinic().execute();
             }
         });
+
+        //create doctor singlton class object
+        DoctorList.getmInstance();
 
     }
 
@@ -564,19 +593,22 @@ public class PrimaryFragment extends Fragment {
                 return mClient.execute(httpGet, responseHandler);
             } catch(IOException e) {
                 e.printStackTrace();
+            } finally {
+                mClient.close();
             }
-            mClient.close();
+
             return null;
         }
 
         protected void onPostExecute(String result) {
             try {
                 List<String> countryList = new ArrayList<String>();
+                countryList.add(getResources().getString(R.string.location));
                 JSONObject jsonObject = new JSONObject(result);
                 JSONArray jsonArray = jsonObject.getJSONArray("data");
                 for(int i = 0; i < jsonArray.length(); i++) {
                     JSONObject country = jsonArray.getJSONObject(i);
-                    spinnerArrayAdapter.add(country.getString("country_name"));
+                    countryList.add(country.getString("country_name"));
                     //Log.v("Country: ", country.getString("country_name"));
                 }
 
@@ -605,22 +637,22 @@ public class PrimaryFragment extends Fragment {
                 exception.printStackTrace();
             } catch (IOException exception) {
                 exception.printStackTrace();
-            }/* catch (JSONException e) {
-                e.printStackTrace();
-            }*/
-            mClient.close();
+            } finally {
+                mClient.close();
+            }
+
             return null;
         }
 
         @Override
         protected void onPostExecute(String result) {
             try {
-                //List<String> specialityList = new ArrayList<String>();
+                List<String> specialityListData = new ArrayList<String>();
                 JSONObject jsonObject = new JSONObject(result);
                 JSONArray jsonArray = jsonObject.getJSONArray("data");
                 for(int i = 0; i < jsonArray.length(); i++) {
                     JSONObject spec = jsonArray.getJSONObject(i);
-                    specialityArrayAdapter.add(spec.getString("SPEC"));
+                    specialityListData.add(spec.getString("SPEC"));
                     //Log.v("Data: ", spec.getString("SPEC"));
                 }
             } catch (Exception e) {
@@ -1145,10 +1177,10 @@ public class PrimaryFragment extends Fragment {
                 exception.printStackTrace();
             } catch (IOException exception) {
                 exception.printStackTrace();
-            }/* catch (JSONException e) {
-                e.printStackTrace();
-            }*/
-            mClient.close();
+            } finally {
+                mClient.close();
+            }
+
             return null;
         }
 
@@ -1188,10 +1220,10 @@ public class PrimaryFragment extends Fragment {
                 exception.printStackTrace();
             } catch (IOException exception) {
                 exception.printStackTrace();
-            }/* catch (JSONException e) {
-                e.printStackTrace();
-            }*/
-            mClient.close();
+            } finally {
+                mClient.close();
+            }
+
             return null;
         }
 
@@ -1231,8 +1263,10 @@ public class PrimaryFragment extends Fragment {
                 exception.printStackTrace();
             } catch (IOException exception) {
                 exception.printStackTrace();
+            } finally {
+                mClient.close();
             }
-            mClient.close();
+
             return null;
         }
 
@@ -1569,9 +1603,13 @@ public class PrimaryFragment extends Fragment {
 
     public void customSearch() {
         BaseActivity baseActivity = new BaseActivity();
+        //SearchFragment searchFragment;
+        //searchFragment = new SearchFragment();
+        //searchFragment.isListingLayout = true;
         FragmentManager mFragmentManager;
         mFragmentManager = getActivity().getSupportFragmentManager();
         mFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         baseActivity.tabFragment.tabLayout.getTabAt(1).select();
     }
+
 }

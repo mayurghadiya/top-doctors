@@ -63,7 +63,10 @@
                     android:hint="@string/name"
                     android:backgroundTint="#ffffff"
                     android:drawableEnd="@mipmap/star"
-                    android:singleLine="true"/>
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/textHighlightColor"
+                    android:singleLine="true"
+                    android:textSize="@dimen/add_doctor_input_font"/>
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
@@ -79,7 +82,10 @@
                     android:hint="@string/clinic_name"
                     android:backgroundTint="#ffffff"
                     android:drawableEnd="@mipmap/star"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/textHighlightColor"
+                    android:textSize="@dimen/add_doctor_input_font"/>
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
@@ -96,7 +102,10 @@
                     android:hint="@string/email"
                     android:drawableEnd="@mipmap/star"
                     android:inputType="textEmailAddress"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/textHighlightColor"
+                    android:textSize="@dimen/add_doctor_input_font"/>
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
@@ -113,7 +122,10 @@
                     android:backgroundTint="#ffffff"
                     android:drawableEnd="@mipmap/star"
                     android:inputType="number"
-                    android:maxLength="15"/>
+                    android:maxLength="15"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/textHighlightColor"
+                    android:textSize="@dimen/add_doctor_input_font"/>
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
@@ -156,7 +168,10 @@
                     android:backgroundTint="#ffffff"
                     android:layout_height="wrap_content"
                     android:hint="@string/clinic_address"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/textHighlightColor"
+                    android:textSize="@dimen/add_doctor_input_font"/>
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
@@ -177,30 +192,36 @@
                         android:spinnerMode="dialog"
                         android:prompt="@string/speciality">
                     </Spinner>
-                    <ImageView
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toStartOf="@+id/add_doctor_speciality_arrow"
-                        android:src="@mipmap/star"
-                        android:paddingStart="@dimen/add_doctor_border_paddingStart"
-                        android:layout_marginTop="@dimen/add_doctor_spinner_image_marginTop"
-                        android:paddingEnd="@dimen/add_doctor_border_paddingEnd"/>
-                    <ImageView
-                        android:id="@+id/add_doctor_speciality_arrow"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:src="@drawable/dropdown_arrow"
-                        android:paddingRight="@dimen/add_doctor_spinner_image_paddingRight"
-                        android:layout_marginTop="@dimen/add_doctor_spinner_image_marginTop"/>
+                        android:orientation="horizontal"
+                        android:layout_alignParentEnd="true">
+
+                        <ImageView
+                            android:id="@+id/specialityRequired"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/star"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginEnd="4dp"/>
+
+                        <ImageView
+                            android:id="@+id/add_doctor_speciality_arrow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/dropdown_arrow"
+                            android:layout_marginTop="10dp"/>
+
+                    </LinearLayout>
                 </RelativeLayout>
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:background="#D3D3D3"
                     android:layout_marginBottom="@dimen/add_doctor_border_line_marginBottom"
-                    android:layout_marginStart="@dimen/add_doctor_border_line_marginStart"
-                    android:layout_marginTop="@dimen/add_doctor_border_line_marginTop"/>
+                    android:layout_marginStart="@dimen/add_doctor_border_line_marginStart"/>
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
 import android.net.http.AndroidHttpClient;
@@ -15,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -62,10 +64,10 @@ public class AddDoctorActivity extends AppCompatActivity {
     String[] genderArray;
     static String webServiceUrl = AppConfig.getWebServiceUrl();
     ArrayAdapter<String> locationArrayAdapter, specialityArrayAdapter;
-    List<String> specialityList, locationList;
+    List<String> specialityList, locationList, specialityListIcon;
     Button submitButton;
 
-    String getName, getClinicName, getEmail, getMobile, getLocation, getCLinicAddress, getSpeciality, getGender;
+    String getName, getClinicName, getEmail, getMobile, getLocation = "", getCLinicAddress, getSpeciality = "", getGender = "";
 
     private ImageView imageView, closeActivity;
     private Bitmap bitmap;
@@ -86,6 +88,9 @@ public class AddDoctorActivity extends AppCompatActivity {
 
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
+
+        SpecialityData.getmInstance();
+        //demoList = SpecialityData.getmInstance().specialityList;
 
         //set font style
         typeface = Typeface.createFromAsset(this.getAssets(), "fonts/ExoMedium.otf");
@@ -124,55 +129,18 @@ public class AddDoctorActivity extends AppCompatActivity {
         loadGenderSpinner();
 
         specialityList = new ArrayList<String>();
+        specialityListIcon = new ArrayList<>();
         specialityList.add(getResources().getString(R.string.speciality));
-        specialityArrayAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_dropdown_item, specialityList) {
-            @Override
-            public boolean isEnabled(int position) {
-                if(position == 0) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }
+        specialityList.addAll(SpecialityData.getmInstance().specialityList);
 
-            @Override
-            public View getDropDownView(int position, View convertView, ViewGroup parent) {
-                View v = null;
-                //View view  = super.getDropDownView(position, convertView, parent);
-                if(position == 0) {
-                    TextView textView = new TextView(getContext());
-                    textView.setHeight(0);
-                    textView.setVisibility(View.GONE);
-                    textView.setTextColor(Color.GRAY);
-                    v = textView;
-                } else {
-                    v = super.getDropDownView(position, null, parent);
-                }
-
-                return v;
-            }
-
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View v = super.getView(position, convertView, parent);
-                ((TextView) v).setTypeface(typeface);
-                ((TextView) v).setTextSize(18);
-
-                return v;
-            }
-        };
-        specialityArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        loadSpecialitySpinner();
-        specialityArrayAdapter.setNotifyOnChange(true);
-        addDoctorSpeciality.setAdapter(specialityArrayAdapter);
-
+        specialityListIcon = SpecialityData.getmInstance().specialityListIcon;
+        CustomAdapter customAdapter=new CustomAdapter(getApplicationContext(), specialityListIcon, specialityList);
+        addDoctorSpeciality.setAdapter(customAdapter);
         addDoctorSpeciality.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i > 0) {
-                    getSpeciality = addDoctorSpeciality.getSelectedItem().toString();
-                    //Toast.makeText(getContext(), getSpeciality, Toast.LENGTH_LONG).show();
+                    getSpeciality = SpecialityData.getmInstance().specialityList.get(i - 1).toString();
                 }
             }
 
@@ -184,6 +152,7 @@ public class AddDoctorActivity extends AppCompatActivity {
 
         locationList = new ArrayList<String>();
         locationList.add(getResources().getString(R.string.location));
+        locationList.addAll(LocationData.getmInstance().locationList);
         locationArrayAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_dropdown_item, locationList) {
             @Override
@@ -208,7 +177,7 @@ public class AddDoctorActivity extends AppCompatActivity {
                     TextView textView = new TextView(getContext());
                     textView.setHeight(0);
                     textView.setVisibility(View.GONE);
-                    textView.setTextColor(Color.GRAY);
+                    textView.setTextColor(getResources().getColor(R.color.textHighlightColor));
                     v = textView;
                 } else {
                     v = super.getDropDownView(position, null, parent);
@@ -220,12 +189,18 @@ public class AddDoctorActivity extends AppCompatActivity {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View v = super.getView(position, convertView, parent);
+                if(position == 0) {
+                    ((TextView) v).setTextColor(getResources().getColor(R.color.textHighlightColor));
+                } else {
+                    ((TextView) v).setTextColor(getResources().getColor(R.color.black));
+                }
                 ((TextView) v).setTypeface(typeface);
-                ((TextView) v).setTextSize(18);
+                int dp = (int) (getResources().getDimension(R.dimen.add_doctor_input_font) / getResources().getDisplayMetrics().density);
+                ((TextView) v).setTextSize(dp);
                 return v;
             }
         };
-        loadLocationSpinner();
+        //loadLocationSpinner();
         locationArrayAdapter.setNotifyOnChange(true);
         addDoctorLocation.setAdapter(locationArrayAdapter);
 
@@ -305,6 +280,8 @@ public class AddDoctorActivity extends AppCompatActivity {
     }
 
     public Boolean dataValidation() {
+        Log.v("Speciality", SpecialityData.getmInstance().specialityList.toString());
+        Log.v("Icon", SpecialityData.getmInstance().specialityListIcon.toString());
         boolean isValid = true;
 
         if(addDoctorName.getText().toString().trim().length() == 0) {
@@ -366,60 +343,91 @@ public class AddDoctorActivity extends AppCompatActivity {
      */
     private void uploadImage(){
         //Showing the progress dialog
-        final ProgressDialog loading = ProgressDialog.show(this,"Uploading...","Please wait...",false,false);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, UPLOAD_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        //Disimissing the progress dialog
-                        loading.dismiss();
-                        //Showing toast message of the response
-                        Toast.makeText(AddDoctorActivity.this, s , Toast.LENGTH_LONG).show();
+        if(getSpeciality.isEmpty()) {
+            Toast.makeText(AddDoctorActivity.this, getResources().getString(R.string.please_select_speciality), Toast.LENGTH_LONG).show();
+        }
+        else if (imageView.getDrawable() == null) {
+            //Log.v("Image data: ", "Image not selected");
+            Toast.makeText(AddDoctorActivity.this, getResources().getString(R.string.please_upload_syndicate_id), Toast.LENGTH_LONG).show();
+        } else {
+            final ProgressDialog loading = ProgressDialog.show(this,"Uploading...","Please wait...",false,false);
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, UPLOAD_URL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String s) {
+                            //Disimissing the progress dialog
+                            loading.dismiss();
+                            //Showing toast message of the response
+                            try {
+                                JSONObject jsonObject = new JSONObject(s);
+                                Toast.makeText(AddDoctorActivity.this, jsonObject.getString("message") , Toast.LENGTH_LONG).show();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
+                            //Dismissing the progress dialog
+                            loading.dismiss();
+
+                            //Showing toast
+                            Log.v("Error", volleyError.getMessage().toString());
+                            Toast.makeText(AddDoctorActivity.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                        }
+                    }){
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    //Converting Bitmap to String
+                    String image = null;
+                    Map<String,String> params = new Hashtable<String, String>();
+                    try {
+                        image = getStringImage(bitmap);
+                        Log.v("Image Data", image);
+                        //Getting Image Name
+                        //String name = editTextName.getText().toString().trim();
+
+                        //Creating parameters
+
+                        //Adding parameters
+                        params.put("name", getName);
+                        params.put("clinic_name", getClinicName);
+                        params.put("email", getEmail);
+                        params.put("mobile", getMobile);
+
+                        if(getLocation.isEmpty()) {
+                            params.put("location", "");
+                        } else {
+                            params.put("location", getLocation);
+                        }
+                        params.put("address", getCLinicAddress);
+                        params.put("speciality", getSpeciality);
+                        if(getGender.isEmpty()) {
+                            params.put("gender", "");
+                        } else {
+                            params.put("gender", getGender);
+                        }
+
+                        params.put("lang", LocalInformation.getLocaleLang());
+                        params.put(KEY_IMAGE, image);
+
+                        //returning parameters
+
+                    } catch (Exception e) {
+                        Toast.makeText(getBaseContext(), "Please select image", Toast.LENGTH_LONG).show();
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        //Dismissing the progress dialog
-                        loading.dismiss();
 
-                        //Showing toast
-                        Toast.makeText(AddDoctorActivity.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
-                    }
-                }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                //Converting Bitmap to String
-                String image = getStringImage(bitmap);
+                    return params;
+                }
+            };
 
-                //Getting Image Name
-                //String name = editTextName.getText().toString().trim();
+            //Creating a Request Queue
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
 
-                //Creating parameters
-                Map<String,String> params = new Hashtable<String, String>();
-
-                //Adding parameters
-                params.put("name", getName);
-                params.put("clinic_name", getClinicName);
-                params.put("email", getEmail);
-                params.put("mobile", getMobile);
-                params.put("location", getLocation);
-                params.put("address", getCLinicAddress);
-                params.put("speciality", getSpeciality);
-                params.put("gender", getGender);
-                params.put("lang", LocalInformation.getLocaleLang());
-                params.put(KEY_IMAGE, image);
-
-                //returning parameters
-                return params;
-            }
-        };
-
-        //Creating a Request Queue
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-
-        //Adding request to the queue
-        requestQueue.add(stringRequest);
+            //Adding request to the queue
+            requestQueue.add(stringRequest);
+        }
     }
 
     /**
@@ -464,8 +472,18 @@ public class AddDoctorActivity extends AppCompatActivity {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View v = super.getView(position, convertView, parent);
+                if(position == 0) {
+                    ((TextView) v).setTextColor(getResources().getColor(R.color.textHighlightColor));
+                } else {
+                    ((TextView) v).setTextColor(getResources().getColor(R.color.black));
+                    /*final Drawable imgArrawTop = getContext().getResources().getDrawable(R.mipmap.dropdown_arrow_top);
+                    imgArrawTop.setBounds(0,0,50,50);
+                    ((TextView) v).setCompoundDrawablePadding(15);
+                    ((TextView) v).setCompoundDrawables(imgArrawTop, null, null, null);*/
+                }
                 ((TextView) v).setTypeface(typeface);
-                ((TextView) v).setTextSize(18);
+                int dp = (int) (getResources().getDimension(R.dimen.add_doctor_input_font) / getResources().getDisplayMetrics().density);
+                ((TextView) v).setTextSize(dp);
 
                 return v;
             }
@@ -477,7 +495,9 @@ public class AddDoctorActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i > 0) {
-                    getGender = addDoctorGender.getSelectedItem().toString();
+                    getGender = String.valueOf(i);
+                    Log.v("Gender", getGender);
+                    //getGender = addDoctorGender.getSelectedItem().toString();
                 }
             }
 

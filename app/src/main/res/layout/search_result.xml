@@ -7,11 +7,12 @@
     android:orientation="vertical"
     android:layout_marginTop="@dimen/main_margin_top"
     android:layout_marginBottom="@dimen/main_margin_bottom"
-    android:layoutDirection="locale">
+    android:layoutDirection="locale"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_marginStart="@dimen/layout_conten_margin_start_end"
         android:layout_marginEnd="@dimen/layout_conten_margin_start_end">
@@ -77,26 +78,15 @@
                         android:paddingStart="2.2dp">
 
                         <!--rating-->
-                        <ImageView
+                        <RatingBar
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@mipmap/review_1"/>
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@mipmap/review_1"/>
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@mipmap/review_1"/>
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@mipmap/review_1"/>
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@mipmap/review_2"/>
+                            style= "@style/CustomRatingBar"
+                            android:id="@+id/doctor_user_rating"
+                            android:numStars="5"
+                            android:stepSize="0.01"
+                            android:paddingTop="2dp"
+                            android:isIndicator="true"/>
 
                         <!--review-->
                         <TextView
@@ -105,6 +95,7 @@
                             android:layout_height="wrap_content"
                             android:text="30 Reviews"
                             android:textSize="@dimen/result_text_size"
+                            android:textColor="@color/black"
                             android:layout_marginTop="@dimen/review_margin_top"
                             android:layout_marginStart="@dimen/review_margin_start"/>
 
@@ -130,17 +121,25 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/spicialities"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginEnd="@dimen/contact_margin_end">
 
+                    <LinearLayout
+                        android:id="@+id/speciality_mipmap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
+
                     <!--speciality-->
                     <ImageView
                         android:id="@+id/speciality"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/teath"/>
+                        android:layout_width="@dimen/doctor_speciality_icon_width_height"
+                        android:layout_height="@dimen/doctor_speciality_icon_width_height"/>
 
 
                     <LinearLayout
@@ -156,7 +155,7 @@
                             android:src="@mipmap/call"
                             android:layout_marginEnd="@dimen/contact_icon_margin_bottom"/>
                         <ImageView
-                            android:id="@+id/add_to_contact"
+                            android:id="@+id/add_to_bookmarks"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@mipmap/add_to_contact"
@@ -166,7 +165,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@mipmap/more"/>
-
                     </LinearLayout>
 
                 </LinearLayout>

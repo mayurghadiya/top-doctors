@@ -82,4 +82,21 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
+    <!--xxhdpi/xxxhdpi-->
+    <style name="CustomRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/ratingbar</item>
+        <item name="android:minHeight">22dp</item>
+        <item name="android:maxHeight">22dp</item>
+        <item name="android:layout_marginTop">-2.5dp</item>
+    </style>
+
+    <!--hdpi-->
+    <style name="CustomRatingBarHdpi" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/ratingbar</item>
+        <item name="android:minHeight">18dp</item>
+        <item name="android:maxHeight">18dp</item>
+        <item name="android:layout_marginTop">-2.5dp</item>
+    </style>
+
+
 </resources>

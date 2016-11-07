@@ -23,11 +23,19 @@
         android:required="true" />
 
     <application
+        android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="true"
         android:icon="@mipmap/toplogo"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:noHistory="true">
+        <supports-screens android:compatibleWidthLimitDp="320" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait">
@@ -39,16 +47,18 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".NavHeaderMainActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".RegisterActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".ForgotPasswordActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
@@ -71,7 +81,8 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".AddDoctorActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
 
         <!-- Google MAP API key -->
 
@@ -79,8 +90,39 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyCMugtR9ACQypCBQPXfyCjRBD_spoi5CKQ" />
 
-        <activity android:name=".MapActivity"></activity>
-        <activity android:name=".ClaimProfileActivity"></activity>
+        <activity
+            android:name=".MapActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ClaimProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SpinnerIconNameActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".WriteReviewActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
+        <activity
+            android:name=".PhotoOrVideoActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".AddClinicActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
+        <activity
+            android:name=".AddLabActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
+        <activity
+            android:name=".AddHospitalActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
+        <activity
+            android:name=".BadgesActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SubmitReviewActivity" />
     </application>
 
 </manifest>

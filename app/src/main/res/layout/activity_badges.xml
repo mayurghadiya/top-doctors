@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/home_page_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:layoutDirection="inherit"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/add_doctor_main_paddingBottom">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:background="#103C61"
+                android:paddingTop="@dimen/add_doctor_padding_top">
+
+                <ImageView
+                    android:id="@+id/close_activity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/add_doctor_close_button_paddingBottom"
+                    android:paddingStart="@dimen/add_doctor_close_button_paddingStart"
+                    android:paddingEnd="@dimen/add_doctor_close_button_paddingEnd"
+                    android:layout_marginTop="@dimen/add_doctor_close_button_marginTop"
+                    android:src="@mipmap/back_arrow"/>
+
+                <TextView
+                    android:id="@+id/badgesText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/badges"
+                    android:textColor="#ffffff"
+                    android:textSize="@dimen/add_doctor_title"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/add_doctor_title_marginTop"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="#E6EBEF">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/border"
+                    android:layout_marginStart="@dimen/add_doctor_close_button_paddingStart"
+                    android:layout_marginEnd="@dimen/add_doctor_close_button_paddingStart"
+                    android:layout_marginTop="10dp"
+                    android:paddingBottom="10dp">
+                    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:stretchColumns="*"
+                        android:paddingTop="@dimen/tablayout_padding">
+
+                        <TableRow>
+                            <ImageView
+                                android:layout_width="0dip"
+                                android:layout_height="60dp"
+                                android:src="@mipmap/badges_1"
+                                android:layout_weight="1"/>
+                            <ImageView
+                                android:layout_width="0dip"
+                                android:layout_height="60dp"
+                                android:src="@mipmap/badges_2"
+                                android:layout_weight="1"/>
+                            <ImageView
+                                android:layout_width="0dip"
+                                android:layout_height="60dp"
+                                android:src="@mipmap/badges_3"
+                                android:layout_weight="1"/>
+                        </TableRow>
+
+                        <TableRow>
+                            <TextView
+                                android:id="@+id/badges1"
+                                android:layout_width="0dip"
+                                android:layout_height="wrap_content"
+                                android:text="@string/first_time_reviewer"
+                                android:textColor="@color/reviewTextColor"
+                                android:textSize="@dimen/photo_or_video_textsize"
+                                android:gravity="center"
+                                android:layout_weight="1"/>
+                            <TextView
+                                android:id="@+id/badges2"
+                                android:layout_width="0dip"
+                                android:layout_height="wrap_content"
+                                android:text="Reviewer (More than 10 times)"
+                                android:textColor="@color/reviewTextColor"
+                                android:textSize="@dimen/photo_or_video_textsize"
+                                android:gravity="center"
+                                android:layout_weight="1"
+                                android:paddingStart="10dp"/>
+                            <TextView
+                                android:id="@+id/badges3"
+                                android:layout_width="0dip"
+                                android:layout_height="wrap_content"
+                                android:text="Top Reviewer (More than 100 reviews)"
+                                android:textColor="@color/reviewTextColor"
+                                android:textSize="@dimen/photo_or_video_textsize"
+                                android:gravity="center"
+                                android:layout_weight="1"
+                                android:paddingStart="10dp"/>
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_marginTop="10dp">
+                            <ImageView
+                                android:layout_width="0dip"
+                                android:layout_height="60dp"
+                                android:src="@mipmap/badges_4"
+                                android:layout_weight="1"/>
+                            <ImageView
+                                android:layout_width="0dip"
+                                android:layout_height="60dp"
+                                android:src="@mipmap/badges_5"
+                                android:layout_weight="1"/>
+                            <ImageView
+                                android:layout_width="0dip"
+                                android:layout_height="60dp"
+                                android:src="@mipmap/badges_6"
+                                android:layout_weight="1"/>
+                        </TableRow>
+
+                        <TableRow>
+                            <TextView
+                                android:id="@+id/badges4"
+                                android:layout_width="0dip"
+                                android:layout_height="wrap_content"
+                                android:text="@string/first_time_share"
+                                android:textColor="@color/reviewTextColor"
+                                android:textSize="@dimen/photo_or_video_textsize"
+                                android:gravity="center"
+                                android:layout_weight="1"/>
+                            <TextView
+                                android:id="@+id/badges5"
+                                android:layout_width="0dip"
+                                android:layout_height="wrap_content"
+                                android:text="Sharer (More than 10 shares)"
+                                android:textColor="@color/reviewTextColor"
+                                android:textSize="@dimen/photo_or_video_textsize"
+                                android:gravity="center"
+                                android:layout_weight="1"
+                                android:paddingStart="10dp"/>
+                            <TextView
+                                android:id="@+id/badges6"
+                                android:layout_width="0dip"
+                                android:layout_height="wrap_content"
+                                android:text="Top Sharer (More than 100 shares)"
+                                android:textColor="@color/reviewTextColor"
+                                android:textSize="@dimen/photo_or_video_textsize"
+                                android:gravity="center"
+                                android:layout_weight="1"
+                                android:paddingStart="10dp"/>
+                        </TableRow>
+
+                    </TableLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

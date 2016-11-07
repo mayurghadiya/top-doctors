@@ -47,7 +47,7 @@
                     android:id="@+id/popup_spinner_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:prompt="@string/country_name"
+                    android:prompt="@string/location"
                     android:background="@null"
                     android:spinnerMode="dialog"
                     android:textColor="@color/black"/>
@@ -96,8 +96,9 @@
                 android:background="#D3D3D3"
                 android:layout_marginBottom="@dimen/filters_borgin_marginBottomStart"
                 android:layout_marginStart="5dp"
-                android:layout_marginTop="-10dp"/>
+                android:layout_marginTop="-5dp"/>
             <RelativeLayout
+                android:id="@+id/gender_relative_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="-3dp">
@@ -108,7 +109,7 @@
                     android:background="@null"
                     android:textColor="@color/black"
                     android:spinnerMode="dialog"
-                    android:prompt="@string/location">
+                    android:prompt="@string/gender">
                 </Spinner>
                 <ImageView
                     android:layout_width="wrap_content"
@@ -120,6 +121,7 @@
                     android:paddingBottom="5dp"/>
             </RelativeLayout>
             <View
+                android:id="@+id/gender_border"
                 android:layout_width="fill_parent"
                 android:layout_height="2dp"
                 android:background="#D3D3D3"
@@ -131,7 +133,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/name"
-                android:textColorHint="@color/black"
+                android:textColorHint="@color/textHighlightColor"
                 android:textColor="@color/black"
                 android:backgroundTint="#ffffff"
                 android:singleLine="true"/>
@@ -162,14 +164,34 @@
                     android:layout_marginRight="@dimen/checkbox_margin"
                     android:layout_marginLeft="@dimen/checkbox_margin"/>
 -->
-                <Button
-                    android:id="@+id/popup_search_button"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:layout_alignParentEnd="true"
-                    android:background="@color/headerColor"
-                    android:text="@string/search"
-                    android:textColor="@color/white"/>
+                    android:gravity="end">
+
+                    <Button
+                        android:id="@+id/reset_filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/headerColor"
+                        android:text="@string/reset"
+                        android:textColor="@color/white"
+                        android:textAllCaps="false"/>
+
+                    <Button
+                        android:id="@+id/popup_search_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/headerColor"
+                        android:text="@string/search"
+                        android:textColor="@color/white"
+                        android:layout_marginStart="5dp"
+                        android:textAllCaps="false"/>
+
+
+                </LinearLayout>
 
             </RelativeLayout>
 

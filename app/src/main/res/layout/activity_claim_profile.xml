@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/claim_profile"
                 android:textColor="@color/white"
-                android:textSize="20dp"
+                android:textSize="@dimen/profile_details_name"
                 android:paddingTop="5dp"/>
 
         </LinearLayout>
@@ -98,14 +98,14 @@
                         android:id="@+id/claim_profile_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="#bcbbc0"
+                        android:textColor="@color/black"
+                        android:textColorHighlight="@color/textHighlightColor"
                         android:backgroundTint="#ffffff"
                         android:hint="@string/email"
                         android:drawablePadding="8dp"
                         android:inputType="textEmailAddress"
                         android:singleLine="true"
                         android:drawableEnd="@mipmap/star"
-                        android:textColorHint="#bcbbc0"
                         android:focusableInTouchMode="true"
                         android:textAlignment="viewStart"/>
 
@@ -121,9 +121,10 @@
                         android:id="@+id/claim_profile_mobile_number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="#bcbbc0"
+                        android:textColor="@color/black"
+                        android:textColorHighlight="@color/textHighlightColor"
                         android:backgroundTint="#ffffff"
-                        android:text="@string/mobile_number"
+                        android:hint="@string/mobile_number"
                         android:textAlignment="viewStart"
                         android:drawableEnd="@mipmap/star"
                         android:paddingTop="15dp"
@@ -141,12 +142,15 @@
                         android:id="@+id/claim_profile_clinic_number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/clinic_number"
-                        android:textColor="#bcbbc0"
+                        android:hint="@string/clinic_number"
+                        android:textColor="@color/black"
+                        android:textColorHighlight="@color/textHighlightColor"
                         android:backgroundTint="#ffffff"
                         android:drawableEnd="@mipmap/star"
                         android:paddingTop="15dp"
-                        android:textAlignment="viewStart"/>
+                        android:textAlignment="viewStart"
+                        android:maxLines="1"
+                        android:inputType="text"/>
 
                     <View
                         android:layout_width="fill_parent"
@@ -189,7 +193,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/add_doctor_terms_layout_marginTop"
                     android:paddingStart="18dp"
-                    android:paddingEnd="18dp">
+                    android:paddingEnd="18dp"
+                    android:layout_marginBottom="5dp">
 
                     <LinearLayout
                         android:layout_width="wrap_content"

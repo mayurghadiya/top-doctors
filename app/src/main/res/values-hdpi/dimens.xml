@@ -23,6 +23,7 @@
     <dimen name="link_and_button_text_size">14dp</dimen>
     <dimen name="text_padding_end">6dp</dimen>
 
+
     <!--Forgot password screen-->
     <dimen name="forgot_text_size">25dp</dimen>
     <dimen name="forgot_password_with_facebook_text">18dp</dimen>
@@ -69,7 +70,7 @@
     <dimen name="hope_page_main_search_height">50dp</dimen>
     <dimen name="hope_page_main_search_padding">11dp</dimen>
     <dimen name="hope_page_main_search_drawable_padding">10dp</dimen>
-    <dimen name="hope_page_main_search_textsize">15dp</dimen>
+    <dimen name="hope_page_main_search_textsize">13dp</dimen>
     <dimen name="search_bar_middle_padding_top">20dp</dimen>
     <dimen name="search_content_margin_top_bottom">15dp</dimen>
     <dimen name="search_content_drawable_padding">8dp</dimen>
@@ -84,13 +85,13 @@
     <dimen name="main_margin_top">15dp</dimen>
     <dimen name="main_margin_bottom">30dp</dimen>
     <dimen name="layout_conten_margin_start_end">12dp</dimen>
-    <dimen name="image_back_ground_width">60dp</dimen>
+    <dimen name="image_back_ground_width">57dp</dimen>
     <dimen name="image_back_ground_height">65dp</dimen>
     <dimen name="image_width_height">50dp</dimen>
-    <dimen name="result_text_size">13dp</dimen>
+    <dimen name="result_text_size">12dp</dimen>
     <dimen name="rating_margin_start">-2dp</dimen>
-    <dimen name="review_margin_top">-2dp</dimen>
-    <dimen name="review_margin_start">20dp</dimen>
+    <dimen name="review_margin_top">3dp</dimen>
+    <dimen name="review_margin_start">13dp</dimen>
     <dimen name="contact_margin_end">1dp</dimen>
     <dimen name="contact_icon_margin_bottom">10dp</dimen>
     <dimen name="contact_icon_margin_end">10dp</dimen>
@@ -102,15 +103,15 @@
     <dimen name="profile_details_name">16dp</dimen>
     <dimen name="detail_name_layout_top">27dp</dimen>
     <dimen name="details_name_margin_start">8dp</dimen>
-    <dimen name="social_share_icon_padding_top">28dp</dimen>
+    <dimen name="social_share_icon_padding_top">35dp</dimen>
     <dimen name="profile_layout_margin_start">23dp</dimen>
     <dimen name="profile_layout_padding_top">10dp</dimen>
-    <dimen name="profile_pic_layout_width">90dp</dimen>
-    <dimen name="profile_pic_layout_height">95dp</dimen>
-    <dimen name="profile_pic_width_height">70dp</dimen>
+    <dimen name="profile_pic_layout_width">65dp</dimen>
+    <dimen name="profile_pic_layout_height">70dp</dimen>
+    <dimen name="profile_pic_width_height">50dp</dimen>
     <dimen name="rating_layout_padding">2.2dp</dimen>
     <dimen name="speciality_margin">-5dp</dimen>
-    <dimen name="after_working_hour_textsize">20dp</dimen>
+    <dimen name="after_working_hour_textsize">16dp</dimen>
     <dimen name="layout_profile_button_padding">10dp</dimen>
     <dimen name="review_icon_paddingtop">3dp</dimen>
     <dimen name="review_padding_start">8dp</dimen>
@@ -121,7 +122,7 @@
     <dimen name="total_doctors_padding_bottom">2dp</dimen>
     <dimen name="total_doctors_drawable_padding">10dp</dimen>
     <dimen name="total_doctors_margin_top">5dp</dimen>
-    <dimen name="total_doctors_text_size">15dp</dimen>
+    <dimen name="total_doctors_text_size">13dp</dimen>
     <dimen name="tablayout_padding">10dp</dimen>
     <dimen name="add_hospital_padding_start">-13dp</dimen>
     <dimen name="border_width">2dp</dimen>
@@ -139,6 +140,105 @@
     <dimen name="map_layout_margin_start">23dp</dimen>
     <dimen name="map_layout_padding_top">10dp</dimen>
     <dimen name="map_height">250dp</dimen>
-    <dimen name="work_hour_textsize">11dp</dimen>
-    <dimen name="get_direction_call_text_size">15dp</dimen>
+    <dimen name="work_hour_textsize">10dp</dimen>
+    <dimen name="get_direction_call_text_size">13dp</dimen>
+
+    <dimen name="profile_border_relative_layout_margin_top">-60dp</dimen>
+    <dimen name="profile_border_relative_layout_margin_top_2">-50dp</dimen>
+    <dimen name="profile_border_relative_layout_margin_start">100dp</dimen>
+    <dimen name="relative_layout_border_width">0.5dp</dimen>
+    <dimen name="relative_layout_border_height">50dp</dimen>
+    <dimen name="profile_border_last_relative_layout_margin_start">180dp</dimen>
+
+    <dimen name="doctor_hospital_clinic_profile_share_icon_height">65dp</dimen>
+    <dimen name="speciality_icon_width_height">24dp</dimen>
+
+    <!--user profile-->
+    <dimen name="user_profile_padding_start">10dp</dimen>
+    <dimen name="profile_padding_bottom">10dp</dimen>
+    <dimen name="profile_title_layout_marginTop">37dp</dimen>
+    <dimen name="profile_scrollbar_margin_top">90dp</dimen>
+    <dimen name="profile_profile_name_layout_marginTop">-175dp</dimen>
+    <dimen name="profile_profile_name_textSize">20dp</dimen>
+    <dimen name="profile_drawablePadding">8dp</dimen>
+    <dimen name="profile_email_textSize">16dp</dimen>
+    <dimen name="profile_email_layout_marginBottom">10dp</dimen>
+    <dimen name="profile_content_linear_layout_margin_start_end">20dp</dimen>
+    <dimen name="profile_table_content_paddingStart">5dp</dimen>
+    <dimen name="profile_table_content_textSize">15dp</dimen>
+    <dimen name="profile_table_image_layout_height">25dp</dimen>
+    <dimen name="profile_details_marginTop">10dp</dimen>
+    <dimen name="profile_details_marginStartEnd">20dp</dimen>
+    <dimen name="profile_details_table_image_layout_height">21dp</dimen>
+    <dimen name="profile_comment_margin_bottom">-35dp</dimen>
+    <dimen name="profile_comment_doctor_title_font_size">13dp</dimen>
+    <dimen name="profile_comment_marginStart">5dp</dimen>
+    <dimen name="profile_comment_time_text_size">14dp</dimen>
+    <dimen name="profile_comment_count_paddingStart">-5dp</dimen>
+    <dimen name="profile_comment_count_text_paddingStart">3dp</dimen>
+    <dimen name="profile_comment_text_text_size">14dp</dimen>
+    <dimen name="profile_comment_image_padding_start">20dp</dimen>
+    <dimen name="profile_comment_badges_height">30dp</dimen>
+
+    <!--Add doctor-->
+    <dimen name="add_doctor_padding_top">10dp</dimen>
+    <dimen name="add_doctor_close_button_paddingBottom">20dp</dimen>
+    <dimen name="add_doctor_close_button_paddingStart">20dp</dimen>
+    <dimen name="add_doctor_close_button_paddingEnd">10dp</dimen>
+    <dimen name="add_doctor_close_button_marginTop">10dp</dimen>
+    <dimen name="add_doctor_title">18dp</dimen>
+    <dimen name="add_doctor_title_marginTop">16dp</dimen>
+    <dimen name="add_doctor_main_content_paddingStartEnd">25dp</dimen>
+    <dimen name="add_doctor_main_content_paddingTop">20dp</dimen>
+    <dimen name="add_doctor_border_line_marginBottom">10dp</dimen>
+    <dimen name="add_doctor_border_line_marginStart">5dp</dimen>
+    <dimen name="add_doctor_border_line_marginTop">-10dp</dimen>
+    <dimen name="add_doctor_spinner_layout_marginStart">-3dp</dimen>
+    <dimen name="add_doctor_spinner_image_paddingRight">2dp</dimen>
+    <dimen name="add_doctor_spinner_image_marginTop">15dp</dimen>
+    <dimen name="add_doctor_border_paddingStart">3dp</dimen>
+    <dimen name="add_doctor_border_paddingEnd">3dp</dimen>
+    <dimen name="add_doctor_upload_layout">10dp</dimen>
+    <dimen name="add_doctor_upload_photo_marginStart">16dp</dimen>
+    <dimen name="add_doctor_photo_text_marginStart">10dp</dimen>
+    <dimen name="add_doctor_photo_text_size">13dp</dimen>
+    <dimen name="add_doctor_terms_layout_marginTop">20dp</dimen>
+    <dimen name="add_doctor_terms_text_layout_marginTop">17dp</dimen>
+    <dimen name="add_doctor_terms_text_size">10dp</dimen>
+    <dimen name="add_doctor_submit_text_size">15dp</dimen>
+    <dimen name="add_doctor_main_paddingBottom">17dp</dimen>
+    <dimen name="add_dotcor_text_size">17dp</dimen>
+    <dimen name="add_doctor_input_font">15dp</dimen>
+    <dimen name="profile_photo_or_video_height">19dp</dimen>
+    <dimen name="doctor_speciality_icon_width_height">21dp</dimen>
+    <dimen name="hospital_profile_working_hour_margin_top">-12dp</dimen>
+
+    <!--review-->
+    <dimen name="review_paddingEnd">10dp</dimen>
+    <dimen name="review_margin_start_end">10dp</dimen>
+    <dimen name="review_title_text_size">15dp</dimen>
+    <dimen name="review_marginTop">10dp</dimen>
+    <dimen name="review_layout_height">30dp</dimen>
+    <dimen name="review_review_text_size">14dp</dimen>
+    <dimen name="review_review_text_paddingTop">5dp</dimen>
+    <dimen name="review_review_count_text_padding_top">3dp</dimen>
+    <dimen name="review_review_count_textSize">15dp</dimen>
+    <dimen name="review_review_count_text_layout_marginStart">10dp</dimen>
+    <dimen name="review_review_text_layout_marginTop">15dp</dimen>
+    <dimen name="review_ratingbar_paddingstart">3dp</dimen>
+
+    <!--write a review-->
+    <dimen name="write_review_title_textSize">20dp</dimen>
+    <dimen name="wirte_review_marginStartEnd">10dp</dimen>
+    <dimen name="write_review_review_title_textSize">18dp</dimen>
+    <dimen name="write_review_title_margin_top">10dp</dimen>
+    <dimen name="write_review_review_box_textSize">14dp</dimen>
+    <dimen name="write_review_layout_margintop">15dp</dimen>
+    <dimen name="write_review_layout_marginStart">10dp</dimen>
+    <dimen name="write_review_image_table_layout_height">40dp</dimen>
+    <dimen name="write_review_button_marginStartEnd">20dp</dimen>
+
+    <dimen name="add_hospital_edittext_margin_top">10dp</dimen>
+
+    <dimen name="default_user_profile_image_width_height">100dp</dimen>
 </resources>

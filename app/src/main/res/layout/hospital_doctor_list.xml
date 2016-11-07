@@ -8,75 +8,61 @@
     android:textAlignment="center">
 
     <LinearLayout
+        android:id="@+id/hospital_doctor_list_result"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="#E7EBEE">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
+            android:background="@color/headerColor"
             android:paddingStart="@dimen/main_container_padding_start_end"
             android:paddingEnd="@dimen/main_container_padding_start_end"
-            android:paddingBottom="@dimen/main_container_padding_bottom"
-            android:background="@color/headerColor">
+            android:layoutDirection="ltr">
 
-            <LinearLayout
-                android:id="@+id/top_bar_main"
+            <ImageView
+                android:id="@+id/hospital_doctor_lists_swipe_menu"
+                android:clickable="true"
+                android:layout_width="@dimen/swipe_menu_width"
+                android:layout_height="@dimen/swipe_menu_height"
+                android:src="@mipmap/menu"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:paddingTop="@dimen/swipe_menu_padding_top"
+                android:paddingBottom="@dimen/swipe_menu_padding_bottom"
+                android:layout_marginStart="@dimen/swipe_menu_margin_start"/>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/top_bar_main_layout_height"
-                android:orientation="horizontal"
-                android:layoutDirection="ltr">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/hospital_doctor_list_profile_detail_name"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:orientation="horizontal">
+                    android:textColor="@color/white"
+                    android:padding="@dimen/hope_page_main_search_padding"
+                    android:drawablePadding="@dimen/hope_page_main_search_drawable_padding"
+                    android:text=""
+                    android:textSize="@dimen/profile_details_name"
+                    android:layout_marginTop="@dimen/detail_name_layout_top"
+                    android:layout_marginRight="25dp"/>
 
-                    <ImageView
-                        android:id="@+id/hospital_doctor_lists_swipe_menu"
-                        android:clickable="true"
-                        android:layout_width="@dimen/swipe_menu_width"
-                        android:layout_height="@dimen/swipe_menu_height"
-                        android:src="@mipmap/menu"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true"
-                        android:paddingTop="@dimen/swipe_menu_padding_top"
-                        android:gravity="left"
-                        android:paddingBottom="@dimen/swipe_menu_padding_bottom"
-                        android:layout_marginStart="@dimen/swipe_menu_margin_start"/>
-
-                    <TextView
-                        android:id="@+id/profile_detail_name"
-                        android:layout_width="@dimen/search_box_width"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:padding="@dimen/hope_page_main_search_padding"
-                        android:drawablePadding="@dimen/hope_page_main_search_drawable_padding"
-                        android:text=""
-                        android:textSize="16dp"
-                        android:layout_marginTop="27dp"
-                        android:layout_marginStart="8dp"/>
-
-                    <ImageView
-                        android:id="@+id/search_map_location"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/share"
-                        android:layout_alignParentEnd="true"
-                        android:paddingTop="28dp"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
+                <ImageView
+                    android:id="@+id/hospital_social_share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/doctor_hospital_clinic_profile_share_icon_height"
+                    android:src="@mipmap/share_1"
+                    android:layout_alignParentEnd="true"
+                    android:paddingTop="@dimen/social_share_icon_padding_top"/>
+            </RelativeLayout>
 
         </LinearLayout>
 
         <ScrollView
-            android:id="@+id/home_page_form"
+            android:id="@+id/doctor_list_home_page_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="none"
@@ -86,7 +72,7 @@
             <LinearLayout
                 android:id="@+id/hospital_doctor_lists"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:background="#E7EBEE">
 
